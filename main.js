@@ -27,24 +27,24 @@ var h1 = document.querySelector("h1")
 //   })
 // }
 
-function getVerseSearch() {
-  $.ajax({
-    method: "GET",
-    url: "https://api.esv.org/v3/passage/search/?q=peace",
-    headers: { "Authorization": "4bb2afad133ab4a9531a4be06fd06ae85703cf0f" },
-    data: { "page-size": 100, "page": 4},
-    success: consoleLogData,
-    error: console.error
-  })
-}
+// function getVerseSearch() {
+//   $.ajax({
+//     method: "GET",
+//     url: "https://api.esv.org/v3/passage/search/?q=peace",
+//     headers: { "Authorization": "4bb2afad133ab4a9531a4be06fd06ae85703cf0f" },
+//     data: { "page-size": 100, "page": 4},
+//     success: consoleLogData,
+//     error: console.error
+//   })
+// }
 
-getVerseSearch()
+// getVerseSearch()
 
-function consoleLogData(data) {
-  console.log("AJAX Data GET: ", data)
-  var span = h1.querySelector("span")
-  // span.textContent = data.passages[0]
-}
+// function consoleLogData(data) {
+//   console.log("AJAX Data GET: ", data)
+//   var span = h1.querySelector("span")
+//   // span.textContent = data.passages[0]
+// }
 
 
 //31 Bible Verses

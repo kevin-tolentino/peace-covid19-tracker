@@ -4,7 +4,7 @@ var currentActive = document.getElementById("currentActive")
 var currentCritical = document.getElementById("currentCritical")
 var currentRecovered = document.getElementById("currentRecovered")
 var currentDeaths = document.getElementById("currentDeaths")
-// var tBody = .querySelector("tbody");
+var verseArray = []
 
 
 function covidHistory(){
@@ -77,12 +77,15 @@ function getVerseFourSearch() {
   })
 }
 
+function verseObjectMaker(data){
+
+}
+
 
 
 function handleGetCovidCurrentSuccess(data){
   console.log("Current Covid Data", data)
   updateCurrentCovidStats(data)
-
     }
 
 function handleGetCovidCurrentError(error){
@@ -99,6 +102,10 @@ function handleGetCovidHistoryError(error){
 
 function handleGetVerseOneSuccess(data) {
   console.log("Page One Verses", data)
+  var content = data.results[49].content
+  var reference = data.results[49].reference
+  var numbers626 = {content, reference}
+  verseArray[0] = numbers626
 }
 
 function handleGetVerseOneError(error) {
@@ -107,6 +114,14 @@ function handleGetVerseOneError(error) {
 
 function handleGetVerseTwoSuccess(data) {
   console.log("Page Two Verses", data)
+  var content = data.results[65].content
+  var reference = data.results[65].reference
+  var psalm48 = { content, reference }
+  verseArray[1] = psalm48
+  content = data.results[96].content
+  reference = data.results[96].reference
+  var isaiah263 = {content, reference }
+  verseArray[2] = isaiah263
 }
 
 function handleGetVerseTwoError(error) {
@@ -115,6 +130,14 @@ function handleGetVerseTwoError(error) {
 
 function handleGetVerseThreeSuccess(data) {
   console.log("Page Three Verses", data)
+  var content = data.results[76].content
+  var reference = data.results[76].reference
+  var john1427 = { content, reference }
+  verseArray[3] = john1427
+  content = data.results[90].content
+  reference = data.results[90].reference
+  var romans51 = { content, reference }
+  verseArray[4] = romans51
 }
 
 function handleGetVerseThreeError(error) {
@@ -123,6 +146,14 @@ function handleGetVerseThreeError(error) {
 
 function handleGetVerseFourSuccess(data) {
   console.log("Page Four Verses", data)
+  var content = data.results[13].content
+  var reference = data.results[13].reference
+  var philippians12 = { content, reference }
+  verseArray[5] = philippians12
+  content = data.results[18].content
+  reference = data.results[18].reference
+  var colossians315 = { content, reference }
+  verseArray[6] = colossians315
 }
 
 function handleGetVerseFourError(error) {
@@ -138,22 +169,23 @@ function updateCurrentCovidStats(data){
 
 
 function start(){
+  covidCurrent();
 
+  covidHistory();
+
+  getVerseOneSearch()
+
+  getVerseTwoSearch()
+
+  getVerseThreeSearch()
+
+  getVerseFourSearch()
+
+  console.log("Verse array: ", verseArray)
 }
 
-covidCurrent();
+start()
 
-covidHistory();
-
-// getVerseOneSearch()
-
-// getVerseTwoSearch()
-
-// getVerseThreeSearch()
-
-// getVerseFourSearch()
-
-// start()
 
 
 
@@ -180,14 +212,15 @@ function consoleLogData(data) {
 
 // In peace I will both lie down and sleep;
 // for you alone, O LORD, make me dwell in safety. (ESV)
+
 // 3. Isaiah 26: 3 - (on page 2) data.results[96].content | data.results[96].reference
 
 // You keep him in perfect peace whose mind is stayed on you, because he trusts in you.
 
-// 4. John 14: 27 - (on page 3) data.results[96].content | data.results[96].reference
+// 4. John 14: 27 - (on page 3) data.results[76].content | data.results[96].reference
 // Peace I leave with you; my Peace I give to you.Not as the world gives do I give to you.Let not your hearts be troubled, neither let them be afraid.
 
-// 5. Romans 5: 1 - (on page 3) data.results[96].content | data.results[96].reference
+// 5. Romans 5: 1 - (on page 3) data.results[90].content | data.results[96].reference
 
 //Therefore, since we have been justified by faith, we have peace with God through our Lord Jesus Christ.
 

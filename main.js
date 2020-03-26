@@ -1,3 +1,6 @@
+var h1 = document.querySelector("h1")
+
+
 function covidHistory(){
   $.ajax({
     method: "GET",
@@ -6,8 +9,8 @@ function covidHistory(){
       "x-rapidapi-host": "covid-193.p.rapidapi.com",
       "x-rapidapi-key": "c857e751dfmsh459b4184fde79f2p1e3cbdjsn082cb4dee5cd"
     },
-    success: this.console.log,
-    error: console.error
+    success: handleGetCovidHistorySuccess,
+    error: handleGetCovidHistoryError
   })
 }
 
@@ -19,76 +22,131 @@ function covidCurrent(){
       "x-rapidapi-host": "covid-193.p.rapidapi.com",
       "x-rapidapi-key": "c857e751dfmsh459b4184fde79f2p1e3cbdjsn082cb4dee5cd"
     },
-    success: this.console.log,
-    error: console.error
+    success: handleGetCovidCurrentSuccess,
+    error: handleGetCovidCurrentError
   })
+}
+
+function getVerseOneSearch() {
+  $.ajax({
+    method: "GET",
+    url: "https://api.esv.org/v3/passage/search/?q=peace",
+    headers: { "Authorization": "4bb2afad133ab4a9531a4be06fd06ae85703cf0f" },
+    data: { "page-size": 100, "page": 1 },
+    success: handleGetVerseOneSuccess,
+    error: handleGetVerseOneError
+  })
+}
+
+function getVerseTwoSearch() {
+  $.ajax({
+    method: "GET",
+    url: "https://api.esv.org/v3/passage/search/?q=peace",
+    headers: { "Authorization": "4bb2afad133ab4a9531a4be06fd06ae85703cf0f" },
+    data: { "page-size": 100, "page": 2 },
+    success: handleGetVerseTwoSuccess,
+    error: handleGetVerseTwoError
+  })
+}
+
+function getVerseThreeSearch() {
+  $.ajax({
+    method: "GET",
+    url: "https://api.esv.org/v3/passage/search/?q=peace",
+    headers: { "Authorization": "4bb2afad133ab4a9531a4be06fd06ae85703cf0f" },
+    data: { "page-size": 100, "page": 3 },
+    success: handleGetVerseThreeSuccess,
+    error: handleGetVerseThreeError
+  })
+}
+
+function getVerseFourSearch() {
+  $.ajax({
+    method: "GET",
+    url: "https://api.esv.org/v3/passage/search/?q=peace",
+    headers: { "Authorization": "4bb2afad133ab4a9531a4be06fd06ae85703cf0f" },
+    data: { "page-size": 100, "page": 4 },
+    success: handleGetVerseFourSuccess,
+    error: handleGetVerseFourError
+  })
+}
+
+
+
+function handleGetCovidCurrentSuccess(data){
+  console.log("Current Covid Data", data)
+    }
+
+function handleGetCovidCurrentError(error){
+  console.error(error)
+}
+
+function handleGetCovidHistorySuccess(data){
+  console.log("History Covid Data", data)
+}
+
+function handleGetCovidHistoryError(error){
+  console.error(error)
+}
+
+function handleGetVerseOneSuccess(data) {
+  console.log("Page One Verses", data)
+}
+
+function handleGetVerseOneError(error) {
+  console.error(error)
+}
+
+function handleGetVerseTwoSuccess(data) {
+  console.log("Page Two Verses", data)
+}
+
+function handleGetVerseTwoError(error) {
+  console.error(error)
+}
+
+function handleGetVerseThreeSuccess(data) {
+  console.log("Page Three Verses", data)
+}
+
+function handleGetVerseThreeError(error) {
+  console.error(error)
+}
+
+function handleGetVerseFourSuccess(data) {
+  console.log("Page Four Verses", data)
+}
+
+function handleGetVerseFourError(error) {
+  console.error(error)
 }
 
 covidCurrent();
 
 covidHistory();
-// var settings = {
-//   "async": true,
-//   "crossDomain": true,
-//   "url": "https://covid-193.p.rapidapi.com/statistics",
-//   "method": "GET",
-//   "headers": {
-//     "x-rapidapi-host": "covid-193.p.rapidapi.com",
-//     "x-rapidapi-key": "c857e751dfmsh459b4184fde79f2p1e3cbdjsn082cb4dee5cd"
-//   }
-// }
 
-// $.ajax(settings).done(function (response) {
-//   console.log(response);
-// });
+// getVerseOneSearch()
 
-// var settings1 = {
-//   "async": true,
-//   "crossDomain": true,
-//   "url": "https://covid-193.p.rapidapi.com/history?country=USA",
-//   "method": "GET",
-//   "headers": {
-//     "x-rapidapi-host": "covid-193.p.rapidapi.com",
-//     "x-rapidapi-key": "c857e751dfmsh459b4184fde79f2p1e3cbdjsn082cb4dee5cd"
-//   }
-// }
+// getVerseTwoSearch()
 
-// $.ajax(settings1).done(function (response) {
-//   console.log(response);
-// });
+// getVerseThreeSearch()
+
+// getVerseFourSearch()
 
 
-var h1 = document.querySelector("h1")
 
-// function getVerse(){
-//   $.ajax({
-//     method: "GET",
-//     url: "https://api.esv.org/v3/passage/text/?q=John+11:35",
-//     headers: { "Authorization": "4bb2afad133ab4a9531a4be06fd06ae85703cf0f" },
-//     data: { "include-passage-references": false, "include-verse-numbers": false, "include-short-copyright": false},
-//     success: consoleLogData,
-//     error: console.error
-//   })
-// }
 
-// function getVerseSearch() {
-//   $.ajax({
-//     method: "GET",
-//     url: "https://api.esv.org/v3/passage/search/?q=peace",
-//     headers: { "Authorization": "4bb2afad133ab4a9531a4be06fd06ae85703cf0f" },
-//     data: { "page-size": 100, "page": 4},
-//     success: consoleLogData,
-//     error: console.error
-//   })
-// }
 
-// getVerseSearch()
 
-// function consoleLogData(data) {
-//   console.log("AJAX Data GET: ", data)
-//   var span = h1.querySelector("span")
-//   // span.textContent = data.passages[0]
-// }
+
+
+
+
+function consoleLogData(data) {
+  console.log("AJAX Data GET: ", data)
+  var span = h1.querySelector("span")
+  // span.textContent = data.passages[0]
+}
 
 
 //31 Bible Verses
@@ -118,3 +176,17 @@ var h1 = document.querySelector("h1")
 
 // 7. Colossians 3: 15 - (on page 4) data.results[18].content | data.results[18].reference
 // And let the peace of Christ rule in your hearts, to which indeed you were called in one body.And be thankful.
+
+
+
+//*To be used later in the project after the hackathon
+// function getVerse(){
+//   $.ajax({
+//     method: "GET",
+//     url: "https://api.esv.org/v3/passage/text/?q=John+11:35",
+//     headers: { "Authorization": "4bb2afad133ab4a9531a4be06fd06ae85703cf0f" },
+//     data: { "include-passage-references": false, "include-verse-numbers": false, "include-short-copyright": false},
+//     success: consoleLogData,
+//     error: console.error
+//   })
+// }

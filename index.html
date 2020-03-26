@@ -3,12 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Peace Of The Day Amidst COVID 19</title>
+  <title>Peace Of The Day | COVID 19 Updates</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>This is a test of <span>knowledge</span></h1>
+  <div class="container">
+    <div class="row-1 border border-primary">
+      <header>
+        <h4 class="text-center">COVID-19 Stats Update & Peace Verse of the Day</h4>
+      </header>
+    </div>
+    <div class="row-2 border border-danger">
+      <main>
+        <div class="covid-table table-responsive">
+          <table class="table table-bordered text-center">
+            <thead class="table-primary">
+              <tr>
+                <th scope="col"><img src="assets/covid-19.png" alt="COVID-19 Icon"></th>
+                <th scope="col">Active</th>
+                <th scope="col">Critical</th>
+                <th scope="col">Recovered</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th class="table-warning" scope="row">Cases</th>
+                <td class="table-info"><strong>66790</strong></td>
+                <td class="table-info"><strong>1452</strong></td>
+                <td class="table-info"><strong>394</strong></td>
+              </tr>
+              <tr>
+                <th class="table-danger" scope="row">Deaths</th>
+                <td class="table-dark" colspan="3"><strong>1027</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="verse">
+          <h2>Peace Verse of the Day</h2>
+          <p id="verse"><span id="verseText">In peace I will both lie down and sleep; for you alone, O LORD, make me dwell in safety.</span> (<span id="verseRef">Psalm 4:8</span>)</p>
+        </div>
+      </main>
+    </div>
+    <div class="row-3 border border-success">
+      <footer class="w-100">
+        <div class="col d-flex justify-content-between">
+          <button class="btn btn-secondary m-1">Previous Day</button>
+          <button class="btn btn-secondary m-1">Update Stats</button>
+          <button class="btn btn-secondary m-1">Next Day</button>
+        </div>
+      </footer>
+    </div>
+  </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
   <script src="main.js"></script>
 </body>

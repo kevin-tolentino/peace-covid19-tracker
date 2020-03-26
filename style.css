@@ -10,3 +10,16 @@
 .row-3 {
   height: 66.7px;
 }
+
+.covid-table {
+  height: 20%;
+}
+
+.verse{
+  height: 80%;
+  background-color: #AFCBFF;
+}
+
+img {
+  width: 50px;
+}

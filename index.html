@@ -16,16 +16,39 @@
       </header>
     </div>
     <div class="row-2 border border-danger">
-      <main>
-        <h1>Main</h1>
+      <main class="table-responsive">
+        <table class="table table-striped text-center">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Active</th>
+              <th scope="col">Critical</th>
+              <th scope="col">Recovered</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Cases</th>
+              <td>66790</td>
+              <td>1452</td>
+              <td>394</td>
+            </tr>
+            <tr>
+              <th scope="row">Deaths</th>
+              <td class="text-center" colspan="3">1027</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2>Peace Verse of the Day</h2>
+        <p id="verse"><span id="verseText">In peace I will both lie down and sleep; for you alone, O LORD, make me dwell in safety.</span> (<span id="verseRef">Psalm 4:8</span>)</p>
       </main>
     </div>
     <div class="row-3 border border-success">
       <footer class="w-100">
         <div class="col d-flex justify-content-between">
-          <button class="btn btn-outline-secondary">Previous Day</button>
-          <button class="btn btn-outline-secondary">Update Stats</button>
-          <button class="btn btn-outline-secondary">Next Day</button>
+          <button class="btn btn-secondary m-1">Previous Day</button>
+          <button class="btn btn-secondary m-1">Update Stats</button>
+          <button class="btn btn-secondary m-1">Next Day</button>
         </div>
       </footer>
     </div>

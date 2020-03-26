@@ -14,7 +14,7 @@ function covidHistory(){
 function covidCurrent(){
   $.ajax({
     method: "GET",
-    url: "https://covid-193.p.rapidapi.com/history?country=USA",
+    url: "https://covid-193.p.rapidapi.com/statistics",
     headers: {
       "x-rapidapi-host": "covid-193.p.rapidapi.com",
       "x-rapidapi-key": "c857e751dfmsh459b4184fde79f2p1e3cbdjsn082cb4dee5cd"
@@ -23,6 +23,10 @@ function covidCurrent(){
     error: console.error
   })
 }
+
+covidCurrent();
+
+covidHistory();
 // var settings = {
 //   "async": true,
 //   "crossDomain": true,

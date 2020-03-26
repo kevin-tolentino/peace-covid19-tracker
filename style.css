@@ -12,14 +12,17 @@
 }
 
 .covid-table {
-  height: 20%;
+  height: 173px;
 }
 
 .verse{
-  height: 80%;
-  background-color: #AFCBFF;
+  height: 358px;
+  background-color: #DBFFD6;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 img {
-  width: 50px;
+  width: 30px;
 }

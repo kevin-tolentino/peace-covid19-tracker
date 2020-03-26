@@ -1,4 +1,10 @@
 var h1 = document.querySelector("h1")
+var table = document.querySelector("table")
+var currentActive = document.getElementById("currentActive")
+var currentCritical = document.getElementById("currentCritical")
+var currentRecovered = document.getElementById("currentRecovered")
+var currentDeaths = document.getElementById("currentDeaths")
+// var tBody = .querySelector("tbody");
 
 
 function covidHistory(){
@@ -75,6 +81,8 @@ function getVerseFourSearch() {
 
 function handleGetCovidCurrentSuccess(data){
   console.log("Current Covid Data", data)
+  updateCurrentCovidStats(data)
+
     }
 
 function handleGetCovidCurrentError(error){
@@ -121,6 +129,18 @@ function handleGetVerseFourError(error) {
   console.error(error)
 }
 
+function updateCurrentCovidStats(data){
+  currentActive.textContent = data.response[3].cases.active
+  currentCritical.textContent = data.response[3].cases.critical
+  currentRecovered.textContent = data.response[3].cases.recovered
+  currentDeaths.textContent = data.response[3].deaths.total
+  }
+
+
+function start(){
+
+}
+
 covidCurrent();
 
 covidHistory();
@@ -133,7 +153,7 @@ covidHistory();
 
 // getVerseFourSearch()
 
-
+// start()
 
 
 

@@ -4,7 +4,14 @@ var currentActive = document.getElementById("currentActive")
 var currentCritical = document.getElementById("currentCritical")
 var currentRecovered = document.getElementById("currentRecovered")
 var currentDeaths = document.getElementById("currentDeaths")
+var verseText = document.getElementById("verseText")
+var verseRef = document.getElementById("verseRef")
 var verseArray = []
+var verseOfTheDay = 0;
+
+var currentDate = new Date()
+var currentDay = currentDate.getDay()
+
 
 
 function covidHistory(){
@@ -154,6 +161,9 @@ function handleGetVerseFourSuccess(data) {
   reference = data.results[18].reference
   var colossians315 = { content, reference }
   verseArray[6] = colossians315
+  verseOfTheDay = verseArray[currentDay]
+  verseText.textContent = verseOfTheDay.content
+  verseRef.textContent = verseOfTheDay.reference
 }
 
 function handleGetVerseFourError(error) {
@@ -168,7 +178,10 @@ function updateCurrentCovidStats(data){
   }
 
 
-function start(){
+
+
+// function start(){
+
   covidCurrent();
 
   covidHistory();
@@ -181,10 +194,14 @@ function start(){
 
   getVerseFourSearch()
 
-  console.log("Verse array: ", verseArray)
-}
+// }
 
-start()
+
+
+// start()
+
+
+
 
 
 

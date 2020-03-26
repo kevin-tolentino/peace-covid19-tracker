@@ -1,3 +1,28 @@
+function covidHistory(){
+  $.ajax({
+    method: "GET",
+    url: "https://covid-193.p.rapidapi.com/history?country=USA",
+    headers: {
+      "x-rapidapi-host": "covid-193.p.rapidapi.com",
+      "x-rapidapi-key": "c857e751dfmsh459b4184fde79f2p1e3cbdjsn082cb4dee5cd"
+    },
+    success: this.console.log,
+    error: console.error
+  })
+}
+
+function covidCurrent(){
+  $.ajax({
+    method: "GET",
+    url: "https://covid-193.p.rapidapi.com/history?country=USA",
+    headers: {
+      "x-rapidapi-host": "covid-193.p.rapidapi.com",
+      "x-rapidapi-key": "c857e751dfmsh459b4184fde79f2p1e3cbdjsn082cb4dee5cd"
+    },
+    success: this.console.log,
+    error: console.error
+  })
+}
 // var settings = {
 //   "async": true,
 //   "crossDomain": true,
@@ -13,7 +38,22 @@
 //   console.log(response);
 // });
 
-// Authorization: Token {{ YOUR_KEY }}
+// var settings1 = {
+//   "async": true,
+//   "crossDomain": true,
+//   "url": "https://covid-193.p.rapidapi.com/history?country=USA",
+//   "method": "GET",
+//   "headers": {
+//     "x-rapidapi-host": "covid-193.p.rapidapi.com",
+//     "x-rapidapi-key": "c857e751dfmsh459b4184fde79f2p1e3cbdjsn082cb4dee5cd"
+//   }
+// }
+
+// $.ajax(settings1).done(function (response) {
+//   console.log(response);
+// });
+
+
 var h1 = document.querySelector("h1")
 
 // function getVerse(){

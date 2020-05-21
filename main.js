@@ -7,7 +7,7 @@ var currentDeaths = document.getElementById("currentDeaths")
 var verseText = document.getElementById("verseText")
 var verseRef = document.getElementById("verseRef")
 var verseArray = []
-var verseOfTheDay = 0;
+var verseOfTheDay = null;
 
 var currentDate = new Date()
 var currentDay = currentDate.getDay()
@@ -84,9 +84,6 @@ function getVerseFourSearch() {
   })
 }
 
-function verseObjectMaker(data){
-
-}
 
 
 
@@ -161,13 +158,16 @@ function handleGetVerseFourSuccess(data) {
   reference = data.results[18].reference
   var colossians315 = { content, reference }
   verseArray[6] = colossians315
-  verseOfTheDay = verseArray[currentDay]
-  verseText.textContent = verseOfTheDay.content
-  verseRef.textContent = verseOfTheDay.reference
 }
 
 function handleGetVerseFourError(error) {
   console.error(error)
+}
+
+function verseOfTheDay(){
+  verseOfTheDay = verseArray[currentDay]
+  verseText.textContent = verseOfTheDay.content
+  verseRef.textContent = verseOfTheDay.reference
 }
 
 function updateCurrentCovidStats(data){

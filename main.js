@@ -22,6 +22,8 @@ if (previousDay.length === 1) {
 var formattedDate = `${currentYear}-${currentMonth}-${previousDay}`;
 
 var today = currentDate.getDay()
+var yesterday = today - 1
+var tomorrow = (today === 6) ? 1 : (today + 1)
 
 
 
@@ -62,6 +64,7 @@ function covidCurrent(){
     error: handleGetCovidCurrentError
   })
 }
+
 
 function getVerseOneSearch() {
   $.ajax({
@@ -107,7 +110,27 @@ function getVerseFourSearch() {
   })
 }
 
+function getVerses(){
+  getVerseOneSearch()
 
+  getVerseTwoSearch()
+
+  getVerseThreeSearch()
+
+  getVerseFourSearch()
+}
+
+function verseOfTheDay() {
+  verseOfTheDay = verseArray[today]
+  verseText.textContent = verseOfTheDay.content
+  verseRef.textContent = verseOfTheDay.reference
+}
+
+function previousVerseOfTheDay(){
+  verseOfTheDay = verseArray[today]
+  verseText.textContent = verseOfTheDay.content
+  verseRef.textContent = verseOfTheDay.reference
+}
 
 
 function handleGetCovidCurrentSuccess(data){
@@ -187,11 +210,6 @@ function handleGetVerseFourError(error) {
   console.error(error)
 }
 
-function verseOfTheDay(){
-  verseOfTheDay = verseArray[today]
-  verseText.textContent = verseOfTheDay.content
-  verseRef.textContent = verseOfTheDay.reference
-}
 
 function updateCurrentCovidStats(data){
   currentActive.textContent = data.response[3].cases.active
@@ -208,6 +226,8 @@ function updateCurrentCovidStats(data){
   covidCurrent();
 
   covidHistory();
+
+  // getVerses();
 
   // getVerseOneSearch()
 

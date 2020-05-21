@@ -33,6 +33,12 @@ function covidHistory(){
       "x-rapidapi-host": "covid-193.p.rapidapi.com",
       "x-rapidapi-key": "c857e751dfmsh459b4184fde79f2p1e3cbdjsn082cb4dee5cd"
     },
+    beforeSend: function(){
+      currentActive.textContent = 'loading'
+      currentCritical.textContent = 'loading'
+      currentRecovered.textContent = 'loading'
+      currentDeaths.textContent = 'loading'
+    },
     success: handleGetCovidHistorySuccess,
     error: handleGetCovidHistoryError
   })
@@ -45,6 +51,12 @@ function covidCurrent(){
     headers: {
       "x-rapidapi-host": "covid-193.p.rapidapi.com",
       "x-rapidapi-key": "c857e751dfmsh459b4184fde79f2p1e3cbdjsn082cb4dee5cd"
+    },
+    beforeSend: function () {
+      currentActive.textContent = 'loading'
+      currentCritical.textContent = 'loading'
+      currentRecovered.textContent = 'loading'
+      currentDeaths.textContent = 'loading'
     },
     success: handleGetCovidCurrentSuccess,
     error: handleGetCovidCurrentError

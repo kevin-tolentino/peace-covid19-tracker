@@ -9,8 +9,19 @@ var verseRef = document.getElementById("verseRef")
 var verseArray = []
 var verseOfTheDay = null;
 
-var currentDate = new Date()
-var currentDay = currentDate.getDay()
+var currentDate = new Date();
+var currentYear = currentDate.getFullYear().toString();
+var currentMonth = (currentDate.getMonth() + 1).toString();
+if (currentMonth.length === 1) {
+  currentMonth = '0' + currentMonth;
+}
+var currentDay = currentDate.getDate().toString();
+if (currentDay.length === 1) {
+  currentDay = '0' + currentDay;
+}
+var formattedDate = `${currentYear}-${currentMonth}-${currentDay}`;
+
+var today = currentDate.getDay()
 
 
 
@@ -165,7 +176,7 @@ function handleGetVerseFourError(error) {
 }
 
 function verseOfTheDay(){
-  verseOfTheDay = verseArray[currentDay]
+  verseOfTheDay = verseArray[today]
   verseText.textContent = verseOfTheDay.content
   verseRef.textContent = verseOfTheDay.reference
 }
@@ -186,13 +197,13 @@ function updateCurrentCovidStats(data){
 
   covidHistory();
 
-  getVerseOneSearch()
+  // getVerseOneSearch()
 
-  getVerseTwoSearch()
+  // getVerseTwoSearch()
 
-  getVerseThreeSearch()
+  // getVerseThreeSearch()
 
-  getVerseFourSearch()
+  // getVerseFourSearch()
 
 // }
 

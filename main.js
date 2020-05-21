@@ -15,11 +15,11 @@ var currentMonth = (currentDate.getMonth() + 1).toString();
 if (currentMonth.length === 1) {
   currentMonth = '0' + currentMonth;
 }
-var currentDay = currentDate.getDate().toString();
-if (currentDay.length === 1) {
-  currentDay = '0' + currentDay;
+var previousDay = (currentDate.getDate().toString()) - 1;
+if (previousDay.length === 1) {
+  previousDay = '0' + previousDay;
 }
-var formattedDate = `${currentYear}-${currentMonth}-${currentDay}`;
+var formattedDate = `${currentYear}-${currentMonth}-${previousDay}`;
 
 var today = currentDate.getDay()
 
@@ -28,7 +28,7 @@ var today = currentDate.getDay()
 function covidHistory(){
   $.ajax({
     method: "GET",
-    url: "https://covid-193.p.rapidapi.com/history?country=USA",
+    url: `https://covid-193.p.rapidapi.com/history?day=${formattedDate}&country=usa`,
     headers: {
       "x-rapidapi-host": "covid-193.p.rapidapi.com",
       "x-rapidapi-key": "c857e751dfmsh459b4184fde79f2p1e3cbdjsn082cb4dee5cd"

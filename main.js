@@ -127,7 +127,7 @@ function verseOfTheDay() {
 }
 
 function previousVerseOfTheDay(){
-  verseOfTheDay = verseArray[today]
+  verseOfTheDay = verseArray[yesterday]
   verseText.textContent = verseOfTheDay.content
   verseRef.textContent = verseOfTheDay.reference
 }

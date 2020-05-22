@@ -17,43 +17,41 @@
     </div>
     <div class="row ">
       <main class="col">
-        <h3 class="text-center">United States COVID-19 Stats</h3>
-
-          <table class="table table-bordered text-center">
-            <thead class="table-primary">
-              <tr>
-                <th scope="col"><img src="assets/covid-19.png" alt="COVID-19 Icon"></th>
-                <th scope="col">Active</th>
-                <th scope="col">Critical</th>
-                <th scope="col">Recovered</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th class="table-warning" scope="row">Cases</th>
-                <td class="table-info"><strong id="currentActive"></strong></td>
-                <td class="table-info"><strong id="currentCritical"></strong></td>
-                <td class="table-info"><strong id="currentRecovered"></strong></td>
-              </tr>
-              <tr>
-                <th class="table-danger" scope="row">Deaths</th>
-                <td class="table-dark" colspan="3"><strong id="currentDeaths"></strong></td>
-              </tr>
-            </tbody>
-          </table>
-
         <div class="col verse">
           <h3 class="text-center">Peace Verse of the Day</h3>
           <h5 id="date" class="text-center"></h5>
           <p id="verse" class="text-center"><span id="verseText">In peace I will both lie down and sleep; for you alone, O LORD, make me dwell in safety.</span> (<span id="verseRef">Psalm 4:8</span>)</p>
         </div>
+        <h3 class="text-center">United States COVID-19 Stats</h3>
+        <table class="table table-bordered text-center">
+          <thead class="table-primary">
+            <tr>
+              <th scope="col"><img src="assets/covid-19.png" alt="COVID-19 Icon"></th>
+              <th scope="col">Active</th>
+              <th scope="col">Critical</th>
+              <th scope="col">Recovered</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class="table-warning" scope="row">Cases</th>
+              <td class="table-info"><strong id="currentActive"></strong></td>
+              <td class="table-info"><strong id="currentCritical"></strong></td>
+              <td class="table-info"><strong id="currentRecovered"></strong></td>
+            </tr>
+            <tr>
+              <th class="table-danger" scope="row">Deaths</th>
+              <td class="table-dark" colspan="3"><strong id="currentDeaths"></strong></td>
+            </tr>
+          </tbody>
+        </table>
       </main>
     </div>
     <div class="row ">
       <footer class="w-100">
         <div class="col d-flex justify-content-between">
           <button id="leftButton" class="col btn btn-primary m-1">Previous Day</button>
-          <button id="middleButton" class="col btn btn-success m-1">Update Stats</button>
+          <button id="middleButton" class="col btn btn-success m-1">Update Stats (every 15 min)</button>
           <button id="rightButton" class="col btn btn-primary m-1">Preview Tomorrow's Verse</button>
         </div>
       </footer>

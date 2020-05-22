@@ -180,7 +180,6 @@ function previewVerseOfTheDay(){
 
 
 function handleGetCovidCurrentSuccess(data){
-  console.log("Current Covid Data", data)
   updateCurrentCovidStats(data)
     }
 
@@ -189,7 +188,6 @@ function handleGetCovidCurrentError(error){
 }
 
 function handleGetCovidHistorySuccess(data){
-  console.log("History Covid Data", data)
   PreviousDayCovidStats(data)
 
 }
@@ -199,7 +197,6 @@ function handleGetCovidHistoryError(error){
 }
 
 function handleGetVerseOneSuccess(data) {
-  console.log("Page One Verses", data)
   var content = data.results[49].content
   var reference = data.results[49].reference
   var numbers626 = {content, reference}
@@ -212,7 +209,6 @@ function handleGetVerseOneError(error) {
 }
 
 function handleGetVerseTwoSuccess(data) {
-  console.log("Page Two Verses", data)
   var content = data.results[65].content
   var reference = data.results[65].reference
   var psalm48 = { content, reference }
@@ -231,7 +227,6 @@ function handleGetVerseTwoError(error) {
 }
 
 function handleGetVerseThreeSuccess(data) {
-  console.log("Page Three Verses", data)
   var content = data.results[76].content
   var reference = data.results[76].reference
   var john1427 = { content, reference }
@@ -249,7 +244,6 @@ function handleGetVerseThreeError(error) {
 }
 
 function handleGetVerseFourSuccess(data) {
-  console.log("Page Four Verses", data)
   var content = data.results[13].content
   var reference = data.results[13].reference
   var philippians12 = { content, reference }
@@ -299,8 +293,11 @@ function getPreviousDay(){
     previewVerseOfTheDay()
     leftButton.textContent = 'View Current Day'
     leftButton.removeEventListener('click', getPreviousDay)
-    leftButton.addEventListener('click', covidCurrent)
     leftButton.addEventListener('click', viewCurrentDayLeftButton)
+    currentActive.textContent = 'TBD'
+    currentCritical.textContent = 'TBD'
+    currentRecovered.textContent = 'TBD'
+    currentDeaths.textContent = 'TBD'
 
   }
 
@@ -311,7 +308,7 @@ function viewCurrentDayRightButton(){
       rightButton.removeEventListener('click', viewCurrentDayRightButton)
       verseOfTheDay(verseArray[today])
       rightButton.textContent = 'Preview Tomorrow'
-    rightButton.addEventListener('click', getPreviewDay)
+      rightButton.addEventListener('click', getPreviewDay)
 
     }
 
@@ -319,8 +316,9 @@ function viewCurrentDayLeftButton() {
   rightButton.classList.remove('invisible')
   middleButton.classList.remove('invisible')
   leftButton.removeEventListener('click', covidCurrent)
-  leftButton.removeEventListener('click', viewCurrentDayRightButton)
+  leftButton.removeEventListener('click', viewCurrentDayLeftButton)
   verseOfTheDay(verseArray[today])
+  covidCurrent()
   leftButton.textContent = 'Preview Day'
   leftButton.addEventListener("click", getPreviousDay)
 }

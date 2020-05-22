@@ -14,16 +14,19 @@ leftButton.addEventListener("click", getPreviousDay)
 middleButton.addEventListener('click', covidCurrent)
 
 var currentDate = new Date();
+var previousDayDate = new Date();
+previousDayDate.setDate(previousDayDate.getDate() - 1);
+var previewDayDate = new Date()
+previewDayDate.setDate(previewDayDate.getDate() + 1);
 var currentYear = currentDate.getFullYear().toString();
 var currentMonth = (currentDate.getMonth() + 1).toString();
 if (currentMonth.length === 1) {
   currentMonth = '0' + currentMonth;
 }
-var currentDay = (currentDate.getDate().toString()) - 1;
+var currentDay = (currentDate.getDate().toString());
 if (currentDay.length === 1) {
   currentDay = '0' + currentDay;
 }
-var formattedCurrentDate = `${currentYear}-${currentMonth}-${currentDay}`;
 var formattedPreviousDate = `${currentYear}-${currentMonth}-${currentDay-1}`;
 
 var today = currentDate.getDay()
@@ -154,14 +157,14 @@ function getVerses(){
 
 
 function previousVerseOfTheDay(){
-  dateHeader.textContent = formattedPreviousDate
+  dateHeader.textContent = previousDayDate.toDateString()
   var previousVerseInfo = verseArray[yesterday]
   verseText.textContent = previousVerseInfo.content
   verseRef.textContent = previousVerseInfo.reference
 }
 
 function verseOfTheDay(verseObject) {
-  dateHeader.textContent = formattedCurrentDate
+  dateHeader.textContent = currentDate.toDateString()
   verseText.textContent = verseObject.content
   verseRef.textContent = verseObject.reference
 }
@@ -271,7 +274,7 @@ function updateCurrentCovidStats(data){
   }
 
 
-  function getPreviousDay(){
+function getPreviousDay(){
     leftButton.classList.add('invisible')
     middleButton.classList.add('invisible')
     covidHistory();
@@ -283,7 +286,7 @@ function updateCurrentCovidStats(data){
 
   }
 
-    function viewCurrentDay(){
+function viewCurrentDay(){
       leftButton.classList.remove('invisible')
       middleButton.classList.remove('invisible')
       rightButton.removeEventListener('click', covidCurrent)

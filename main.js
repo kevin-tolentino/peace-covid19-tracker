@@ -1,4 +1,3 @@
-var h1 = document.querySelector("h1")
 var currentActive = document.getElementById("currentActive")
 var currentCritical = document.getElementById("currentCritical")
 var currentRecovered = document.getElementById("currentRecovered")
@@ -289,6 +288,7 @@ function getPreviousDay(){
     covidHistory();
     previousVerseOfTheDay()
     rightButton.textContent = 'View Current Day'
+    rightButton.removeEventListener('click', getPreviewDay)
     rightButton.addEventListener('click', covidCurrent)
     rightButton.addEventListener('click', viewCurrentDayRightButton)
   }
@@ -311,6 +311,8 @@ function viewCurrentDayRightButton(){
       rightButton.removeEventListener('click', viewCurrentDayRightButton)
       verseOfTheDay(verseArray[today])
       rightButton.textContent = 'Preview Tomorrow'
+    rightButton.addEventListener('click', getPreviewDay)
+
     }
 
 function viewCurrentDayLeftButton() {
@@ -320,6 +322,7 @@ function viewCurrentDayLeftButton() {
   leftButton.removeEventListener('click', viewCurrentDayRightButton)
   verseOfTheDay(verseArray[today])
   leftButton.textContent = 'Preview Day'
+  leftButton.addEventListener("click", getPreviousDay)
 }
 
 

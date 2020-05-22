@@ -6,6 +6,8 @@ var currentDeaths = document.getElementById("currentDeaths")
 var verseText = document.getElementById("verseText")
 var verseRef = document.getElementById("verseRef")
 var verseArray = []
+var previousDayButton = document.getElementById('previousDay')
+previousDayButton.addEventListener("click", previousVerseOfTheDay)
 // var verseOfTheDay = null;
 
 var currentDate = new Date();
@@ -149,9 +151,9 @@ function verseOfTheDay(verseObject) {
 }
 
 function previousVerseOfTheDay(){
-  verseOfTheDay = verseArray[yesterday]
-  verseText.textContent = verseOfTheDay.content
-  verseRef.textContent = verseOfTheDay.reference
+  var previousVerseInfo = verseArray[yesterday]
+  verseText.textContent = previousVerseInfo.content
+  verseRef.textContent = previousVerseInfo.reference
 }
 
 

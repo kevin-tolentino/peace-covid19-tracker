@@ -1,5 +1,4 @@
 var h1 = document.querySelector("h1")
-var table = document.querySelector("table")
 var currentActive = document.getElementById("currentActive")
 var currentCritical = document.getElementById("currentCritical")
 var currentRecovered = document.getElementById("currentRecovered")
@@ -7,20 +6,41 @@ var currentDeaths = document.getElementById("currentDeaths")
 var verseText = document.getElementById("verseText")
 var verseRef = document.getElementById("verseRef")
 var verseArray = []
-var verseOfTheDay = 0;
+var previousDayButton = document.getElementById('previousDay')
+previousDayButton.addEventListener("click", previousVerseOfTheDay)
+// var verseOfTheDay = null;
 
-var currentDate = new Date()
-var currentDay = currentDate.getDay()
+var currentDate = new Date();
+var currentYear = currentDate.getFullYear().toString();
+var currentMonth = (currentDate.getMonth() + 1).toString();
+if (currentMonth.length === 1) {
+  currentMonth = '0' + currentMonth;
+}
+var previousDay = (currentDate.getDate().toString()) - 1;
+if (previousDay.length === 1) {
+  previousDay = '0' + previousDay;
+}
+var formattedDate = `${currentYear}-${currentMonth}-${previousDay}`;
+
+var today = currentDate.getDay()
+var yesterday = today - 1
+var tomorrow = (today === 6) ? 1 : (today + 1)
 
 
 
 function covidHistory(){
   $.ajax({
     method: "GET",
-    url: "https://covid-193.p.rapidapi.com/history?country=USA",
+    url: `https://covid-193.p.rapidapi.com/history?day=${formattedDate}&country=usa`,
     headers: {
       "x-rapidapi-host": "covid-193.p.rapidapi.com",
       "x-rapidapi-key": "c857e751dfmsh459b4184fde79f2p1e3cbdjsn082cb4dee5cd"
+    },
+    beforeSend: function(){
+      currentActive.textContent = 'loading'
+      currentCritical.textContent = 'loading'
+      currentRecovered.textContent = 'loading'
+      currentDeaths.textContent = 'loading'
     },
     success: handleGetCovidHistorySuccess,
     error: handleGetCovidHistoryError
@@ -35,10 +55,17 @@ function covidCurrent(){
       "x-rapidapi-host": "covid-193.p.rapidapi.com",
       "x-rapidapi-key": "c857e751dfmsh459b4184fde79f2p1e3cbdjsn082cb4dee5cd"
     },
+    beforeSend: function () {
+      currentActive.textContent = 'loading'
+      currentCritical.textContent = 'loading'
+      currentRecovered.textContent = 'loading'
+      currentDeaths.textContent = 'loading'
+    },
     success: handleGetCovidCurrentSuccess,
     error: handleGetCovidCurrentError
   })
 }
+
 
 function getVerseOneSearch() {
   $.ajax({
@@ -46,6 +73,12 @@ function getVerseOneSearch() {
     url: "https://api.esv.org/v3/passage/search/?q=peace",
     headers: { "Authorization": "4bb2afad133ab4a9531a4be06fd06ae85703cf0f" },
     data: { "page-size": 100, "page": 1 },
+    beforeSend: function () {
+      if (today === 0){
+        verseText.textContent = 'loading'
+        verseRef.textContent = 'loading'
+      }
+    },
     success: handleGetVerseOneSuccess,
     error: handleGetVerseOneError
   })
@@ -57,6 +90,12 @@ function getVerseTwoSearch() {
     url: "https://api.esv.org/v3/passage/search/?q=peace",
     headers: { "Authorization": "4bb2afad133ab4a9531a4be06fd06ae85703cf0f" },
     data: { "page-size": 100, "page": 2 },
+    beforeSend: function () {
+      if (today === 1 || today === 2) {
+        verseText.textContent = 'loading'
+        verseRef.textContent = 'loading'
+      }
+    },
     success: handleGetVerseTwoSuccess,
     error: handleGetVerseTwoError
   })
@@ -68,6 +107,12 @@ function getVerseThreeSearch() {
     url: "https://api.esv.org/v3/passage/search/?q=peace",
     headers: { "Authorization": "4bb2afad133ab4a9531a4be06fd06ae85703cf0f" },
     data: { "page-size": 100, "page": 3 },
+    beforeSend: function () {
+      if (today === 3 || today === 4) {
+        verseText.textContent = 'loading'
+        verseRef.textContent = 'loading'
+      }
+    },
     success: handleGetVerseThreeSuccess,
     error: handleGetVerseThreeError
   })
@@ -79,15 +124,37 @@ function getVerseFourSearch() {
     url: "https://api.esv.org/v3/passage/search/?q=peace",
     headers: { "Authorization": "4bb2afad133ab4a9531a4be06fd06ae85703cf0f" },
     data: { "page-size": 100, "page": 4 },
+    beforeSend: function () {
+      if (today === 5 || today === 6) {
+        verseText.textContent = 'loading'
+        verseRef.textContent = 'loading'
+      }
+    },
     success: handleGetVerseFourSuccess,
     error: handleGetVerseFourError
   })
 }
 
-function verseObjectMaker(data){
+function getVerses(){
+  getVerseOneSearch()
 
+  getVerseTwoSearch()
+
+  getVerseThreeSearch()
+
+  getVerseFourSearch()
 }
 
+function verseOfTheDay(verseObject) {
+  verseText.textContent = verseObject.content
+  verseRef.textContent = verseObject.reference
+}
+
+function previousVerseOfTheDay(){
+  var previousVerseInfo = verseArray[yesterday]
+  verseText.textContent = previousVerseInfo.content
+  verseRef.textContent = previousVerseInfo.reference
+}
 
 
 function handleGetCovidCurrentSuccess(data){
@@ -113,6 +180,7 @@ function handleGetVerseOneSuccess(data) {
   var reference = data.results[49].reference
   var numbers626 = {content, reference}
   verseArray[0] = numbers626
+  if (today === 0) {verseOfTheDay(numbers626)}
 }
 
 function handleGetVerseOneError(error) {
@@ -129,6 +197,9 @@ function handleGetVerseTwoSuccess(data) {
   reference = data.results[96].reference
   var isaiah263 = {content, reference }
   verseArray[2] = isaiah263
+  if (today === 1) { verseOfTheDay(psalm48) }
+  if (today === 2) { verseOfTheDay(isaiah263) }
+
 }
 
 function handleGetVerseTwoError(error) {
@@ -145,6 +216,8 @@ function handleGetVerseThreeSuccess(data) {
   reference = data.results[90].reference
   var romans51 = { content, reference }
   verseArray[4] = romans51
+  if (today === 3) { verseOfTheDay(john1427) }
+  if (today === 4) { verseOfTheDay(romans51) }
 }
 
 function handleGetVerseThreeError(error) {
@@ -161,14 +234,15 @@ function handleGetVerseFourSuccess(data) {
   reference = data.results[18].reference
   var colossians315 = { content, reference }
   verseArray[6] = colossians315
-  verseOfTheDay = verseArray[currentDay]
-  verseText.textContent = verseOfTheDay.content
-  verseRef.textContent = verseOfTheDay.reference
+  if (today === 5) { verseOfTheDay(philippians12) }
+  if (today === 6) { verseOfTheDay(colossians315) }
+
 }
 
 function handleGetVerseFourError(error) {
   console.error(error)
 }
+
 
 function updateCurrentCovidStats(data){
   currentActive.textContent = data.response[3].cases.active
@@ -186,13 +260,8 @@ function updateCurrentCovidStats(data){
 
   covidHistory();
 
-  getVerseOneSearch()
+  getVerses();
 
-  getVerseTwoSearch()
-
-  getVerseThreeSearch()
-
-  getVerseFourSearch()
 
 // }
 

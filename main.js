@@ -8,8 +8,7 @@ var verseRef = document.getElementById("verseRef")
 var dateHeader = document.getElementById('date')
 var verseArray = []
 var previousDayButton = document.getElementById('previousDay')
-previousDayButton.addEventListener("click", previousVerseOfTheDay)
-// var verseOfTheDay = null;
+previousDayButton.addEventListener("click", getPreviousDay)
 
 var currentDate = new Date();
 var currentYear = currentDate.getFullYear().toString();
@@ -22,15 +21,15 @@ if (currentDay.length === 1) {
   currentDay = '0' + currentDay;
 }
 var formattedCurrentDate = `${currentYear}-${currentMonth}-${currentDay}`;
+var formattedPreviousDate = `${currentYear}-${currentMonth}-${currentDay-1}`;
 
 var today = currentDate.getDay()
 var yesterday = today - 1
-var tomorrow = (today === 6) ? 1 : (today + 1)
+var tomorrow = (today === 6) ? 0 : (today + 1)
 
 
 
 function covidHistory(){
-  var formattedPreviousDate = `${currentYear}-${currentMonth}-${currentDay-1}`;
   $.ajax({
     method: "GET",
     url: `https://covid-193.p.rapidapi.com/history?day=${formattedPreviousDate}&country=usa`,
@@ -147,17 +146,21 @@ function getVerses(){
   getVerseFourSearch()
 }
 
+
+
+function previousVerseOfTheDay(){
+  dateHeader.textContent = formattedPreviousDate
+  var previousVerseInfo = verseArray[yesterday]
+  verseText.textContent = previousVerseInfo.content
+  verseRef.textContent = previousVerseInfo.reference
+}
+
 function verseOfTheDay(verseObject) {
   dateHeader.textContent = formattedCurrentDate
   verseText.textContent = verseObject.content
   verseRef.textContent = verseObject.reference
 }
 
-function previousVerseOfTheDay(){
-  var previousVerseInfo = verseArray[yesterday]
-  verseText.textContent = previousVerseInfo.content
-  verseRef.textContent = previousVerseInfo.reference
-}
 
 
 function handleGetCovidCurrentSuccess(data){
@@ -171,6 +174,8 @@ function handleGetCovidCurrentError(error){
 
 function handleGetCovidHistorySuccess(data){
   console.log("History Covid Data", data)
+  PreviousDayCovidStats(data)
+
 }
 
 function handleGetCovidHistoryError(error){
@@ -246,6 +251,12 @@ function handleGetVerseFourError(error) {
   console.error(error)
 }
 
+function PreviousDayCovidStats(data) {
+  currentActive.textContent = data.response[0].cases.active
+  currentCritical.textContent = data.response[0].cases.critical
+  currentRecovered.textContent = data.response[0].cases.recovered
+  currentDeaths.textContent = data.response[0].deaths.total
+}
 
 function updateCurrentCovidStats(data){
   currentActive.textContent = data.response[3].cases.active
@@ -255,14 +266,16 @@ function updateCurrentCovidStats(data){
   }
 
 
+  function getPreviousDay(){
+    covidHistory();
+    previousVerseOfTheDay()
+  }
+
 
 
 
   covidCurrent();
-
-  covidHistory();
-
-  // getVerses();
+  getVerses();
 
 
 

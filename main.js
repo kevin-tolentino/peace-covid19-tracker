@@ -30,7 +30,9 @@ var today = currentDate.getDay()
 var yesterday = today - 1
 var tomorrow = (today === 6) ? 0 : (today + 1)
 
-
+function formatNumber(num) {
+  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+}
 
 function covidHistory(){
   $.ajax({
@@ -255,17 +257,17 @@ function handleGetVerseFourError(error) {
 }
 
 function PreviousDayCovidStats(data) {
-  currentActive.textContent = data.response[0].cases.active
-  currentCritical.textContent = data.response[0].cases.critical
-  currentRecovered.textContent = data.response[0].cases.recovered
-  currentDeaths.textContent = data.response[0].deaths.total
+  currentActive.textContent = formatNumber(data.response[0].cases.active)
+  currentCritical.textContent = formatNumber(data.response[0].cases.critical)
+  currentRecovered.textContent = formatNumber(data.response[0].cases.recovered)
+  currentDeaths.textContent = formatNumber(data.response[0].deaths.total)
 }
 
 function updateCurrentCovidStats(data){
-  currentActive.textContent = data.response[3].cases.active
-  currentCritical.textContent = data.response[3].cases.critical
-  currentRecovered.textContent = data.response[3].cases.recovered
-  currentDeaths.textContent = data.response[3].deaths.total
+  currentActive.textContent = formatNumber(data.response[3].cases.active)
+  currentCritical.textContent = formatNumber(data.response[3].cases.critical)
+  currentRecovered.textContent = formatNumber(data.response[3].cases.recovered)
+  currentDeaths.textContent = formatNumber(data.response[3].deaths.total)
   }
 
 

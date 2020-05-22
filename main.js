@@ -1,4 +1,3 @@
-var h1 = document.querySelector("h1")
 var currentActive = document.getElementById("currentActive")
 var currentCritical = document.getElementById("currentCritical")
 var currentRecovered = document.getElementById("currentRecovered")
@@ -12,25 +11,32 @@ var middleButton = document.getElementById('middleButton')
 var rightButton = document.getElementById('rightButton')
 leftButton.addEventListener("click", getPreviousDay)
 middleButton.addEventListener('click', covidCurrent)
+rightButton.addEventListener("click", getPreviewDay)
+
 
 var currentDate = new Date();
+var previousDayDate = new Date();
+previousDayDate.setDate(previousDayDate.getDate() - 1);
+var previewDayDate = new Date()
+previewDayDate.setDate(previewDayDate.getDate() + 1);
 var currentYear = currentDate.getFullYear().toString();
 var currentMonth = (currentDate.getMonth() + 1).toString();
 if (currentMonth.length === 1) {
   currentMonth = '0' + currentMonth;
 }
-var currentDay = (currentDate.getDate().toString()) - 1;
+var currentDay = (currentDate.getDate().toString());
 if (currentDay.length === 1) {
   currentDay = '0' + currentDay;
 }
-var formattedCurrentDate = `${currentYear}-${currentMonth}-${currentDay}`;
 var formattedPreviousDate = `${currentYear}-${currentMonth}-${currentDay-1}`;
 
 var today = currentDate.getDay()
 var yesterday = today - 1
 var tomorrow = (today === 6) ? 0 : (today + 1)
 
-
+function formatNumber(num) {
+  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+}
 
 function covidHistory(){
   $.ajax({
@@ -152,22 +158,28 @@ function getVerses(){
 
 
 function previousVerseOfTheDay(){
-  dateHeader.textContent = formattedPreviousDate
+  dateHeader.textContent = previousDayDate.toDateString()
   var previousVerseInfo = verseArray[yesterday]
   verseText.textContent = previousVerseInfo.content
   verseRef.textContent = previousVerseInfo.reference
 }
 
 function verseOfTheDay(verseObject) {
-  dateHeader.textContent = formattedCurrentDate
+  dateHeader.textContent = currentDate.toDateString()
   verseText.textContent = verseObject.content
   verseRef.textContent = verseObject.reference
+}
+
+function previewVerseOfTheDay(){
+  dateHeader.textContent = previewDayDate.toDateString()
+  var previewVerseInfo = verseArray[tomorrow]
+  verseText.textContent = previewVerseInfo.content
+  verseRef.textContent = previewVerseInfo.reference
 }
 
 
 
 function handleGetCovidCurrentSuccess(data){
-  console.log("Current Covid Data", data)
   updateCurrentCovidStats(data)
     }
 
@@ -176,7 +188,6 @@ function handleGetCovidCurrentError(error){
 }
 
 function handleGetCovidHistorySuccess(data){
-  console.log("History Covid Data", data)
   PreviousDayCovidStats(data)
 
 }
@@ -186,7 +197,6 @@ function handleGetCovidHistoryError(error){
 }
 
 function handleGetVerseOneSuccess(data) {
-  console.log("Page One Verses", data)
   var content = data.results[49].content
   var reference = data.results[49].reference
   var numbers626 = {content, reference}
@@ -199,7 +209,6 @@ function handleGetVerseOneError(error) {
 }
 
 function handleGetVerseTwoSuccess(data) {
-  console.log("Page Two Verses", data)
   var content = data.results[65].content
   var reference = data.results[65].reference
   var psalm48 = { content, reference }
@@ -218,7 +227,6 @@ function handleGetVerseTwoError(error) {
 }
 
 function handleGetVerseThreeSuccess(data) {
-  console.log("Page Three Verses", data)
   var content = data.results[76].content
   var reference = data.results[76].reference
   var john1427 = { content, reference }
@@ -236,7 +244,6 @@ function handleGetVerseThreeError(error) {
 }
 
 function handleGetVerseFourSuccess(data) {
-  console.log("Page Four Verses", data)
   var content = data.results[13].content
   var reference = data.results[13].reference
   var philippians12 = { content, reference }
@@ -255,107 +262,70 @@ function handleGetVerseFourError(error) {
 }
 
 function PreviousDayCovidStats(data) {
-  currentActive.textContent = data.response[0].cases.active
-  currentCritical.textContent = data.response[0].cases.critical
-  currentRecovered.textContent = data.response[0].cases.recovered
-  currentDeaths.textContent = data.response[0].deaths.total
+  currentActive.textContent = formatNumber(data.response[0].cases.active)
+  currentCritical.textContent = formatNumber(data.response[0].cases.critical)
+  currentRecovered.textContent = formatNumber(data.response[0].cases.recovered)
+  currentDeaths.textContent = formatNumber(data.response[0].deaths.total)
 }
 
 function updateCurrentCovidStats(data){
-  currentActive.textContent = data.response[3].cases.active
-  currentCritical.textContent = data.response[3].cases.critical
-  currentRecovered.textContent = data.response[3].cases.recovered
-  currentDeaths.textContent = data.response[3].deaths.total
+  currentActive.textContent = formatNumber(data.response[3].cases.active)
+  currentCritical.textContent = formatNumber(data.response[3].cases.critical)
+  currentRecovered.textContent = formatNumber(data.response[3].cases.recovered)
+  currentDeaths.textContent = formatNumber(data.response[3].deaths.total)
   }
 
 
-  function getPreviousDay(){
+function getPreviousDay(){
     leftButton.classList.add('invisible')
     middleButton.classList.add('invisible')
     covidHistory();
     previousVerseOfTheDay()
     rightButton.textContent = 'View Current Day'
+    rightButton.removeEventListener('click', getPreviewDay)
     rightButton.addEventListener('click', covidCurrent)
-    rightButton.addEventListener('click', viewCurrentDay)
+    rightButton.addEventListener('click', viewCurrentDayRightButton)
+  }
 
+  function getPreviewDay(){
+    middleButton.classList.add('invisible')
+    rightButton.classList.add('invisible')
+    previewVerseOfTheDay()
+    leftButton.textContent = 'View Current Day'
+    leftButton.removeEventListener('click', getPreviousDay)
+    leftButton.addEventListener('click', viewCurrentDayLeftButton)
+    currentActive.textContent = 'TBD'
+    currentCritical.textContent = 'TBD'
+    currentRecovered.textContent = 'TBD'
+    currentDeaths.textContent = 'TBD'
 
   }
 
-    function viewCurrentDay(){
+function viewCurrentDayRightButton(){
       leftButton.classList.remove('invisible')
       middleButton.classList.remove('invisible')
       rightButton.removeEventListener('click', covidCurrent)
-      rightButton.removeEventListener('click', viewCurrentDay)
+      rightButton.removeEventListener('click', viewCurrentDayRightButton)
       verseOfTheDay(verseArray[today])
       rightButton.textContent = 'Preview Tomorrow'
+      rightButton.addEventListener('click', getPreviewDay)
+
     }
+
+function viewCurrentDayLeftButton() {
+  rightButton.classList.remove('invisible')
+  middleButton.classList.remove('invisible')
+  leftButton.removeEventListener('click', covidCurrent)
+  leftButton.removeEventListener('click', viewCurrentDayLeftButton)
+  verseOfTheDay(verseArray[today])
+  covidCurrent()
+  leftButton.textContent = 'Preview Day'
+  leftButton.addEventListener("click", getPreviousDay)
+}
+
+
 
 
 
   covidCurrent();
   getVerses();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function consoleLogData(data) {
-  console.log("AJAX Data GET: ", data)
-  var span = h1.querySelector("span")
-  // span.textContent = data.passages[0]
-}
-
-
-//31 Bible Verses
-// 1. Numbers 6: 26 - (on page 1) data.results[49].content | data.results[49].reference
-
-//   The LORD bless you and keep you;
-// the LORD make his face to shine upon you and be gracious to you;
-// the LORD lift up his countenance upon you and give you peace. (ESV)
-
-// 2. Psalm 4: 8 - (on page 2) data.results[65].content | data.results[65].reference
-
-// In peace I will both lie down and sleep;
-// for you alone, O LORD, make me dwell in safety. (ESV)
-
-// 3. Isaiah 26: 3 - (on page 2) data.results[96].content | data.results[96].reference
-
-// You keep him in perfect peace whose mind is stayed on you, because he trusts in you.
-
-// 4. John 14: 27 - (on page 3) data.results[76].content | data.results[96].reference
-// Peace I leave with you; my Peace I give to you.Not as the world gives do I give to you.Let not your hearts be troubled, neither let them be afraid.
-
-// 5. Romans 5: 1 - (on page 3) data.results[90].content | data.results[96].reference
-
-//Therefore, since we have been justified by faith, we have peace with God through our Lord Jesus Christ.
-
-// 6. Philippians 1: 2 - (on page 4) data.results[13].content | data.results[13].reference
-// Grace to you and peace from God our Father and the Lord Jesus Christ.
-
-// 7. Colossians 3: 15 - (on page 4) data.results[18].content | data.results[18].reference
-// And let the peace of Christ rule in your hearts, to which indeed you were called in one body.And be thankful.
-
-
-
-//*To be used later in the project after the hackathon
-// function getVerse(){
-//   $.ajax({
-//     method: "GET",
-//     url: "https://api.esv.org/v3/passage/text/?q=John+11:35",
-//     headers: { "Authorization": "4bb2afad133ab4a9531a4be06fd06ae85703cf0f" },
-//     data: { "include-passage-references": false, "include-verse-numbers": false, "include-short-copyright": false},
-//     success: consoleLogData,
-//     error: console.error
-//   })
-// }

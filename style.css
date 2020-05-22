@@ -11,16 +11,12 @@
   height: 66.7px;
 }
 
-.covid-table {
+/* .covid-table {
   height: 173px;
-}
+} */
 
 .verse{
-  height: 358px;
   background-color: #DBFFD6;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
 }
 
 img {

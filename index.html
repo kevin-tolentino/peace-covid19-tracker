@@ -10,14 +10,15 @@
 </head>
 <body>
   <div class="container">
-    <div class="row-1 border border-primary">
-      <header>
-        <h4 class="text-center">COVID-19 Stats Update & Peace Verse of the Day</h4>
+    <div class="row border border-primary">
+      <header class="col">
+        <h1 class="text-center">Peace COVID19 Tracker</h1>
       </header>
     </div>
-    <div class="row-2 border border-danger">
-      <main>
-        <div class="covid-table table-responsive">
+    <div class="row ">
+      <main class="col">
+        <h3 class="text-center">United States COVID-19 Stats</h3>
+
           <table class="table table-bordered text-center">
             <thead class="table-primary">
               <tr>
@@ -40,19 +41,20 @@
               </tr>
             </tbody>
           </table>
-        </div>
-        <div class="verse">
-          <h2>Peace Verse of the Day</h2>
-          <p id="verse"><span id="verseText">In peace I will both lie down and sleep; for you alone, O LORD, make me dwell in safety.</span> (<span id="verseRef">Psalm 4:8</span>)</p>
+
+        <div class="col verse">
+          <h3 class="text-center">Peace Verse of the Day</h3>
+          <h5 id="date" class="text-center"></h5>
+          <p id="verse" class="text-center"><span id="verseText">In peace I will both lie down and sleep; for you alone, O LORD, make me dwell in safety.</span> (<span id="verseRef">Psalm 4:8</span>)</p>
         </div>
       </main>
     </div>
-    <div class="row-3 border border-success">
+    <div class="row ">
       <footer class="w-100">
         <div class="col d-flex justify-content-between">
-          <button id="previousDay" class="btn btn-secondary m-1">Previous Day</button>
-          <button class="btn btn-secondary m-1">Update Stats</button>
-          <button id="previewDay" class="btn btn-secondary m-1">Next Day</button>
+          <button id="leftButton" class="btn btn-primary m-1">Previous Day</button>
+          <button id="middleButton" class="btn btn-success m-1">Update Stats</button>
+          <button id="rightButton" class="btn btn-primary m-1">Preview Tomorrow</button>
         </div>
       </footer>
     </div>

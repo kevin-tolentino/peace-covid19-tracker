@@ -5,10 +5,13 @@ var currentRecovered = document.getElementById("currentRecovered")
 var currentDeaths = document.getElementById("currentDeaths")
 var verseText = document.getElementById("verseText")
 var verseRef = document.getElementById("verseRef")
+var dateHeader = document.getElementById('date')
 var verseArray = []
-var previousDayButton = document.getElementById('previousDay')
-previousDayButton.addEventListener("click", previousVerseOfTheDay)
-// var verseOfTheDay = null;
+var leftButton = document.getElementById('leftButton')
+var middleButton = document.getElementById('middleButton')
+var rightButton = document.getElementById('rightButton')
+leftButton.addEventListener("click", getPreviousDay)
+middleButton.addEventListener('click', covidCurrent)
 
 var currentDate = new Date();
 var currentYear = currentDate.getFullYear().toString();
@@ -16,22 +19,23 @@ var currentMonth = (currentDate.getMonth() + 1).toString();
 if (currentMonth.length === 1) {
   currentMonth = '0' + currentMonth;
 }
-var previousDay = (currentDate.getDate().toString()) - 1;
-if (previousDay.length === 1) {
-  previousDay = '0' + previousDay;
+var currentDay = (currentDate.getDate().toString()) - 1;
+if (currentDay.length === 1) {
+  currentDay = '0' + currentDay;
 }
-var formattedDate = `${currentYear}-${currentMonth}-${previousDay}`;
+var formattedCurrentDate = `${currentYear}-${currentMonth}-${currentDay}`;
+var formattedPreviousDate = `${currentYear}-${currentMonth}-${currentDay-1}`;
 
 var today = currentDate.getDay()
 var yesterday = today - 1
-var tomorrow = (today === 6) ? 1 : (today + 1)
+var tomorrow = (today === 6) ? 0 : (today + 1)
 
 
 
 function covidHistory(){
   $.ajax({
     method: "GET",
-    url: `https://covid-193.p.rapidapi.com/history?day=${formattedDate}&country=usa`,
+    url: `https://covid-193.p.rapidapi.com/history?day=${formattedPreviousDate}&country=usa`,
     headers: {
       "x-rapidapi-host": "covid-193.p.rapidapi.com",
       "x-rapidapi-key": "c857e751dfmsh459b4184fde79f2p1e3cbdjsn082cb4dee5cd"
@@ -145,16 +149,21 @@ function getVerses(){
   getVerseFourSearch()
 }
 
-function verseOfTheDay(verseObject) {
-  verseText.textContent = verseObject.content
-  verseRef.textContent = verseObject.reference
-}
+
 
 function previousVerseOfTheDay(){
+  dateHeader.textContent = formattedPreviousDate
   var previousVerseInfo = verseArray[yesterday]
   verseText.textContent = previousVerseInfo.content
   verseRef.textContent = previousVerseInfo.reference
 }
+
+function verseOfTheDay(verseObject) {
+  dateHeader.textContent = formattedCurrentDate
+  verseText.textContent = verseObject.content
+  verseRef.textContent = verseObject.reference
+}
+
 
 
 function handleGetCovidCurrentSuccess(data){
@@ -168,6 +177,8 @@ function handleGetCovidCurrentError(error){
 
 function handleGetCovidHistorySuccess(data){
   console.log("History Covid Data", data)
+  PreviousDayCovidStats(data)
+
 }
 
 function handleGetCovidHistoryError(error){
@@ -243,6 +254,12 @@ function handleGetVerseFourError(error) {
   console.error(error)
 }
 
+function PreviousDayCovidStats(data) {
+  currentActive.textContent = data.response[0].cases.active
+  currentCritical.textContent = data.response[0].cases.critical
+  currentRecovered.textContent = data.response[0].cases.recovered
+  currentDeaths.textContent = data.response[0].deaths.total
+}
 
 function updateCurrentCovidStats(data){
   currentActive.textContent = data.response[3].cases.active
@@ -252,22 +269,35 @@ function updateCurrentCovidStats(data){
   }
 
 
+  function getPreviousDay(){
+    leftButton.classList.add('invisible')
+    middleButton.classList.add('invisible')
+    covidHistory();
+    previousVerseOfTheDay()
+    rightButton.textContent = 'View Current Day'
+    rightButton.addEventListener('click', covidCurrent)
+    rightButton.addEventListener('click', viewCurrentDay)
 
 
-// function start(){
+  }
+
+    function viewCurrentDay(){
+      leftButton.classList.remove('invisible')
+      middleButton.classList.remove('invisible')
+      rightButton.removeEventListener('click', covidCurrent)
+      rightButton.removeEventListener('click', viewCurrentDay)
+      verseOfTheDay(verseArray[today])
+      rightButton.textContent = 'Preview Tomorrow'
+    }
+
+
 
   covidCurrent();
-
-  covidHistory();
-
   getVerses();
 
 
-// }
 
 
-
-// start()
 
 
 

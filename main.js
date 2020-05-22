@@ -272,16 +272,18 @@ function updateCurrentCovidStats(data){
     covidHistory();
     previousVerseOfTheDay()
     rightButton.textContent = 'View Current Day'
-    rightButton.addEventListener('click', function(){
-      covidCurrent()
-      viewCurrentDay()
-    })
+    rightButton.addEventListener('click', covidCurrent)
+    rightButton.addEventListener('click', viewCurrentDay)
+
 
   }
 
     function viewCurrentDay(){
       leftButton.classList.remove('invisible')
+      rightButton.removeEventListener('click', covidCurrent)
+      rightButton.removeEventListener('click', viewCurrentDay)
       verseOfTheDay(verseArray[today])
+      rightButton.textContent = 'Preview Tomorrow'
     }
 
 

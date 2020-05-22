@@ -10,14 +10,14 @@
 </head>
 <body>
   <div class="container">
-    <div class="row-1 border border-primary">
-      <header>
+    <div class="row border border-primary">
+      <header class="col">
         <h4 class="text-center">COVID-19 Stats Update & Peace Verse of the Day</h4>
       </header>
     </div>
-    <div class="row-2 border border-danger">
-      <main>
-        <div class="covid-table table-responsive">
+    <div class="row border border-danger">
+      <main class="col">
+        <div class="covid-table table-responsive col">
           <table class="table table-bordered text-center">
             <thead class="table-primary">
               <tr>
@@ -41,13 +41,14 @@
             </tbody>
           </table>
         </div>
-        <div class="verse">
+        <div class="verse col">
           <h2 class="text-center">Peace Verse of the Day</h2>
-          <p id="verse" class="text-center"><span id="verseText">In peace I will both lie down and sleep; for you alone, O LORD, make me dwell in safety.</span> (<span id="verseRef">Psalm 4:8</span>)</p>
+          <h3 id="date" class="text-center"></h3>
+          <h5 id="verse" class="text-center"><span id="verseText">In peace I will both lie down and sleep; for you alone, O LORD, make me dwell in safety.</span> (<span id="verseRef">Psalm 4:8</span>)</h5>
         </div>
       </main>
     </div>
-    <div class="row-3 border border-success">
+    <div class="row border border-success">
       <footer class="w-100">
         <div class="col d-flex justify-content-between">
           <button id="previousDay" class="btn btn-secondary m-1">Previous Day</button>

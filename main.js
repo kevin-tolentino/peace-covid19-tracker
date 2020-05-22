@@ -5,6 +5,7 @@ var currentRecovered = document.getElementById("currentRecovered")
 var currentDeaths = document.getElementById("currentDeaths")
 var verseText = document.getElementById("verseText")
 var verseRef = document.getElementById("verseRef")
+var dateHeader = document.getElementById('date')
 var verseArray = []
 var previousDayButton = document.getElementById('previousDay')
 previousDayButton.addEventListener("click", previousVerseOfTheDay)
@@ -16,11 +17,11 @@ var currentMonth = (currentDate.getMonth() + 1).toString();
 if (currentMonth.length === 1) {
   currentMonth = '0' + currentMonth;
 }
-var previousDay = (currentDate.getDate().toString()) - 1;
-if (previousDay.length === 1) {
-  previousDay = '0' + previousDay;
+var currentDay = (currentDate.getDate().toString()) - 1;
+if (currentDay.length === 1) {
+  currentDay = '0' + currentDay;
 }
-var formattedDate = `${currentYear}-${currentMonth}-${previousDay}`;
+var formattedCurrentDate = `${currentYear}-${currentMonth}-${currentDay}`;
 
 var today = currentDate.getDay()
 var yesterday = today - 1
@@ -29,9 +30,10 @@ var tomorrow = (today === 6) ? 1 : (today + 1)
 
 
 function covidHistory(){
+  var formattedPreviousDate = `${currentYear}-${currentMonth}-${currentDay-1}`;
   $.ajax({
     method: "GET",
-    url: `https://covid-193.p.rapidapi.com/history?day=${formattedDate}&country=usa`,
+    url: `https://covid-193.p.rapidapi.com/history?day=${formattedPreviousDate}&country=usa`,
     headers: {
       "x-rapidapi-host": "covid-193.p.rapidapi.com",
       "x-rapidapi-key": "c857e751dfmsh459b4184fde79f2p1e3cbdjsn082cb4dee5cd"
@@ -146,6 +148,7 @@ function getVerses(){
 }
 
 function verseOfTheDay(verseObject) {
+  dateHeader.textContent = formattedCurrentDate
   verseText.textContent = verseObject.content
   verseRef.textContent = verseObject.reference
 }
@@ -260,7 +263,6 @@ function updateCurrentCovidStats(data){
   covidHistory();
 
   // getVerses();
-
 
 
 

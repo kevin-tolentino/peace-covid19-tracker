@@ -8,8 +8,10 @@ var verseRef = document.getElementById("verseRef")
 var dateHeader = document.getElementById('date')
 var verseArray = []
 var leftButton = document.getElementById('leftButton')
+var middleButton = document.getElementById('middleButton')
 var rightButton = document.getElementById('rightButton')
 leftButton.addEventListener("click", getPreviousDay)
+middleButton.addEventListener('click', covidCurrent)
 
 var currentDate = new Date();
 var currentYear = currentDate.getFullYear().toString();
@@ -269,6 +271,7 @@ function updateCurrentCovidStats(data){
 
   function getPreviousDay(){
     leftButton.classList.add('invisible')
+    middleButton.classList.add('invisible')
     covidHistory();
     previousVerseOfTheDay()
     rightButton.textContent = 'View Current Day'
@@ -280,6 +283,7 @@ function updateCurrentCovidStats(data){
 
     function viewCurrentDay(){
       leftButton.classList.remove('invisible')
+      middleButton.classList.remove('invisible')
       rightButton.removeEventListener('click', covidCurrent)
       rightButton.removeEventListener('click', viewCurrentDay)
       verseOfTheDay(verseArray[today])

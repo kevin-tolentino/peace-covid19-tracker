@@ -254,20 +254,17 @@ function updateCurrentCovidStats(data){
 
 
 
-// function start(){
 
   covidCurrent();
 
   covidHistory();
 
-  getVerses();
-
-
-// }
+  // getVerses();
 
 
 
-// start()
+
+
 
 
 

@@ -307,7 +307,7 @@ function viewCurrentDayRightButton(){
       rightButton.removeEventListener('click', covidCurrent)
       rightButton.removeEventListener('click', viewCurrentDayRightButton)
       verseOfTheDay(verseArray[today])
-      rightButton.textContent = 'Preview Tomorrow'
+  rightButton.textContent = "Preview Tomorrow's Verse"
       rightButton.addEventListener('click', getPreviewDay)
 
     }

@@ -1,6 +1,6 @@
 # peace-covid19-tracker
 
-A web application that utilizes the [ESV API](https://api.esv.org/ "ESV API") and the [COVID-19 API-SPORTS API](https://api-sports.io/documentation/covid-19 "API Sports COVID-19") to display daily curated Bible Verses and recent COVID-19 case data on a table.
+📖🦠A web application that utilizes the [ESV API](https://api.esv.org/ "ESV API") and the [COVID-19 API-SPORTS API](https://api-sports.io/documentation/covid-19 "API Sports COVID-19") to display daily curated Bible Verses and recent COVID-19 case data on a table.
 
 ## 👀Live Demo
 

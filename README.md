@@ -1,19 +1,45 @@
-# C220-Hackathon-2
+# peace-covid19-tracker
 
-For this Hackathon, you will be combining multiple public APIs of your choosing in order to create a web application that uses their combined data to create something new. The application is yours to design, but your idea must be approved by an instructor before you can move forward with building the application.
+A web application that utilizes the [ESV API](https://api.esv.org/ "ESV API") and the [COVID-19 API-SPORTS API](https://api-sports.io/documentation/covid-19 "API Sports COVID-19") to display daily curated Bible Verses and recent COVID-19 case data on a table.
 
-### Requirements
-- Combine **at least** 2 public APIs via AJAX requests and present their combined information in a web application of your design.
-- Must be issue-managed via [Meistertask](https://www.meistertask.com/) or an equivalent Kanban board.
-- Application idea **MUST** be approved by an instructor before you begin coding your project.
+## Live Demo
+
+Try the application live at https://peace-covid19-tracker.kevintolentino.com/
+
+## Technologies Used
+
+- HTML5
+- CSS3
+- JavaScript
+- jQuery (AJAX)
+- Bootstrap 4
+- font-awesome
+
+## Features
+
+- Users can view current USA COVID19 Case Data.
+- Users can view today's Bible verse.
+- Users can press button to update current COVID19 Case Data every 15 minutes.
+- Users can view previous day USA COVID19 Data.
+- Users can view previous day's Bible verse.
+- Users can preview tomorrow's Bible verse.
+
+## Preview
+![Add Destination Demo](https://github.com/helen-choi/itinize/blob/master/server/public/images/add-destination-demo.gif "Add Destination Demo")
+
+## Development
+
+### Getting Started
+
+1. Clone the repository.
+
+```
+git clone https://github.com/kevin-tolentino/peace-covid19-tracker.git
+cd peace-covid19-tracker
+```
+
+2. Register for your API Keys at the following links: [ESV API](https://api.esv.org/docs/) [COVID-19 by API-SPORTS](https://rapidapi.com/api-sports/api/covid-193/endpoints) (Note: You must sign up for a RapidAPI account to obtain key)
+
+3. Open index.html in the browser
 
 
-### Approved API List
-
-Found [**here**](https://docs.google.com/document/d/10CMIYVWv36gophaq_3DldBoAT4w6g4xL9xEMnEu-z5o/edit?usp=sharing)
-
-### ProgrammableWeb API Directory
-
-Found [**here**](https://www.programmableweb.com/apis/directory)
-
-**NOTE:** Any APIs found through this link not on the approved API list above must be approved by an instructor to be used. In order to be approved, you must be able to provide proof of a successful AJAX call in the browser **WITHOUT** using VSCode's Live Server.

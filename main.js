@@ -160,7 +160,9 @@ function getVerses(){
 function previousVerseOfTheDay(){
   dateHeader.textContent = previousDayDate.toDateString()
   var previousVerseInfo = verseArray[yesterday]
-  verseText.textContent = previousVerseInfo.content
+  var formattedText = previousVerseInfo.content
+  formattedText = formattedText[0].toUpperCase() + formattedText.slice(1)
+  verseText.textContent = formattedText
   verseRef.textContent = previousVerseInfo.reference
 }
 
@@ -175,7 +177,9 @@ function verseOfTheDay(verseObject) {
 function previewVerseOfTheDay(){
   dateHeader.textContent = previewDayDate.toDateString()
   var previewVerseInfo = verseArray[tomorrow]
-  verseText.textContent = previewVerseInfo.content
+  var formattedText = previewVerseInfo.content
+  formattedText = formattedText[0].toUpperCase() + formattedText.slice(1)
+  verseText.textContent = formattedText
   verseRef.textContent = previewVerseInfo.reference
 }
 

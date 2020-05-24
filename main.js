@@ -160,20 +160,26 @@ function getVerses(){
 function previousVerseOfTheDay(){
   dateHeader.textContent = previousDayDate.toDateString()
   var previousVerseInfo = verseArray[yesterday]
-  verseText.textContent = previousVerseInfo.content
+  var formattedText = previousVerseInfo.content
+  formattedText = formattedText[0].toUpperCase() + formattedText.slice(1)
+  verseText.textContent = formattedText
   verseRef.textContent = previousVerseInfo.reference
 }
 
 function verseOfTheDay(verseObject) {
   dateHeader.textContent = currentDate.toDateString()
-  verseText.textContent = verseObject.content
+  var formattedText = verseObject.content
+  formattedText = formattedText[0].toUpperCase() + formattedText.slice(1)
+  verseText.textContent = formattedText
   verseRef.textContent = verseObject.reference
 }
 
 function previewVerseOfTheDay(){
   dateHeader.textContent = previewDayDate.toDateString()
   var previewVerseInfo = verseArray[tomorrow]
-  verseText.textContent = previewVerseInfo.content
+  var formattedText = previewVerseInfo.content
+  formattedText = formattedText[0].toUpperCase() + formattedText.slice(1)
+  verseText.textContent = formattedText
   verseRef.textContent = previewVerseInfo.reference
 }
 
@@ -189,7 +195,6 @@ function handleGetCovidCurrentError(error){
 
 function handleGetCovidHistorySuccess(data){
   PreviousDayCovidStats(data)
-
 }
 
 function handleGetCovidHistoryError(error){

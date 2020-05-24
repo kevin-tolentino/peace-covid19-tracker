@@ -166,7 +166,9 @@ function previousVerseOfTheDay(){
 
 function verseOfTheDay(verseObject) {
   dateHeader.textContent = currentDate.toDateString()
-  verseText.textContent = verseObject.content
+  var formattedText = verseObject.content
+  formattedText = formattedText[0].toUpperCase() + formattedText.slice(1)
+  verseText.textContent = formattedText
   verseRef.textContent = verseObject.reference
 }
 
@@ -189,7 +191,6 @@ function handleGetCovidCurrentError(error){
 
 function handleGetCovidHistorySuccess(data){
   PreviousDayCovidStats(data)
-
 }
 
 function handleGetCovidHistoryError(error){

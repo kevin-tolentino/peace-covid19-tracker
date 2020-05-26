@@ -17,11 +17,11 @@ Try the application live at https://peace-covid19-tracker.kevintolentino.com/
 
 ## 💡Features
 
-- Users can view current USA COVID19 Case Data.
+- Users can view current USA COVID-19 Case Data.
 - Users can view today's Bible verse.
-- Users can press button to update current COVID19 Case Data every 15 minutes.
-- Users can view previous day USA COVID19 Data.
-- Users can view previous day's Bible verse.
+- Users can press button to update current COVID-19 Case Data every 15 minutes.
+- Users can view yesterday's historic USA COVID-19 Data.
+- Users can view yesterday's Bible verse.
 - Users can preview tomorrow's Bible verse.
 
 ## ✨Preview

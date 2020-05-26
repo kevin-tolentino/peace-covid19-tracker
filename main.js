@@ -324,7 +324,7 @@ function viewCurrentDayLeftButton() {
   leftButton.removeEventListener('click', viewCurrentDayLeftButton)
   verseOfTheDay(verseArray[today])
   covidCurrent()
-  leftButton.textContent = 'Preview Day'
+  leftButton.textContent = 'Previous Day'
   leftButton.addEventListener("click", getPreviousDay)
 }
 

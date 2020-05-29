@@ -72,6 +72,9 @@ function covidCurrent(){
       currentCritical.textContent = 'loading'
       currentRecovered.textContent = 'loading'
       currentDeaths.textContent = 'loading'
+      leftButton.setAttribute('disabled', '')
+      rightButton.setAttribute('disabled', '')
+
     },
     success: handleGetCovidCurrentSuccess,
     error: handleGetCovidCurrentError
@@ -189,7 +192,9 @@ function previewVerseOfTheDay(){
 
 function handleGetCovidCurrentSuccess(data){
   updateCurrentCovidStats(data)
-  console.log(data)
+  leftButton.removeAttribute('disabled', '')
+  rightButton.removeAttribute('disabled', '')
+
     }
 
 function handleGetCovidCurrentError(error){

@@ -5,12 +5,15 @@ var currentDeaths = document.getElementById("currentDeaths")
 var verseText = document.getElementById("verseText")
 var verseRef = document.getElementById("verseRef")
 var dateHeader = document.getElementById('date')
+var timer = document.getElementById('timer')
 var verseArray = []
 var leftButton = document.getElementById('leftButton')
 var middleButton = document.getElementById('middleButton')
 var rightButton = document.getElementById('rightButton')
 leftButton.addEventListener("click", getPreviousDay)
-middleButton.addEventListener('click', covidCurrent)
+middleButton.addEventListener('click', function () {
+  covidCurrent()
+  startTimer(5, timer)} )
 rightButton.addEventListener("click", getPreviewDay)
 
 
@@ -38,6 +41,33 @@ function formatNumber(num) {
   return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 }
 
+
+function startTimer(duration, display) {
+    middleButton.setAttribute('disabled', '')
+    var timer = duration, minutes, seconds;
+    var intervalId = setInterval(function () {
+      minutes = parseInt(timer / 60, 10);
+      seconds = parseInt(timer % 60, 10);
+
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+
+      display.textContent = minutes + ":" + seconds;
+      if (minutes === "00" && seconds === "00"){
+        middleButton.removeAttribute('disabled', '')
+        clearInterval(intervalId)
+        display.textContent = null
+      }
+
+      if (--timer < 0) {
+        timer = duration;
+      }
+      if (timer === 0) {
+        display.textContent = minutes + ":" + seconds
+      }
+    }, 1000);
+  }
+
 function covidHistory(){
   $.ajax({
     method: "GET",
@@ -51,6 +81,8 @@ function covidHistory(){
       currentCritical.textContent = 'loading'
       currentRecovered.textContent = 'loading'
       currentDeaths.textContent = 'loading'
+      rightButton.setAttribute('disabled', '')
+
     },
     success: handleGetCovidHistorySuccess,
     error: handleGetCovidHistoryError
@@ -70,6 +102,9 @@ function covidCurrent(){
       currentCritical.textContent = 'loading'
       currentRecovered.textContent = 'loading'
       currentDeaths.textContent = 'loading'
+      leftButton.setAttribute('disabled', '')
+      rightButton.setAttribute('disabled', '')
+
     },
     success: handleGetCovidCurrentSuccess,
     error: handleGetCovidCurrentError
@@ -187,6 +222,9 @@ function previewVerseOfTheDay(){
 
 function handleGetCovidCurrentSuccess(data){
   updateCurrentCovidStats(data)
+  leftButton.removeAttribute('disabled', '')
+  rightButton.removeAttribute('disabled', '')
+
     }
 
 function handleGetCovidCurrentError(error){
@@ -195,6 +233,7 @@ function handleGetCovidCurrentError(error){
 
 function handleGetCovidHistorySuccess(data){
   PreviousDayCovidStats(data)
+  rightButton.removeAttribute('disabled', '')
 }
 
 function handleGetCovidHistoryError(error){
@@ -331,6 +370,6 @@ function viewCurrentDayLeftButton() {
 
 
 
-
+  startTimer(900, timer)
   covidCurrent();
   getVerses();

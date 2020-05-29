@@ -5,6 +5,7 @@ var currentDeaths = document.getElementById("currentDeaths")
 var verseText = document.getElementById("verseText")
 var verseRef = document.getElementById("verseRef")
 var dateHeader = document.getElementById('date')
+var timer = document.getElementById('timer')
 var verseArray = []
 var leftButton = document.getElementById('leftButton')
 var middleButton = document.getElementById('middleButton')
@@ -37,6 +38,24 @@ var tomorrow = (today === 6) ? 0 : (today + 1)
 function formatNumber(num) {
   return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 }
+
+
+  function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+      minutes = parseInt(timer / 60, 10);
+      seconds = parseInt(timer % 60, 10);
+
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+
+      display.textContent = minutes + ":" + seconds;
+
+      if (--timer < 0) {
+        timer = duration;
+      }
+    }, 1000);
+  }
 
 function covidHistory(){
   $.ajax({
@@ -340,6 +359,6 @@ function viewCurrentDayLeftButton() {
 
 
 
-
+  startTimer(300, timer)
   covidCurrent();
   getVerses();

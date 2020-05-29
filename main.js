@@ -51,6 +51,8 @@ function covidHistory(){
       currentCritical.textContent = 'loading'
       currentRecovered.textContent = 'loading'
       currentDeaths.textContent = 'loading'
+      rightButton.setAttribute('disabled', '')
+
     },
     success: handleGetCovidHistorySuccess,
     error: handleGetCovidHistoryError
@@ -187,6 +189,7 @@ function previewVerseOfTheDay(){
 
 function handleGetCovidCurrentSuccess(data){
   updateCurrentCovidStats(data)
+  console.log(data)
     }
 
 function handleGetCovidCurrentError(error){
@@ -195,6 +198,7 @@ function handleGetCovidCurrentError(error){
 
 function handleGetCovidHistorySuccess(data){
   PreviousDayCovidStats(data)
+  rightButton.removeAttribute('disabled', '')
 }
 
 function handleGetCovidHistoryError(error){

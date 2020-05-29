@@ -11,7 +11,9 @@ var leftButton = document.getElementById('leftButton')
 var middleButton = document.getElementById('middleButton')
 var rightButton = document.getElementById('rightButton')
 leftButton.addEventListener("click", getPreviousDay)
-middleButton.addEventListener('click', covidCurrent)
+middleButton.addEventListener('click', function () {
+  covidCurrent()
+  startTimer(5, timer)} )
 rightButton.addEventListener("click", getPreviewDay)
 
 
@@ -40,9 +42,10 @@ function formatNumber(num) {
 }
 
 
-  function startTimer(duration, display) {
+function startTimer(duration, display) {
+    middleButton.setAttribute('disabled', '')
     var timer = duration, minutes, seconds;
-    setInterval(function () {
+    var intervalId = setInterval(function () {
       minutes = parseInt(timer / 60, 10);
       seconds = parseInt(timer % 60, 10);
 
@@ -50,9 +53,17 @@ function formatNumber(num) {
       seconds = seconds < 10 ? "0" + seconds : seconds;
 
       display.textContent = minutes + ":" + seconds;
+      if (minutes === "00" && seconds === "00"){
+        middleButton.removeAttribute('disabled', '')
+        clearInterval(intervalId)
+        display.textContent = null
+      }
 
       if (--timer < 0) {
         timer = duration;
+      }
+      if (timer === 0) {
+        display.textContent = minutes + ":" + seconds
       }
     }, 1000);
   }
@@ -359,6 +370,6 @@ function viewCurrentDayLeftButton() {
 
 
 
-  startTimer(300, timer)
+  startTimer(900, timer)
   covidCurrent();
   getVerses();

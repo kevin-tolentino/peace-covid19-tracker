@@ -20,7 +20,6 @@ rightButton.addEventListener("click", getPreviewDay)
 var currentDate = new Date();
 var previousDayDate = new Date();
 previousDayDate.setDate(previousDayDate.getDate() - 1);
-console.log(previousDayDate)
 var previewDayDate = new Date()
 previewDayDate.setDate(previewDayDate.getDate() + 1);
 var yesterdayYear = previousDayDate.getFullYear().toString();

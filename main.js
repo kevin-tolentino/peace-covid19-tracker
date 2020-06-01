@@ -22,16 +22,16 @@ var previousDayDate = new Date();
 previousDayDate.setDate(previousDayDate.getDate() - 1);
 var previewDayDate = new Date()
 previewDayDate.setDate(previewDayDate.getDate() + 1);
-var currentYear = currentDate.getFullYear().toString();
-var currentMonth = (currentDate.getMonth() + 1).toString();
-if (currentMonth.length === 1) {
-  currentMonth = '0' + currentMonth;
+var yesterdayYear = previousDayDate.getFullYear().toString();
+var yesterdayMonth = (previousDayDate.getMonth() + 1).toString();
+if (yesterdayMonth.length === 1) {
+  yesterdayMonth = '0' + yesterdayMonth;
 }
-var currentDay = (currentDate.getDate().toString());
-if (currentDay.length === 1) {
-  currentDay = '0' + currentDay;
+var yesterdayDay = (previousDayDate.getDate().toString());
+if (yesterdayDay.length === 1) {
+  yesterdayDay = '0' + yesterdayDay;
 }
-var formattedPreviousDate = `${currentYear}-${currentMonth}-${currentDay-1}`;
+var formattedPreviousDate = `${yesterdayYear}-${yesterdayMonth}-${yesterdayDay}`;
 
 var today = currentDate.getDay()
 var yesterday = today - 1

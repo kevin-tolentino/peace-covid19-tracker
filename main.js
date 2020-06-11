@@ -13,7 +13,7 @@ var rightButton = document.getElementById('rightButton')
 leftButton.addEventListener("click", getPreviousDay)
 middleButton.addEventListener('click', function () {
   covidCurrent()
-  startTimer(5, timer)} )
+  startTimer(900, timer)} )
 rightButton.addEventListener("click", getPreviewDay)
 
 

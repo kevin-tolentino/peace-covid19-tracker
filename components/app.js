@@ -24,7 +24,7 @@ class App{
       "x-rapidapi-host": "covid-193.p.rapidapi.com",
       "x-rapidapi-key": "c857e751dfmsh459b4184fde79f2p1e3cbdjsn082cb4dee5cd"
     },
-    //move this to verseDisplay component as it's own method
+    //move this to covidTable class component as it's own method
     beforeSend: function () {
       currentActive.textContent = 'loading'
       currentCritical.textContent = 'loading'
@@ -46,6 +46,7 @@ class App{
       "x-rapidapi-host": "covid-193.p.rapidapi.com",
       "x-rapidapi-key": "c857e751dfmsh459b4184fde79f2p1e3cbdjsn082cb4dee5cd"
     },
+    //move this to covidTable class component as it's own method
     beforeSend: function () {
       currentActive.textContent = 'loading'
       currentCritical.textContent = 'loading'

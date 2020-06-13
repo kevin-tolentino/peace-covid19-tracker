@@ -68,12 +68,7 @@ class App{
     url: "https://api.esv.org/v3/passage/search/?q=peace",
     headers: { "Authorization": "4bb2afad133ab4a9531a4be06fd06ae85703cf0f" },
     data: { "page-size": 100, "page": 1 },
-    beforeSend: function () {
-      if (today === 0) {
-        verseText.textContent = 'loading'
-        verseRef.textContent = 'loading'
-      }
-    },
+    beforeSend: this.verseDisplay.beforeSendDayOne(today),
     success: this.handleGetVerseOneSuccess,
     error: this.handleGetVerseOneError
   })

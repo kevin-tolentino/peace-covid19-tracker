@@ -10,6 +10,11 @@ var verseArray = []
 var leftButton = document.getElementById('leftButton')
 var middleButton = document.getElementById('middleButton')
 var rightButton = document.getElementById('rightButton')
+const verseDisplayElement = document.getElementById('verseDisplay')
+
+const verseDisplay = new VerseDisplay(verseText, verseRef)
+
+
 leftButton.addEventListener("click", getPreviousDay)
 middleButton.addEventListener('click', function () {
   covidCurrent()

@@ -12,7 +12,8 @@ var middleButton = document.getElementById('middleButton')
 var rightButton = document.getElementById('rightButton')
 const verseDisplayElement = document.getElementById('verseDisplay')
 
-const verseDisplay = new VerseDisplay(verseText, verseRef)
+const verseDisplay = new VerseDisplay (verseText, verseRef)
+const covidTable = new CovidTable (verseText, verseRef, currentActive, currentCritical, currentRecovered, currentDeaths)
 
 
 leftButton.addEventListener("click", getPreviousDay)

@@ -1,5 +1,5 @@
 class App{
-  constructor(verseDisplay, covidTable, formattedPreviousDate, timer, leftButton, middleButton, rightButton){
+  constructor(verseDisplay, covidTable, formattedPreviousDate, timer, currentDate, yesterday, today, tomorrow, leftButton, middleButton, rightButton){
     this.handleGetCovidHistorySuccess = this.handleGetCovidHistorySuccess.bind(this)
     this.handleGetCovidHistoryError = this.handleGetCovidHistoryError.bind(this)
     this.handleGetCovidCurrentSuccess = this.handleGetCovidCurrentSuccess.bind(this)
@@ -17,29 +17,23 @@ class App{
     this.verseDisplay = verseDisplay
     this.covidTable = covidTable
     this.timer = timer
+    this.currentDate = currentDate
+    this.yesterday = yesterday
+    this.today = today
+    this.tomorrow = tomorrow
     this.leftButton = leftButton
     this.middleButton = middleButton
     this.rightButton = rightButton
     //fix these event listeners to call correct methods from respective classes
-    this.leftButton.addEventListener("click", getPreviousDay)
+    this.leftButton.addEventListener("click", this.getPreviousDay)
     this.middleButton.addEventListener('click', function () {
-      covidCurrent()
-      startTimer(900, timer)
+      this.covidCurrent()
+      this.startTimer(900, timer)
     })
-    this.rightButton.addEventListener("click", getPreviewDay)
+    this.rightButton.addEventListener("click", this.getPreviewDay)
   }
 
  covidHistory() {
-   var yesterdayYear = previousDayDate.getFullYear().toString();
-   var yesterdayMonth = (previousDayDate.getMonth() + 1).toString();
-   if (yesterdayMonth.length === 1) {
-     yesterdayMonth = '0' + yesterdayMonth;
-   }
-   var yesterdayDay = (previousDayDate.getDate().toString());
-   if (yesterdayDay.length === 1) {
-     yesterdayDay = '0' + yesterdayDay;
-   }
-   var formattedPreviousDate = `${yesterdayYear}-${yesterdayMonth}-${yesterdayDay}`;
   $.ajax({
     method: "GET",
     url: `https://covid-193.p.rapidapi.com/history?day=${this.formattedPreviousDate}&country=usa`,
@@ -49,7 +43,7 @@ class App{
     },
     beforeSend: function () {
       this.beforeSendCovid()
-      rightButton.setAttribute('disabled', '')
+      this.rightButton.setAttribute('disabled', '')
 
     },
     success: this.handleGetCovidHistorySuccess,
@@ -67,8 +61,8 @@ class App{
     },
     beforeSend: function () {
       this.beforeSendCovid()
-      leftButton.setAttribute('disabled', '')
-      rightButton.setAttribute('disabled', '')
+      this.leftButton.setAttribute('disabled', '')
+      this.rightButton.setAttribute('disabled', '')
     },
     success: this.handleGetCovidCurrentSuccess,
     error: this.handleGetCovidCurrentError
@@ -138,25 +132,25 @@ class App{
 
 
 
-function handleGetCovidCurrentSuccess(data) {
-  updateCurrentCovidStats(data)
-  leftButton.removeAttribute('disabled', '')
-  rightButton.removeAttribute('disabled', '')
+// function handleGetCovidCurrentSuccess(data) {
+//   updateCurrentCovidStats(data)
+//   this.leftButton.removeAttribute('disabled', '')
+//   this.rightButton.removeAttribute('disabled', '')
 
-}
+// }
 
-function handleGetCovidCurrentError(error) {
-  console.error(error)
-}
+// function handleGetCovidCurrentError(error) {
+//   console.error(error)
+// }
 
-function handleGetCovidHistorySuccess(data) {
-  PreviousDayCovidStats(data)
-  rightButton.removeAttribute('disabled', '')
-}
+// function handleGetCovidHistorySuccess(data) {
+//   PreviousDayCovidStats(data)
+//   rightButton.removeAttribute('disabled', '')
+// }
 
-function handleGetCovidHistoryError(error) {
-  console.error(error)
-}
+// function handleGetCovidHistoryError(error) {
+//   console.error(error)
+// }
 
 handleGetVerseOneSuccess(data) {
   var content = data.results[49].content
@@ -179,8 +173,8 @@ function handleGetVerseTwoSuccess(data) {
   reference = data.results[96].reference
   var isaiah263 = { content, reference }
   this.verseArray[2] = isaiah263
-  if (today === 1) { verseOfTheDay(psalm48) }
-  if (today === 2) { verseOfTheDay(isaiah263) }
+  if (this.today === 1) { verseOfTheDay(psalm48) }
+  if (this.today === 2) { verseOfTheDay(isaiah263) }
 
 }
 
@@ -196,9 +190,9 @@ function handleGetVerseTwoSuccess(data) {
   content = data.results[90].content
   reference = data.results[90].reference
   var romans51 = { content, reference }
-  verseArray[4] = romans51
-  if (today === 3) { verseOfTheDay(john1427) }
-  if (today === 4) { verseOfTheDay(romans51) }
+  this.verseArray[4] = romans51
+  if (this.today === 3) { verseOfTheDay(john1427) }
+  if (this.today === 4) { verseOfTheDay(romans51) }
 }
 
  handleGetVerseThreeError(error) {
@@ -214,21 +208,13 @@ function handleGetVerseTwoSuccess(data) {
   reference = data.results[18].reference
   var colossians315 = { content, reference }
   this.verseArray[6] = colossians315
-  if (today === 5) { verseOfTheDay(philippians12) }
-  if (today === 6) { verseOfTheDay(colossians315) }
+  if (this.today === 5) { verseOfTheDay(philippians12) }
+  if (this.today === 6) { verseOfTheDay(colossians315) }
 
 }
 
  handleGetVerseFourError(error) {
   console.error(error)
-}
-
-
-function updateCurrentCovidStats(data) {
-  currentActive.textContent = formatNumber(data.response[3].cases.active)
-  currentCritical.textContent = formatNumber(data.response[3].cases.critical)
-  currentRecovered.textContent = formatNumber(data.response[3].cases.recovered)
-  currentDeaths.textContent = formatNumber(data.response[3].deaths.total)
 }
 
 
@@ -312,6 +298,6 @@ function viewCurrentDayLeftButton() {
 }
 
 
-covidCurrent();
-getVerses();
+// covidCurrent();
+// getVerses();
 }

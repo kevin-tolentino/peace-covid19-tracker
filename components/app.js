@@ -132,32 +132,32 @@ class App{
 
 
 
-// function handleGetCovidCurrentSuccess(data) {
-//   updateCurrentCovidStats(data)
-//   this.leftButton.removeAttribute('disabled', '')
-//   this.rightButton.removeAttribute('disabled', '')
+function handleGetCovidCurrentSuccess(data) {
+  updateCurrentCovidStats(data)
+  this.leftButton.removeAttribute('disabled', '')
+  this.rightButton.removeAttribute('disabled', '')
 
-// }
+}
 
-// function handleGetCovidCurrentError(error) {
-//   console.error(error)
-// }
+function handleGetCovidCurrentError(error) {
+  console.error(error)
+}
 
-// function handleGetCovidHistorySuccess(data) {
-//   PreviousDayCovidStats(data)
-//   rightButton.removeAttribute('disabled', '')
-// }
+function handleGetCovidHistorySuccess(data) {
+  PreviousDayCovidStats(data)
+  rightButton.removeAttribute('disabled', '')
+}
 
-// function handleGetCovidHistoryError(error) {
-//   console.error(error)
-// }
+function handleGetCovidHistoryError(error) {
+  console.error(error)
+}
 
 handleGetVerseOneSuccess(data) {
   var content = data.results[49].content
   var reference = data.results[49].reference
   var numbers626 = { content, reference }
   this.verseArray[0] = numbers626
-  if (today === 0) { verseOfTheDay(numbers626) }
+  if (this.today === 0) { this.verseDisplay.verseOfTheDay(numbers626) }
 }
 
 handleGetVerseOneError(error) {
@@ -173,8 +173,8 @@ function handleGetVerseTwoSuccess(data) {
   reference = data.results[96].reference
   var isaiah263 = { content, reference }
   this.verseArray[2] = isaiah263
-  if (this.today === 1) { verseOfTheDay(psalm48) }
-  if (this.today === 2) { verseOfTheDay(isaiah263) }
+  if (this.today === 1) { this.verseDisplay.verseOfTheDay(psalm48) }
+  if (this.today === 2) { this.verseDisplay.verseOfTheDay(isaiah263) }
 
 }
 
@@ -191,8 +191,8 @@ function handleGetVerseTwoSuccess(data) {
   reference = data.results[90].reference
   var romans51 = { content, reference }
   this.verseArray[4] = romans51
-  if (this.today === 3) { verseOfTheDay(john1427) }
-  if (this.today === 4) { verseOfTheDay(romans51) }
+  if (this.today === 3) { this.verseDisplay.verseOfTheDay(john1427) }
+  if (this.today === 4) { this.verseDisplay.verseOfTheDay(romans51) }
 }
 
  handleGetVerseThreeError(error) {
@@ -208,8 +208,8 @@ function handleGetVerseTwoSuccess(data) {
   reference = data.results[18].reference
   var colossians315 = { content, reference }
   this.verseArray[6] = colossians315
-  if (this.today === 5) { verseOfTheDay(philippians12) }
-  if (this.today === 6) { verseOfTheDay(colossians315) }
+  if (this.today === 5) { this.verseDisplay.verseOfTheDay(philippians12) }
+  if (this.today === 6) { this.verseDisplay.verseOfTheDay(colossians315) }
 
 }
 
@@ -222,7 +222,7 @@ function getPreviousDay() {
   this.leftButton.classList.add('invisible')
   this.middleButton.classList.add('invisible')
   this.covidHistory();
-  previousVerseOfTheDay()
+  previousVerseOfTheDay(this.verseArray, this.previousDayDate, this.yesterday)
   this.rightButton.textContent = 'View Current Day'
   this.rightButton.removeEventListener('click', getPreviewDay)
   this.rightButton.addEventListener('click', covidCurrent)
@@ -232,7 +232,7 @@ function getPreviousDay() {
 function getPreviewDay() {
   middleButton.classList.add('invisible')
   rightButton.classList.add('invisible')
-  previewVerseOfTheDay()
+  previewVerseOfTheDay(this.verseArray, this.previewDayDate, this.tomorrow)
   leftButton.textContent = 'View Current Day'
   leftButton.removeEventListener('click', getPreviousDay)
   leftButton.addEventListener('click', viewCurrentDayLeftButton)

@@ -1,11 +1,8 @@
 class VerseDisplay{
-  constructor(verseText, verseRef, dateHeader, yesterday, today, tomorrow){
+  constructor(verseText, verseRef, dateHeader){
     this.verseText = verseText
     this.verseRef = verseRef
     this.dateHeader = dateHeader
-    this.yesterday = yesterday
-    this.today = today
-    this.tomorrow = tomorrow
   }
 
   beforeSendVerse(){
@@ -13,29 +10,29 @@ class VerseDisplay{
       this.verseRef.textContent = 'loading'
   }
 
-  previousVerseOfTheDay() {
+  previousVerseOfTheDay(verseArray, previousDayDate, yesterday) {
   this.dateHeader.textContent = previousDayDate.toDateString()
-  var previousVerseInfo = verseArray[yesterday]
+    var previousVerseInfo = verseArray[yesterday]
   var formattedText = previousVerseInfo.content
   formattedText = formattedText[0].toUpperCase() + formattedText.slice(1)
-  verseText.textContent = formattedText
-  verseRef.textContent = previousVerseInfo.reference
+  this.verseText.textContent = formattedText
+  this.verseRef.textContent = previousVerseInfo.reference
 }
 
-verseOfTheDay(verseObject) {
+  verseOfTheDay(verseObject, currentDate) {
   this.dateHeader.textContent = currentDate.toDateString()
   var formattedText = verseObject.content
   formattedText = formattedText[0].toUpperCase() + formattedText.slice(1)
-  verseText.textContent = formattedText
-  verseRef.textContent = verseObject.reference
+  this.verseText.textContent = formattedText
+  this.verseRef.textContent = verseObject.reference
 }
 
-previewVerseOfTheDay() {
+  previewVerseOfTheDay(verseArray, previewDayDate, tomorrow) {
   this.dateHeader.textContent = previewDayDate.toDateString()
-  var previewVerseInfo = verseArray[tomorrow]
+    var previewVerseInfo = verseArray[tomorrow]
   var formattedText = previewVerseInfo.content
   formattedText = formattedText[0].toUpperCase() + formattedText.slice(1)
-  verseText.textContent = formattedText
-  verseRef.textContent = previewVerseInfo.reference
+  this.verseText.textContent = formattedText
+  this.verseRef.textContent = previewVerseInfo.reference
 }
 }

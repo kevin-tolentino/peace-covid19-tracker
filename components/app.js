@@ -1,6 +1,5 @@
 class App{
   constructor(verseDisplay, covidTable, footerButtons){
-    this.verseDisplay = verseDisplay
     this.handleGetCovidHistorySuccess = this.handleGetCovidHistorySuccess.bind(this)
     this.handleGetCovidHistoryError = this.handleGetCovidHistoryError.bind(this)
     this.handleGetCovidCurrentSuccess = this.handleGetCovidCurrentSuccess.bind(this)
@@ -13,7 +12,9 @@ class App{
     this.handleGetVerseThreeError = this.handleGetVerseThreeError.bind(this)
     this.handleGetVerseFourSuccess = this.handleGetVerseFourSuccess.bind(this)
     this.handleGetVerseFourError = this.handleGetVerseFourError.bind(this)
+    this.verseArray = []
     this.verseDisplay = verseDisplay
+    //put date in here
   }
 
  covidHistory() {
@@ -170,15 +171,15 @@ function handleGetCovidHistoryError(error) {
   console.error(error)
 }
 
-function handleGetVerseOneSuccess(data) {
+handleGetVerseOneSuccess(data) {
   var content = data.results[49].content
   var reference = data.results[49].reference
   var numbers626 = { content, reference }
-  verseArray[0] = numbers626
+  this.verseArray[0] = numbers626
   if (today === 0) { verseOfTheDay(numbers626) }
 }
 
-function handleGetVerseOneError(error) {
+handleGetVerseOneError(error) {
   console.error(error)
 }
 
@@ -190,21 +191,21 @@ function handleGetVerseTwoSuccess(data) {
   content = data.results[96].content
   reference = data.results[96].reference
   var isaiah263 = { content, reference }
-  verseArray[2] = isaiah263
+  this.verseArray[2] = isaiah263
   if (today === 1) { verseOfTheDay(psalm48) }
   if (today === 2) { verseOfTheDay(isaiah263) }
 
 }
 
-function handleGetVerseTwoError(error) {
+ handleGetVerseTwoError(error) {
   console.error(error)
 }
 
-function handleGetVerseThreeSuccess(data) {
+ handleGetVerseThreeSuccess(data) {
   var content = data.results[76].content
   var reference = data.results[76].reference
   var john1427 = { content, reference }
-  verseArray[3] = john1427
+  this.verseArray[3] = john1427
   content = data.results[90].content
   reference = data.results[90].reference
   var romans51 = { content, reference }
@@ -213,25 +214,25 @@ function handleGetVerseThreeSuccess(data) {
   if (today === 4) { verseOfTheDay(romans51) }
 }
 
-function handleGetVerseThreeError(error) {
+ handleGetVerseThreeError(error) {
   console.error(error)
 }
 
-function handleGetVerseFourSuccess(data) {
+ handleGetVerseFourSuccess(data) {
   var content = data.results[13].content
   var reference = data.results[13].reference
   var philippians12 = { content, reference }
-  verseArray[5] = philippians12
+  this.verseArray[5] = philippians12
   content = data.results[18].content
   reference = data.results[18].reference
   var colossians315 = { content, reference }
-  verseArray[6] = colossians315
+  this.verseArray[6] = colossians315
   if (today === 5) { verseOfTheDay(philippians12) }
   if (today === 6) { verseOfTheDay(colossians315) }
 
 }
 
-function handleGetVerseFourError(error) {
+ handleGetVerseFourError(error) {
   console.error(error)
 }
 

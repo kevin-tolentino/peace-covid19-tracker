@@ -12,17 +12,6 @@ var middleButton = document.getElementById('middleButton')
 var rightButton = document.getElementById('rightButton')
 const verseDisplayElement = document.getElementById('verseDisplay')
 
-const verseDisplay = new VerseDisplay (verseText, verseRef)
-const covidTable = new CovidTable (verseText, verseRef, currentActive, currentCritical, currentRecovered, currentDeaths)
-
-
-leftButton.addEventListener("click", getPreviousDay)
-middleButton.addEventListener('click', function () {
-  covidCurrent()
-  startTimer(900, timer)} )
-rightButton.addEventListener("click", getPreviewDay)
-
-
 var currentDate = new Date();
 var previousDayDate = new Date();
 previousDayDate.setDate(previousDayDate.getDate() - 1);
@@ -43,33 +32,14 @@ var today = currentDate.getDay()
 var yesterday = today - 1
 var tomorrow = (today === 6) ? 0 : (today + 1)
 
-function formatNumber(num) {
-  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-}
+
+const verseDisplay = new VerseDisplay (verseText, verseRef, dateHeader)
+const covidTable = new CovidTable (verseText, verseRef, currentActive, currentCritical, currentRecovered, currentDeaths)
+const app = new App (verseDisplay, covidTable, formattedPreviousDate, timer)
 
 
-function startTimer(duration, display) {
-    middleButton.setAttribute('disabled', '')
-    var timer = duration, minutes, seconds;
-    var intervalId = setInterval(function () {
-      minutes = parseInt(timer / 60, 10);
-      seconds = parseInt(timer % 60, 10);
-
-      minutes = minutes < 10 ? "0" + minutes : minutes;
-      seconds = seconds < 10 ? "0" + seconds : seconds;
-
-      display.textContent = minutes + ":" + seconds;
-      if (minutes === "00" && seconds === "00"){
-        middleButton.removeAttribute('disabled', '')
-        clearInterval(intervalId)
-        display.textContent = null
-      }
-
-      if (--timer < 0) {
-        timer = duration;
-      }
-      if (timer === 0) {
-        display.textContent = minutes + ":" + seconds
-      }
-    }, 1000);
-  }
+leftButton.addEventListener("click", getPreviousDay)
+middleButton.addEventListener('click', function () {
+  covidCurrent()
+  startTimer(900, timer)} )
+rightButton.addEventListener("click", getPreviewDay)

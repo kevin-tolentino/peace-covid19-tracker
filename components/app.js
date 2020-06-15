@@ -1,5 +1,5 @@
 class App{
-  constructor(verseDisplay, covidTable, formattedPreviousDate){
+  constructor(verseDisplay, covidTable, formattedPreviousDate, timer){
     this.handleGetCovidHistorySuccess = this.handleGetCovidHistorySuccess.bind(this)
     this.handleGetCovidHistoryError = this.handleGetCovidHistoryError.bind(this)
     this.handleGetCovidCurrentSuccess = this.handleGetCovidCurrentSuccess.bind(this)
@@ -15,7 +15,8 @@ class App{
     this.verseArray = []
     this.formattedPreviousDate = formattedPreviousDate
     this.verseDisplay = verseDisplay
-    //put date in here
+    this.covidTable = covidTable
+    this.timer = timer
   }
 
  covidHistory() {
@@ -26,12 +27,8 @@ class App{
       "x-rapidapi-host": "covid-193.p.rapidapi.com",
       "x-rapidapi-key": "c857e751dfmsh459b4184fde79f2p1e3cbdjsn082cb4dee5cd"
     },
-    //move this to covidTable class component as it's own method
     beforeSend: function () {
-      currentActive.textContent = 'loading'
-      currentCritical.textContent = 'loading'
-      currentRecovered.textContent = 'loading'
-      currentDeaths.textContent = 'loading'
+      this.beforeSendCovid()
       rightButton.setAttribute('disabled', '')
 
     },
@@ -48,15 +45,10 @@ class App{
       "x-rapidapi-host": "covid-193.p.rapidapi.com",
       "x-rapidapi-key": "c857e751dfmsh459b4184fde79f2p1e3cbdjsn082cb4dee5cd"
     },
-    //move this to covidTable class component as it's own method
     beforeSend: function () {
-      currentActive.textContent = 'loading'
-      currentCritical.textContent = 'loading'
-      currentRecovered.textContent = 'loading'
-      currentDeaths.textContent = 'loading'
+      this.beforeSendCovid()
       leftButton.setAttribute('disabled', '')
       rightButton.setAttribute('disabled', '')
-
     },
     success: this.handleGetCovidCurrentSuccess,
     error: this.handleGetCovidCurrentError
@@ -237,12 +229,6 @@ function handleGetVerseTwoSuccess(data) {
   console.error(error)
 }
 
-function PreviousDayCovidStats(data) {
-  currentActive.textContent = formatNumber(data.response[0].cases.active)
-  currentCritical.textContent = formatNumber(data.response[0].cases.critical)
-  currentRecovered.textContent = formatNumber(data.response[0].cases.recovered)
-  currentDeaths.textContent = formatNumber(data.response[0].deaths.total)
-}
 
 function updateCurrentCovidStats(data) {
   currentActive.textContent = formatNumber(data.response[3].cases.active)
@@ -299,12 +285,39 @@ function viewCurrentDayLeftButton() {
   leftButton.addEventListener("click", getPreviousDay)
 }
 
+ startTimer(duration, display) {
+  middleButton.setAttribute('disabled', '')
+  var timer = duration, minutes, seconds;
+  var intervalId = setInterval(function () {
+    minutes = parseInt(timer / 60, 10);
+    seconds = parseInt(timer % 60, 10);
+
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    display.textContent = minutes + ":" + seconds;
+    if (minutes === "00" && seconds === "00") {
+      middleButton.removeAttribute('disabled', '')
+      clearInterval(intervalId)
+      display.textContent = null
+    }
+
+    if (--timer < 0) {
+      timer = duration;
+    }
+    if (timer === 0) {
+      display.textContent = minutes + ":" + seconds
+    }
+  }, 1000);
+}
+
   start(){
   this.getVerses()
+  this.startTimer(900, this.timer)
+
 }
 
 
-startTimer(900, timer)
 covidCurrent();
 getVerses();
 }

@@ -1,8 +1,11 @@
 class VerseDisplay{
-  constructor(verseText, verseRef, dateHeader){
+  constructor(verseText, verseRef, dateHeader, yesterday, today, tomorrow){
     this.verseText = verseText
     this.verseRef = verseRef
     this.dateHeader = dateHeader
+    this.yesterday = yesterday
+    this.today = today
+    this.tomorrow = tomorrow
   }
 
   beforeSendVerse(){
@@ -11,7 +14,7 @@ class VerseDisplay{
   }
 
   previousVerseOfTheDay() {
-  dateHeader.textContent = previousDayDate.toDateString()
+  this.dateHeader.textContent = previousDayDate.toDateString()
   var previousVerseInfo = verseArray[yesterday]
   var formattedText = previousVerseInfo.content
   formattedText = formattedText[0].toUpperCase() + formattedText.slice(1)
@@ -20,7 +23,7 @@ class VerseDisplay{
 }
 
 verseOfTheDay(verseObject) {
-  dateHeader.textContent = currentDate.toDateString()
+  this.dateHeader.textContent = currentDate.toDateString()
   var formattedText = verseObject.content
   formattedText = formattedText[0].toUpperCase() + formattedText.slice(1)
   verseText.textContent = formattedText
@@ -28,7 +31,7 @@ verseOfTheDay(verseObject) {
 }
 
 previewVerseOfTheDay() {
-  dateHeader.textContent = previewDayDate.toDateString()
+  this.dateHeader.textContent = previewDayDate.toDateString()
   var previewVerseInfo = verseArray[tomorrow]
   var formattedText = previewVerseInfo.content
   formattedText = formattedText[0].toUpperCase() + formattedText.slice(1)

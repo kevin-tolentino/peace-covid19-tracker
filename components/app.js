@@ -1,5 +1,5 @@
 class App{
-  constructor(verseDisplay, covidTable, formattedPreviousDate, timer){
+  constructor(verseDisplay, covidTable, formattedPreviousDate, timer, leftButton, middleButton, rightButton){
     this.handleGetCovidHistorySuccess = this.handleGetCovidHistorySuccess.bind(this)
     this.handleGetCovidHistoryError = this.handleGetCovidHistoryError.bind(this)
     this.handleGetCovidCurrentSuccess = this.handleGetCovidCurrentSuccess.bind(this)
@@ -17,9 +17,29 @@ class App{
     this.verseDisplay = verseDisplay
     this.covidTable = covidTable
     this.timer = timer
+    this.leftButton = leftButton
+    this.middleButton = middleButton
+    this.rightButton = rightButton
+    //fix these event listeners to call correct methods from respective classes
+    this.leftButton.addEventListener("click", getPreviousDay)
+    this.middleButton.addEventListener('click', function () {
+      covidCurrent()
+      startTimer(900, timer)
+    })
+    this.rightButton.addEventListener("click", getPreviewDay)
   }
 
  covidHistory() {
+   var yesterdayYear = previousDayDate.getFullYear().toString();
+   var yesterdayMonth = (previousDayDate.getMonth() + 1).toString();
+   if (yesterdayMonth.length === 1) {
+     yesterdayMonth = '0' + yesterdayMonth;
+   }
+   var yesterdayDay = (previousDayDate.getDate().toString());
+   if (yesterdayDay.length === 1) {
+     yesterdayDay = '0' + yesterdayDay;
+   }
+   var formattedPreviousDate = `${yesterdayYear}-${yesterdayMonth}-${yesterdayDay}`;
   $.ajax({
     method: "GET",
     url: `https://covid-193.p.rapidapi.com/history?day=${this.formattedPreviousDate}&country=usa`,
@@ -115,32 +135,6 @@ class App{
 }
 
 
-
-function previousVerseOfTheDay() {
-  dateHeader.textContent = previousDayDate.toDateString()
-  var previousVerseInfo = verseArray[yesterday]
-  var formattedText = previousVerseInfo.content
-  formattedText = formattedText[0].toUpperCase() + formattedText.slice(1)
-  verseText.textContent = formattedText
-  verseRef.textContent = previousVerseInfo.reference
-}
-
-function verseOfTheDay(verseObject) {
-  dateHeader.textContent = currentDate.toDateString()
-  var formattedText = verseObject.content
-  formattedText = formattedText[0].toUpperCase() + formattedText.slice(1)
-  verseText.textContent = formattedText
-  verseRef.textContent = verseObject.reference
-}
-
-function previewVerseOfTheDay() {
-  dateHeader.textContent = previewDayDate.toDateString()
-  var previewVerseInfo = verseArray[tomorrow]
-  var formattedText = previewVerseInfo.content
-  formattedText = formattedText[0].toUpperCase() + formattedText.slice(1)
-  verseText.textContent = formattedText
-  verseRef.textContent = previewVerseInfo.reference
-}
 
 
 
@@ -239,14 +233,14 @@ function updateCurrentCovidStats(data) {
 
 
 function getPreviousDay() {
-  leftButton.classList.add('invisible')
-  middleButton.classList.add('invisible')
-  covidHistory();
+  this.leftButton.classList.add('invisible')
+  this.middleButton.classList.add('invisible')
+  this.covidHistory();
   previousVerseOfTheDay()
-  rightButton.textContent = 'View Current Day'
-  rightButton.removeEventListener('click', getPreviewDay)
-  rightButton.addEventListener('click', covidCurrent)
-  rightButton.addEventListener('click', viewCurrentDayRightButton)
+  this.rightButton.textContent = 'View Current Day'
+  this.rightButton.removeEventListener('click', getPreviewDay)
+  this.rightButton.addEventListener('click', covidCurrent)
+  this.rightButton.addEventListener('click', viewCurrentDayRightButton)
 }
 
 function getPreviewDay() {

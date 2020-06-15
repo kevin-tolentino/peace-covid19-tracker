@@ -1,14 +1,15 @@
 class CovidTable {
-  constructor(verseText, verseRef, currentActive, currentCritical, currentRecovered, currentDeaths) {
-    this.verseText = verseText;
-    this.verseRef = verseRef;
+  constructor(currentActive, currentCritical, currentRecovered, currentDeaths) {
     this.currentActive = currentActive
     this.currentCritical = currentCritical
     this.currentRecovered = currentRecovered
     this.currentDeaths = currentDeaths
   }
 
-  beforeSendCovidHistory(){
-
+  beforeSendCovid(){
+    this.currentActive.textContent = 'loading'
+    this.currentCritical.textContent = 'loading'
+    this.currentRecovered.textContent = 'loading'
+    this.currentDeaths.textContent = 'loading'
   }
 }

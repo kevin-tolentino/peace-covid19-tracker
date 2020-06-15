@@ -1,5 +1,5 @@
 class App{
-  constructor(verseDisplay, covidTable, footerButtons){
+  constructor(verseDisplay, covidTable, formattedPreviousDate){
     this.handleGetCovidHistorySuccess = this.handleGetCovidHistorySuccess.bind(this)
     this.handleGetCovidHistoryError = this.handleGetCovidHistoryError.bind(this)
     this.handleGetCovidCurrentSuccess = this.handleGetCovidCurrentSuccess.bind(this)
@@ -13,6 +13,7 @@ class App{
     this.handleGetVerseFourSuccess = this.handleGetVerseFourSuccess.bind(this)
     this.handleGetVerseFourError = this.handleGetVerseFourError.bind(this)
     this.verseArray = []
+    this.formattedPreviousDate = formattedPreviousDate
     this.verseDisplay = verseDisplay
     //put date in here
   }
@@ -20,7 +21,7 @@ class App{
  covidHistory() {
   $.ajax({
     method: "GET",
-    url: `https://covid-193.p.rapidapi.com/history?day=${formattedPreviousDate}&country=usa`,
+    url: `https://covid-193.p.rapidapi.com/history?day=${this.formattedPreviousDate}&country=usa`,
     headers: {
       "x-rapidapi-host": "covid-193.p.rapidapi.com",
       "x-rapidapi-key": "c857e751dfmsh459b4184fde79f2p1e3cbdjsn082cb4dee5cd"
@@ -111,14 +112,14 @@ class App{
   })
 }
 
-function getVerses() {
-  getVerseOneSearch()
+ getVerses() {
+  this.getVerseOneSearch()
 
-  getVerseTwoSearch()
+  this.getVerseTwoSearch()
 
-  getVerseThreeSearch()
+  this.getVerseThreeSearch()
 
-  getVerseFourSearch()
+  this.getVerseFourSearch()
 }
 
 
@@ -296,6 +297,10 @@ function viewCurrentDayLeftButton() {
   covidCurrent()
   leftButton.textContent = 'Previous Day'
   leftButton.addEventListener("click", getPreviousDay)
+}
+
+  start(){
+  this.getVerses()
 }
 
 

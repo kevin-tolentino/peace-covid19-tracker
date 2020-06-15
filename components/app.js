@@ -68,7 +68,7 @@ class App{
     url: "https://api.esv.org/v3/passage/search/?q=peace",
     headers: { "Authorization": "4bb2afad133ab4a9531a4be06fd06ae85703cf0f" },
     data: { "page-size": 100, "page": 1 },
-    beforeSend: this.verseDisplay.beforeSendDayOne(today),
+    beforeSend: this.verseDisplay.beforeSendVerse(),
     success: this.handleGetVerseOneSuccess,
     error: this.handleGetVerseOneError
   })
@@ -80,12 +80,7 @@ class App{
     url: "https://api.esv.org/v3/passage/search/?q=peace",
     headers: { "Authorization": "4bb2afad133ab4a9531a4be06fd06ae85703cf0f" },
     data: { "page-size": 100, "page": 2 },
-    beforeSend: function () {
-      if (today === 1 || today === 2) {
-        verseText.textContent = 'loading'
-        verseRef.textContent = 'loading'
-      }
-    },
+    beforeSend: this.verseDisplay.beforeSendVerse(),
     success: this.handleGetVerseTwoSuccess,
     error: this.handleGetVerseTwoError
   })
@@ -97,12 +92,7 @@ class App{
     url: "https://api.esv.org/v3/passage/search/?q=peace",
     headers: { "Authorization": "4bb2afad133ab4a9531a4be06fd06ae85703cf0f" },
     data: { "page-size": 100, "page": 3 },
-    beforeSend: function () {
-      if (today === 3 || today === 4) {
-        verseText.textContent = 'loading'
-        verseRef.textContent = 'loading'
-      }
-    },
+    beforeSend: this.verseDisplay.beforeSendVerse(),
     success: this.handleGetVerseThreeSuccess,
     error: this.handleGetVerseThreeError
   })
@@ -114,12 +104,7 @@ class App{
     url: "https://api.esv.org/v3/passage/search/?q=peace",
     headers: { "Authorization": "4bb2afad133ab4a9531a4be06fd06ae85703cf0f" },
     data: { "page-size": 100, "page": 4 },
-    beforeSend: function () {
-      if (today === 5 || today === 6) {
-        verseText.textContent = 'loading'
-        verseRef.textContent = 'loading'
-      }
-    },
+    beforeSend: this.verseDisplay.beforeSendVerse(),
     success: this.handleGetVerseFourSuccess,
     error: this.handleGetVerseFourError
   })

@@ -26,7 +26,7 @@ Try the application live at https://peace-covid19-tracker.kevintolentino.com/
 
 ## ✨Preview
 <p align="center">
-  <img width=100% alt="app demo" src="https://github.com/kevin-tolentino/peace-covid19-tracker/blob/master/assets/app-demo.gif" >
+  <img width=100% alt="app demo" src="https://github.com/kevin-tolentino/peace-covid19-tracker/blob/master/assets/peace-covid-demo-square.gif" >
 </p>
 
 ## 📋 Development

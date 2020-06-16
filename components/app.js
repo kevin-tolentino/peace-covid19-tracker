@@ -1,4 +1,4 @@
-class App{
+class App {
   constructor(verseDisplay,
     covidTable,
     formattedPreviousDate,
@@ -12,7 +12,7 @@ class App{
     leftButton,
     middleButton,
     rightButton,
-    currentLeftDay){
+    currentLeftDay) {
     this.handleGetCovidHistorySuccess = this.handleGetCovidHistorySuccess.bind(this)
     this.handleGetCovidHistoryError = this.handleGetCovidHistoryError.bind(this)
     this.handleGetCovidCurrentSuccess = this.handleGetCovidCurrentSuccess.bind(this)
@@ -44,6 +44,10 @@ class App{
     this.covidCurrent = this.covidCurrent.bind(this)
     this.covidHistory = this.covidHistory.bind(this)
     //fix these event listeners to call correct methods from respective classes
+    this.currentRightDay.addEventListener("click", () => {
+      this.covidCurrent()
+      this.verseDisplay.verseOfTheDay(this.verseArray[this.today], this.currentDate)
+    })
     this.leftButton.addEventListener("click", () => {
       this.getPreviousDay()
       this.covidHistory()
@@ -56,6 +60,7 @@ class App{
     this.rightButton.addEventListener("click", () => {
       this.getPreviewDay()
     })
+    //add event listener for currentLeftDay button
   }
 
   start() {
@@ -65,262 +70,260 @@ class App{
     console.log(App)
   }
 
- covidHistory() {
-  $.ajax({
-    method: "GET",
-    url: `https://covid-193.p.rapidapi.com/history?day=${this.formattedPreviousDate}&country=usa`,
-    headers: {
-      "x-rapidapi-host": "covid-193.p.rapidapi.com",
-      "x-rapidapi-key": "c857e751dfmsh459b4184fde79f2p1e3cbdjsn082cb4dee5cd"
-    },
-    beforeSend: () => {
-      this.covidTable.beforeSendCovid()
-      this.rightButton.setAttribute('disabled', '')
-    },
-    success: this.handleGetCovidHistorySuccess,
-    error: this.handleGetCovidHistoryError
-  })
-}
+  covidHistory() {
+    $.ajax({
+      method: "GET",
+      url: `https://covid-193.p.rapidapi.com/history?day=${this.formattedPreviousDate}&country=usa`,
+      headers: {
+        "x-rapidapi-host": "covid-193.p.rapidapi.com",
+        "x-rapidapi-key": "c857e751dfmsh459b4184fde79f2p1e3cbdjsn082cb4dee5cd"
+      },
+      beforeSend: () => {
+        this.covidTable.beforeSendCovid()
+        this.rightButton.setAttribute('disabled', '')
+      },
+      success: this.handleGetCovidHistorySuccess,
+      error: this.handleGetCovidHistoryError
+    })
+  }
 
- covidCurrent() {
-  $.ajax({
-    method: "GET",
-    url: "https://covid-193.p.rapidapi.com/statistics",
-    headers: {
-      "x-rapidapi-host": "covid-193.p.rapidapi.com",
-      "x-rapidapi-key": "c857e751dfmsh459b4184fde79f2p1e3cbdjsn082cb4dee5cd"
-    },
-    beforeSend: () => {
-      this.covidTable.beforeSendCovid()
-      this.leftButton.setAttribute('disabled', '')
-      this.rightButton.setAttribute('disabled', '')
-    },
-    success: this.handleGetCovidCurrentSuccess,
-    error: this.handleGetCovidCurrentError
-  })
-}
-
-
- getVerseOneSearch() {
-  $.ajax({
-    method: "GET",
-    url: "https://api.esv.org/v3/passage/search/?q=peace",
-    headers: { "Authorization": "4bb2afad133ab4a9531a4be06fd06ae85703cf0f" },
-    data: { "page-size": 100, "page": 1 },
-    beforeSend: this.verseDisplay.beforeSendVerse(),
-    success: this.handleGetVerseOneSuccess,
-    error: this.handleGetVerseOneError
-  })
-}
-
- getVerseTwoSearch() {
-  $.ajax({
-    method: "GET",
-    url: "https://api.esv.org/v3/passage/search/?q=peace",
-    headers: { "Authorization": "4bb2afad133ab4a9531a4be06fd06ae85703cf0f" },
-    data: { "page-size": 100, "page": 2 },
-    beforeSend: this.verseDisplay.beforeSendVerse(),
-    success: this.handleGetVerseTwoSuccess,
-    error: this.handleGetVerseTwoError
-  })
-}
-
- getVerseThreeSearch() {
-  $.ajax({
-    method: "GET",
-    url: "https://api.esv.org/v3/passage/search/?q=peace",
-    headers: { "Authorization": "4bb2afad133ab4a9531a4be06fd06ae85703cf0f" },
-    data: { "page-size": 100, "page": 3 },
-    beforeSend: this.verseDisplay.beforeSendVerse(),
-    success: this.handleGetVerseThreeSuccess,
-    error: this.handleGetVerseThreeError
-  })
-}
-
- getVerseFourSearch() {
-  $.ajax({
-    method: "GET",
-    url: "https://api.esv.org/v3/passage/search/?q=peace",
-    headers: { "Authorization": "4bb2afad133ab4a9531a4be06fd06ae85703cf0f" },
-    data: { "page-size": 100, "page": 4 },
-    beforeSend: this.verseDisplay.beforeSendVerse(),
-    success: this.handleGetVerseFourSuccess,
-    error: this.handleGetVerseFourError
-  })
-}
-
- getVerses() {
-  this.getVerseOneSearch()
-
-  this.getVerseTwoSearch()
-
-  this.getVerseThreeSearch()
-
-  this.getVerseFourSearch()
-}
+  covidCurrent() {
+    $.ajax({
+      method: "GET",
+      url: "https://covid-193.p.rapidapi.com/statistics",
+      headers: {
+        "x-rapidapi-host": "covid-193.p.rapidapi.com",
+        "x-rapidapi-key": "c857e751dfmsh459b4184fde79f2p1e3cbdjsn082cb4dee5cd"
+      },
+      beforeSend: () => {
+        this.covidTable.beforeSendCovid()
+        this.leftButton.setAttribute('disabled', '')
+        this.rightButton.setAttribute('disabled', '')
+      },
+      success: this.handleGetCovidCurrentSuccess,
+      error: this.handleGetCovidCurrentError
+    })
+  }
 
 
+  getVerseOneSearch() {
+    $.ajax({
+      method: "GET",
+      url: "https://api.esv.org/v3/passage/search/?q=peace",
+      headers: { "Authorization": "4bb2afad133ab4a9531a4be06fd06ae85703cf0f" },
+      data: { "page-size": 100, "page": 1 },
+      beforeSend: this.verseDisplay.beforeSendVerse(),
+      success: this.handleGetVerseOneSuccess,
+      error: this.handleGetVerseOneError
+    })
+  }
+
+  getVerseTwoSearch() {
+    $.ajax({
+      method: "GET",
+      url: "https://api.esv.org/v3/passage/search/?q=peace",
+      headers: { "Authorization": "4bb2afad133ab4a9531a4be06fd06ae85703cf0f" },
+      data: { "page-size": 100, "page": 2 },
+      beforeSend: this.verseDisplay.beforeSendVerse(),
+      success: this.handleGetVerseTwoSuccess,
+      error: this.handleGetVerseTwoError
+    })
+  }
+
+  getVerseThreeSearch() {
+    $.ajax({
+      method: "GET",
+      url: "https://api.esv.org/v3/passage/search/?q=peace",
+      headers: { "Authorization": "4bb2afad133ab4a9531a4be06fd06ae85703cf0f" },
+      data: { "page-size": 100, "page": 3 },
+      beforeSend: this.verseDisplay.beforeSendVerse(),
+      success: this.handleGetVerseThreeSuccess,
+      error: this.handleGetVerseThreeError
+    })
+  }
+
+  getVerseFourSearch() {
+    $.ajax({
+      method: "GET",
+      url: "https://api.esv.org/v3/passage/search/?q=peace",
+      headers: { "Authorization": "4bb2afad133ab4a9531a4be06fd06ae85703cf0f" },
+      data: { "page-size": 100, "page": 4 },
+      beforeSend: this.verseDisplay.beforeSendVerse(),
+      success: this.handleGetVerseFourSuccess,
+      error: this.handleGetVerseFourError
+    })
+  }
+
+  getVerses() {
+    this.getVerseOneSearch()
+
+    this.getVerseTwoSearch()
+
+    this.getVerseThreeSearch()
+
+    this.getVerseFourSearch()
+  }
 
 
 
- handleGetCovidCurrentSuccess(data) {
-  this.covidTable.updateCurrentCovidStats(data)
-  this.leftButton.removeAttribute('disabled', '')
-  this.rightButton.removeAttribute('disabled', '')
-
-}
-
- handleGetCovidCurrentError(error) {
-  console.error(error)
-}
-
- handleGetCovidHistorySuccess(data) {
-  this.covidTable.previousDayCovidStats(data)
-  this.rightButton.removeAttribute('disabled', '')
-}
-
- handleGetCovidHistoryError(error) {
-  console.error(error)
-}
-
-handleGetVerseOneSuccess(data) {
-  var content = data.results[49].content
-  var reference = data.results[49].reference
-  var numbers626 = { content, reference }
-  this.verseArray[0] = numbers626
-  if (this.today === 0) { this.verseDisplay.verseOfTheDay(numbers626, this.currentDate) }
-}
-
-handleGetVerseOneError(error) {
-  console.error(error)
-}
-
- handleGetVerseTwoSuccess(data) {
-  var content = data.results[65].content
-  var reference = data.results[65].reference
-  var psalm48 = { content, reference }
-  this.verseArray[1] = psalm48
-  content = data.results[96].content
-  reference = data.results[96].reference
-  var isaiah263 = { content, reference }
-  this.verseArray[2] = isaiah263
-  if (this.today === 1) { this.verseDisplay.verseOfTheDay(psalm48, this.currentDate) }
-  if (this.today === 2) { this.verseDisplay.verseOfTheDay(isaiah263, this.currentDate) }
-
-}
-
- handleGetVerseTwoError(error) {
-  console.error(error)
-}
-
- handleGetVerseThreeSuccess(data) {
-  var content = data.results[76].content
-  var reference = data.results[76].reference
-  var john1427 = { content, reference }
-  this.verseArray[3] = john1427
-  content = data.results[90].content
-  reference = data.results[90].reference
-  var romans51 = { content, reference }
-  this.verseArray[4] = romans51
-  if (this.today === 3) { this.verseDisplay.verseOfTheDay(john1427, this.currentDate) }
-  if (this.today === 4) { this.verseDisplay.verseOfTheDay(romans51, this.currentDate) }
-}
-
- handleGetVerseThreeError(error) {
-  console.error(error)
-}
-
- handleGetVerseFourSuccess(data) {
-  var content = data.results[13].content
-  var reference = data.results[13].reference
-  var philippians12 = { content, reference }
-  this.verseArray[5] = philippians12
-  content = data.results[18].content
-  reference = data.results[18].reference
-  var colossians315 = { content, reference }
-  this.verseArray[6] = colossians315
-  if (this.today === 5) { this.verseDisplay.verseOfTheDay(philippians12, this.currentDate) }
-  if (this.today === 6) { this.verseDisplay.verseOfTheDay(colossians315, this.currentDate) }
-
-}
-
- handleGetVerseFourError(error) {
-  console.error(error)
-}
 
 
- getPreviousDay(){
-   var leftButton = document.getElementById('leftButton')
-   var middleButton = document.getElementById('middleButton')
-   var rightButton = document.getElementById('rightButton')
-  leftButton.classList.add('invisible')
-  middleButton.classList.add('invisible')
-  rightButton.textContent = 'View Current Day'
-  rightButton.removeEventListener('click', this.getPreviewDay)
-  rightButton.addEventListener('click', this.covidCurrent)
-  rightButton.addEventListener('click', this.viewCurrentDayRightButton)
-}
+  handleGetCovidCurrentSuccess(data) {
+    this.covidTable.updateCurrentCovidStats(data)
+    this.leftButton.removeAttribute('disabled', '')
+    this.rightButton.removeAttribute('disabled', '')
 
- getPreviewDay() {
- this.middleButton.classList.add('invisible')
-  this.rightButton.classList.add('invisible')
-  verseDisplay.previewVerseOfTheDay(this.verseArray, this.previewDayDate, this.tomorrow)
-  this.leftButton.textContent = 'View Current Day'
-  this.leftButton.removeEventListener('click', this.getPreviousDay)
-  this.leftButton.addEventListener('click', this.viewCurrentDayLeftButton)
-  this.covidTable.previewStatsPlaceholder()
-}
+  }
 
-viewCurrentDayRight(){
-  this.verseOfTheDay(this.verseArray[this.today])
-}
+  handleGetCovidCurrentError(error) {
+    console.error(error)
+  }
 
-//  viewCurrentDayRightButton() {
-//   leftButton.classList.remove('invisible')
-//   middleButton.classList.remove('invisible')
-//   rightButton.removeEventListener('click', covidCurrent)
-//   rightButton.removeEventListener('click', viewCurrentDayRightButton)
-//   verseOfTheDay(verseArray[today])
-//   rightButton.textContent = "Preview Tomorrow's Verse"
-//   rightButton.addEventListener('click', getPreviewDay)
-// }
+  handleGetCovidHistorySuccess(data) {
+    this.covidTable.previousDayCovidStats(data)
+    this.rightButton.removeAttribute('disabled', '')
+  }
 
-//  viewCurrentDayLeftButton() {
-//   rightButton.classList.remove('invisible')
-//   middleButton.classList.remove('invisible')
-//   leftButton.removeEventListener('click', covidCurrent)
-//   leftButton.removeEventListener('click', viewCurrentDayLeftButton)
-//   verseOfTheDay(verseArray[today])
-//   covidCurrent()
-//   leftButton.textContent = 'Previous Day'
-//   leftButton.addEventListener("click", getPreviousDay)
-// }
+  handleGetCovidHistoryError(error) {
+    console.error(error)
+  }
 
- startTimer(duration, display) {
-  this.middleButton.setAttribute('disabled', '')
-  var timer = duration, minutes, seconds;
-  var intervalId = setInterval(function () {
-    minutes = parseInt(timer / 60, 10);
-    seconds = parseInt(timer % 60, 10);
+  handleGetVerseOneSuccess(data) {
+    var content = data.results[49].content
+    var reference = data.results[49].reference
+    var numbers626 = { content, reference }
+    this.verseArray[0] = numbers626
+    if (this.today === 0) { this.verseDisplay.verseOfTheDay(numbers626, this.currentDate) }
+  }
 
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    seconds = seconds < 10 ? "0" + seconds : seconds;
+  handleGetVerseOneError(error) {
+    console.error(error)
+  }
 
-    display.textContent = minutes + ":" + seconds;
-    if (minutes === "00" && seconds === "00") {
-      this.middleButton.removeAttribute('disabled', '')
-      clearInterval(intervalId)
-      display.textContent = null
-    }
+  handleGetVerseTwoSuccess(data) {
+    var content = data.results[65].content
+    var reference = data.results[65].reference
+    var psalm48 = { content, reference }
+    this.verseArray[1] = psalm48
+    content = data.results[96].content
+    reference = data.results[96].reference
+    var isaiah263 = { content, reference }
+    this.verseArray[2] = isaiah263
+    if (this.today === 1) { this.verseDisplay.verseOfTheDay(psalm48, this.currentDate) }
+    if (this.today === 2) { this.verseDisplay.verseOfTheDay(isaiah263, this.currentDate) }
 
-    if (--timer < 0) {
-      timer = duration;
-    }
-    if (timer === 0) {
-      display.textContent = minutes + ":" + seconds
-    }
-  }, 1000);
-}
+  }
+
+  handleGetVerseTwoError(error) {
+    console.error(error)
+  }
+
+  handleGetVerseThreeSuccess(data) {
+    var content = data.results[76].content
+    var reference = data.results[76].reference
+    var john1427 = { content, reference }
+    this.verseArray[3] = john1427
+    content = data.results[90].content
+    reference = data.results[90].reference
+    var romans51 = { content, reference }
+    this.verseArray[4] = romans51
+    if (this.today === 3) { this.verseDisplay.verseOfTheDay(john1427, this.currentDate) }
+    if (this.today === 4) { this.verseDisplay.verseOfTheDay(romans51, this.currentDate) }
+  }
+
+  handleGetVerseThreeError(error) {
+    console.error(error)
+  }
+
+  handleGetVerseFourSuccess(data) {
+    var content = data.results[13].content
+    var reference = data.results[13].reference
+    var philippians12 = { content, reference }
+    this.verseArray[5] = philippians12
+    content = data.results[18].content
+    reference = data.results[18].reference
+    var colossians315 = { content, reference }
+    this.verseArray[6] = colossians315
+    if (this.today === 5) { this.verseDisplay.verseOfTheDay(philippians12, this.currentDate) }
+    if (this.today === 6) { this.verseDisplay.verseOfTheDay(colossians315, this.currentDate) }
+
+  }
+
+  handleGetVerseFourError(error) {
+    console.error(error)
+  }
 
 
+  getPreviousDay() {
+    var currentRightDay = document.getElementById('currentRightDay')
+    var leftButton = document.getElementById('leftButton')
+    var middleButton = document.getElementById('middleButton')
+    var rightButton = document.getElementById('rightButton')
+    leftButton.classList.add('invisible')
+    middleButton.classList.add('invisible')
+    rightButton.classList.add('d-none')
+    currentRightDay.classList.remove('d-none')
+  }
+
+  getPreviewDay() {
+    this.middleButton.classList.add('invisible')
+    this.rightButton.classList.add('invisible')
+    //change this method to be like improved getPreviousDay()
+    verseDisplay.previewVerseOfTheDay(this.verseArray, this.previewDayDate, this.tomorrow)
+    this.leftButton.textContent = 'View Current Day'
+    this.leftButton.removeEventListener('click', this.getPreviousDay)
+    this.leftButton.addEventListener('click', this.viewCurrentDayLeftButton)
+    this.covidTable.previewStatsPlaceholder()
+  }
+
+  viewCurrentDayRight() {
+    this.verseOfTheDay(this.verseArray[this.today])
+  }
+
+  //  viewCurrentDayRightButton() {
+  //   leftButton.classList.remove('invisible')
+  //   middleButton.classList.remove('invisible')
+  //   rightButton.removeEventListener('click', covidCurrent)
+  //   rightButton.removeEventListener('click', viewCurrentDayRightButton)
+  //   verseOfTheDay(verseArray[today])
+  //   rightButton.textContent = "Preview Tomorrow's Verse"
+  //   rightButton.addEventListener('click', getPreviewDay)
+  // }
+
+  //  viewCurrentDayLeftButton() {
+  //   rightButton.classList.remove('invisible')
+  //   middleButton.classList.remove('invisible')
+  //   leftButton.removeEventListener('click', covidCurrent)
+  //   leftButton.removeEventListener('click', viewCurrentDayLeftButton)
+  //   verseOfTheDay(verseArray[today])
+  //   covidCurrent()
+  //   leftButton.textContent = 'Previous Day'
+  //   leftButton.addEventListener("click", getPreviousDay)
+  // }
+
+  startTimer(duration, display) {
+    this.middleButton.setAttribute('disabled', '')
+    var timer = duration, minutes, seconds;
+    var intervalId = setInterval(function () {
+      minutes = parseInt(timer / 60, 10);
+      seconds = parseInt(timer % 60, 10);
+
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+
+      display.textContent = minutes + ":" + seconds;
+      if (minutes === "00" && seconds === "00") {
+        this.middleButton.removeAttribute('disabled', '')
+        clearInterval(intervalId)
+        display.textContent = null
+      }
+
+      if (--timer < 0) {
+        timer = duration;
+      }
+      if (timer === 0) {
+        display.textContent = minutes + ":" + seconds
+      }
+    }, 1000);
+  }
 }

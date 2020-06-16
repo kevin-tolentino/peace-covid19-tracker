@@ -41,10 +41,9 @@ class App{
       "x-rapidapi-host": "covid-193.p.rapidapi.com",
       "x-rapidapi-key": "c857e751dfmsh459b4184fde79f2p1e3cbdjsn082cb4dee5cd"
     },
-    beforeSend: function () {
-      this.beforeSendCovid()
+    beforeSend: () => {
+      this.covidTable.beforeSendCovid()
       this.rightButton.setAttribute('disabled', '')
-
     },
     success: this.handleGetCovidHistorySuccess,
     error: this.handleGetCovidHistoryError
@@ -59,8 +58,8 @@ class App{
       "x-rapidapi-host": "covid-193.p.rapidapi.com",
       "x-rapidapi-key": "c857e751dfmsh459b4184fde79f2p1e3cbdjsn082cb4dee5cd"
     },
-    beforeSend: function () {
-      this.beforeSendCovid()
+    beforeSend: () => {
+      this.covidTable.beforeSendCovid()
       this.leftButton.setAttribute('disabled', '')
       this.rightButton.setAttribute('disabled', '')
     },
@@ -293,11 +292,8 @@ handleGetVerseOneError(error) {
 
   start(){
   this.getVerses()
+  this.covidCurrent()
   // this.startTimer(900, this.timer)
 
 }
-
-
-// covidCurrent();
-// getVerses();
 }

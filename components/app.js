@@ -1,5 +1,18 @@
 class App{
-  constructor(verseDisplay, covidTable, formattedPreviousDate, timer, previousDayDate, currentDate, yesterday, today, tomorrow, leftButton, middleButton, rightButton){
+  constructor(verseDisplay,
+    covidTable,
+    formattedPreviousDate,
+    timer, previousDayDate,
+    currentDate,
+    previewDayDate,
+    yesterday,
+    today,
+    tomorrow,
+    currentRightDay,
+    leftButton,
+    middleButton,
+    rightButton,
+    currentLeftDay){
     this.handleGetCovidHistorySuccess = this.handleGetCovidHistorySuccess.bind(this)
     this.handleGetCovidHistoryError = this.handleGetCovidHistoryError.bind(this)
     this.handleGetCovidCurrentSuccess = this.handleGetCovidCurrentSuccess.bind(this)
@@ -19,22 +32,37 @@ class App{
     this.timer = timer
     this.previousDayDate = previousDayDate
     this.currentDate = currentDate
+    this.previewDayDate = previewDayDate
     this.yesterday = yesterday
     this.today = today
     this.tomorrow = tomorrow
+    this.currentRightDay = currentRightDay
     this.leftButton = leftButton
     this.middleButton = middleButton
     this.rightButton = rightButton
+    this.currentLeftDay = currentLeftDay
     this.covidCurrent = this.covidCurrent.bind(this)
+    this.covidHistory = this.covidHistory.bind(this)
     //fix these event listeners to call correct methods from respective classes
     this.leftButton.addEventListener("click", () => {
       this.getPreviousDay()
+      this.covidHistory()
+      this.verseDisplay.previousVerseOfTheDay(this.verseArray, this.previousDayDate, this.yesterday)
     })
     this.middleButton.addEventListener('click', () => {
       this.covidCurrent()
       this.startTimer(900, timer)
     })
-    this.rightButton.addEventListener("click", this.getPreviewDay)
+    this.rightButton.addEventListener("click", () => {
+      this.getPreviewDay()
+    })
+  }
+
+  start() {
+    this.getVerses()
+    this.covidCurrent()
+    this.startTimer(1, this.timer)
+    console.log(App)
   }
 
  covidHistory() {
@@ -221,30 +249,33 @@ handleGetVerseOneError(error) {
 }
 
 
- getPreviousDay(event) {
-  var leftButton = this.leftButton
-  console.log(leftButton)
+ getPreviousDay(){
+   var leftButton = document.getElementById('leftButton')
+   var middleButton = document.getElementById('middleButton')
+   var rightButton = document.getElementById('rightButton')
   leftButton.classList.add('invisible')
-  this.middleButton.classList.add('invisible')
-  this.covidHistory();
-  this.verseDisplay.previousVerseOfTheDay(this.verseArray, this.previousDayDate, this.yesterday)
-  this.rightButton.textContent = 'View Current Day'
-  this.rightButton.removeEventListener('click', getPreviewDay)
-  this.rightButton.addEventListener('click', covidCurrent)
-  this.rightButton.addEventListener('click', viewCurrentDayRightButton)
+  middleButton.classList.add('invisible')
+  rightButton.textContent = 'View Current Day'
+  rightButton.removeEventListener('click', this.getPreviewDay)
+  rightButton.addEventListener('click', this.covidCurrent)
+  rightButton.addEventListener('click', this.viewCurrentDayRightButton)
 }
 
  getPreviewDay() {
  this.middleButton.classList.add('invisible')
   this.rightButton.classList.add('invisible')
-  previewVerseOfTheDay(this.verseArray, this.previewDayDate, this.tomorrow)
+  verseDisplay.previewVerseOfTheDay(this.verseArray, this.previewDayDate, this.tomorrow)
   this.leftButton.textContent = 'View Current Day'
-  this.leftButton.removeEventListener('click', getPreviousDay)
-  this.leftButton.addEventListener('click', viewCurrentDayLeftButton)
+  this.leftButton.removeEventListener('click', this.getPreviousDay)
+  this.leftButton.addEventListener('click', this.viewCurrentDayLeftButton)
   this.covidTable.previewStatsPlaceholder()
 }
 
-// function viewCurrentDayRightButton() {
+viewCurrentDayRight(){
+  this.verseOfTheDay(this.verseArray[this.today])
+}
+
+//  viewCurrentDayRightButton() {
 //   leftButton.classList.remove('invisible')
 //   middleButton.classList.remove('invisible')
 //   rightButton.removeEventListener('click', covidCurrent)
@@ -252,10 +283,9 @@ handleGetVerseOneError(error) {
 //   verseOfTheDay(verseArray[today])
 //   rightButton.textContent = "Preview Tomorrow's Verse"
 //   rightButton.addEventListener('click', getPreviewDay)
-
 // }
 
-// function viewCurrentDayLeftButton() {
+//  viewCurrentDayLeftButton() {
 //   rightButton.classList.remove('invisible')
 //   middleButton.classList.remove('invisible')
 //   leftButton.removeEventListener('click', covidCurrent)
@@ -292,10 +322,5 @@ handleGetVerseOneError(error) {
   }, 1000);
 }
 
-  start(){
-  this.getVerses()
-  this.covidCurrent()
-  this.startTimer(900, this.timer)
 
-}
 }

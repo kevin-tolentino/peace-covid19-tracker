@@ -7,9 +7,10 @@ var verseRef = document.getElementById("verseRef")
 var dateHeader = document.getElementById('date')
 var timer = document.getElementById('timer')
 var leftButton = document.getElementById('leftButton')
+var currentRightDay = document.getElementById('currentRightDay')
 var middleButton = document.getElementById('middleButton')
 var rightButton = document.getElementById('rightButton')
-
+var currentLeftDay = document.getElementById('currentLeftDay')
 var currentDate = new Date();
 var previousDayDate = new Date();
 previousDayDate.setDate(previousDayDate.getDate() - 1);
@@ -33,5 +34,5 @@ var tomorrow = (today === 6) ? 0 : (today + 1)
 
 const verseDisplay = new VerseDisplay(verseText, verseRef, dateHeader, currentDate)
 const covidTable = new CovidTable(currentActive, currentCritical, currentRecovered, currentDeaths)
-var covidTracker = new App(verseDisplay, covidTable, formattedPreviousDate, timer, previousDayDate, currentDate, yesterday, today, tomorrow, leftButton, middleButton, rightButton)
+var covidTracker = new App(verseDisplay, covidTable, formattedPreviousDate, timer, previousDayDate, currentDate, previewDayDate, yesterday, today, tomorrow, currentRightDay, leftButton, middleButton, rightButton, currentLeftDay)
 covidTracker.start()

@@ -61,6 +61,8 @@ class App {
     })
     this.rightButton.addEventListener("click", () => {
       this.getPreviewDay()
+      this.verseDisplay.previewVerseOfTheDay(this.verseArray, this.previewDayDate, this.tomorrow)
+      this.covidTable.previewStatsPlaceholder()
     })
     //add event listener for currentLeftDay button
   }
@@ -268,14 +270,14 @@ class App {
   }
 
   getPreviewDay() {
-    this.middleButton.classList.add('invisible')
-    this.rightButton.classList.add('invisible')
-    //change this method to be like improved getPreviousDay()
-    verseDisplay.previewVerseOfTheDay(this.verseArray, this.previewDayDate, this.tomorrow)
-    this.leftButton.textContent = 'View Current Day'
-    this.leftButton.removeEventListener('click', this.getPreviousDay)
-    this.leftButton.addEventListener('click', this.viewCurrentDayLeftButton)
-    this.covidTable.previewStatsPlaceholder()
+    var currentLeftDay = document.getElementById('currentLeftDay')
+    var leftButton = document.getElementById('leftButton')
+    var middleButton = document.getElementById('middleButton')
+    var rightButton = document.getElementById('rightButton')
+    leftButton.classList.add('invisible')
+    middleButton.classList.add('invisible')
+    rightButton.classList.add('d-none')
+    currentLeftDay.classList.remove('d-none')
   }
 
   viewCurrentDayRight() {

@@ -47,6 +47,8 @@ class App {
     this.currentRightDay.addEventListener("click", () => {
       this.covidCurrent()
       this.verseDisplay.verseOfTheDay(this.verseArray[this.today], this.currentDate)
+      this.viewCurrentDayRight()
+
     })
     this.leftButton.addEventListener("click", () => {
       this.getPreviousDay()
@@ -277,7 +279,14 @@ class App {
   }
 
   viewCurrentDayRight() {
-    this.verseOfTheDay(this.verseArray[this.today])
+    var currentRightDay = document.getElementById('currentRightDay')
+    var leftButton = document.getElementById('leftButton')
+    var middleButton = document.getElementById('middleButton')
+    var rightButton = document.getElementById('rightButton')
+    leftButton.classList.remove('invisible')
+    middleButton.classList.remove('invisible')
+    rightButton.classList.remove('d-none')
+    currentRightDay.classList.add('d-none')
   }
 
   //  viewCurrentDayRightButton() {

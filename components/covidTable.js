@@ -30,4 +30,11 @@ class CovidTable {
     this.currentRecovered.textContent = this.formatNumber(data.response[3].cases.recovered)
     this.currentDeaths.textContent = this.formatNumber(data.response[3].deaths.total)
   }
+
+  previewStatsPlaceholder(){
+    this.currentActive.textContent = 'TBD'
+    this.currentCritical.textContent = 'TBD'
+    this.currentRecovered.textContent = 'TBD'
+    this.currentDeaths.textContent = 'TBD'
+  }
 }

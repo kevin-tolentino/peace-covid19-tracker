@@ -1,5 +1,5 @@
 class App{
-  constructor(verseDisplay, covidTable, formattedPreviousDate, timer, currentDate, yesterday, today, tomorrow, leftButton, middleButton, rightButton){
+  constructor(verseDisplay, covidTable, formattedPreviousDate, timer, previousDayDate, currentDate, yesterday, today, tomorrow, leftButton, middleButton, rightButton){
     this.handleGetCovidHistorySuccess = this.handleGetCovidHistorySuccess.bind(this)
     this.handleGetCovidHistoryError = this.handleGetCovidHistoryError.bind(this)
     this.handleGetCovidCurrentSuccess = this.handleGetCovidCurrentSuccess.bind(this)
@@ -17,6 +17,7 @@ class App{
     this.verseDisplay = verseDisplay
     this.covidTable = covidTable
     this.timer = timer
+    this.previousDayDate = previousDayDate
     this.currentDate = currentDate
     this.yesterday = yesterday
     this.today = today
@@ -24,9 +25,12 @@ class App{
     this.leftButton = leftButton
     this.middleButton = middleButton
     this.rightButton = rightButton
+    this.covidCurrent = this.covidCurrent.bind(this)
     //fix these event listeners to call correct methods from respective classes
-    this.leftButton.addEventListener("click", this.getPreviousDay)
-    this.middleButton.addEventListener('click', function () {
+    this.leftButton.addEventListener("click", () => {
+      this.getPreviousDay()
+    })
+    this.middleButton.addEventListener('click', () => {
       this.covidCurrent()
       this.startTimer(900, timer)
     })
@@ -217,30 +221,28 @@ handleGetVerseOneError(error) {
 }
 
 
-// function getPreviousDay() {
-//   this.leftButton.classList.add('invisible')
-//   this.middleButton.classList.add('invisible')
-//   this.covidHistory();
-//   previousVerseOfTheDay(this.verseArray, this.previousDayDate, this.yesterday)
-//   this.rightButton.textContent = 'View Current Day'
-//   this.rightButton.removeEventListener('click', getPreviewDay)
-//   this.rightButton.addEventListener('click', covidCurrent)
-//   this.rightButton.addEventListener('click', viewCurrentDayRightButton)
-// }
+ getPreviousDay(event) {
+  var leftButton = this.leftButton
+  console.log(leftButton)
+  leftButton.classList.add('invisible')
+  this.middleButton.classList.add('invisible')
+  this.covidHistory();
+  this.verseDisplay.previousVerseOfTheDay(this.verseArray, this.previousDayDate, this.yesterday)
+  this.rightButton.textContent = 'View Current Day'
+  this.rightButton.removeEventListener('click', getPreviewDay)
+  this.rightButton.addEventListener('click', covidCurrent)
+  this.rightButton.addEventListener('click', viewCurrentDayRightButton)
+}
 
-// function getPreviewDay() {
-//   middleButton.classList.add('invisible')
-//   rightButton.classList.add('invisible')
-//   previewVerseOfTheDay(this.verseArray, this.previewDayDate, this.tomorrow)
-//   leftButton.textContent = 'View Current Day'
-//   leftButton.removeEventListener('click', getPreviousDay)
-//   leftButton.addEventListener('click', viewCurrentDayLeftButton)
-//   currentActive.textContent = 'TBD'
-//   currentCritical.textContent = 'TBD'
-//   currentRecovered.textContent = 'TBD'
-//   currentDeaths.textContent = 'TBD'
-
-// }
+ getPreviewDay() {
+ this.middleButton.classList.add('invisible')
+  this.rightButton.classList.add('invisible')
+  previewVerseOfTheDay(this.verseArray, this.previewDayDate, this.tomorrow)
+  this.leftButton.textContent = 'View Current Day'
+  this.leftButton.removeEventListener('click', getPreviousDay)
+  this.leftButton.addEventListener('click', viewCurrentDayLeftButton)
+  this.covidTable.previewStatsPlaceholder()
+}
 
 // function viewCurrentDayRightButton() {
 //   leftButton.classList.remove('invisible')
@@ -264,36 +266,36 @@ handleGetVerseOneError(error) {
 //   leftButton.addEventListener("click", getPreviousDay)
 // }
 
-//  startTimer(duration, display) {
-//   middleButton.setAttribute('disabled', '')
-//   var timer = duration, minutes, seconds;
-//   var intervalId = setInterval(function () {
-//     minutes = parseInt(timer / 60, 10);
-//     seconds = parseInt(timer % 60, 10);
+ startTimer(duration, display) {
+  this.middleButton.setAttribute('disabled', '')
+  var timer = duration, minutes, seconds;
+  var intervalId = setInterval(function () {
+    minutes = parseInt(timer / 60, 10);
+    seconds = parseInt(timer % 60, 10);
 
-//     minutes = minutes < 10 ? "0" + minutes : minutes;
-//     seconds = seconds < 10 ? "0" + seconds : seconds;
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
 
-//     display.textContent = minutes + ":" + seconds;
-//     if (minutes === "00" && seconds === "00") {
-//       middleButton.removeAttribute('disabled', '')
-//       clearInterval(intervalId)
-//       display.textContent = null
-//     }
+    display.textContent = minutes + ":" + seconds;
+    if (minutes === "00" && seconds === "00") {
+      this.middleButton.removeAttribute('disabled', '')
+      clearInterval(intervalId)
+      display.textContent = null
+    }
 
-//     if (--timer < 0) {
-//       timer = duration;
-//     }
-//     if (timer === 0) {
-//       display.textContent = minutes + ":" + seconds
-//     }
-//   }, 1000);
-// }
+    if (--timer < 0) {
+      timer = duration;
+    }
+    if (timer === 0) {
+      display.textContent = minutes + ":" + seconds
+    }
+  }, 1000);
+}
 
   start(){
   this.getVerses()
   this.covidCurrent()
-  // this.startTimer(900, this.timer)
+  this.startTimer(900, this.timer)
 
 }
 }

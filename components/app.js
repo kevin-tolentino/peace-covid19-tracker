@@ -48,7 +48,6 @@ class App {
       this.covidCurrent()
       this.verseDisplay.verseOfTheDay(this.verseArray[this.today], this.currentDate)
       this.viewCurrentDayRight()
-
     })
     this.leftButton.addEventListener("click", () => {
       this.getPreviousDay()
@@ -64,14 +63,17 @@ class App {
       this.verseDisplay.previewVerseOfTheDay(this.verseArray, this.previewDayDate, this.tomorrow)
       this.covidTable.previewStatsPlaceholder()
     })
-    //add event listener for currentLeftDay button
+    this.currentLeftDay.addEventListener("click", () => {
+      this.covidCurrent()
+      this.verseDisplay.verseOfTheDay(this.verseArray[this.today], this.currentDate)
+      this.viewCurrentDayLeft()
+    })
   }
 
   start() {
     this.getVerses()
     this.covidCurrent()
-    this.startTimer(1, this.timer)
-    console.log(App)
+    this.startTimer(900, this.timer)
   }
 
   covidHistory() {
@@ -167,9 +169,6 @@ class App {
 
     this.getVerseFourSearch()
   }
-
-
-
 
 
   handleGetCovidCurrentSuccess(data) {
@@ -291,26 +290,16 @@ class App {
     currentRightDay.classList.add('d-none')
   }
 
-  //  viewCurrentDayRightButton() {
-  //   leftButton.classList.remove('invisible')
-  //   middleButton.classList.remove('invisible')
-  //   rightButton.removeEventListener('click', covidCurrent)
-  //   rightButton.removeEventListener('click', viewCurrentDayRightButton)
-  //   verseOfTheDay(verseArray[today])
-  //   rightButton.textContent = "Preview Tomorrow's Verse"
-  //   rightButton.addEventListener('click', getPreviewDay)
-  // }
-
-  //  viewCurrentDayLeftButton() {
-  //   rightButton.classList.remove('invisible')
-  //   middleButton.classList.remove('invisible')
-  //   leftButton.removeEventListener('click', covidCurrent)
-  //   leftButton.removeEventListener('click', viewCurrentDayLeftButton)
-  //   verseOfTheDay(verseArray[today])
-  //   covidCurrent()
-  //   leftButton.textContent = 'Previous Day'
-  //   leftButton.addEventListener("click", getPreviousDay)
-  // }
+  viewCurrentDayLeft() {
+    var currentLeftDay = document.getElementById('currentLeftDay')
+    var leftButton = document.getElementById('leftButton')
+    var middleButton = document.getElementById('middleButton')
+    var rightButton = document.getElementById('rightButton')
+    leftButton.classList.remove('invisible')
+    middleButton.classList.remove('invisible')
+    rightButton.classList.remove('d-none')
+    currentLeftDay.classList.add('d-none')
+  }
 
   startTimer(duration, display) {
     this.middleButton.setAttribute('disabled', '')

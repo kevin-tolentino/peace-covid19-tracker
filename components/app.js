@@ -43,7 +43,6 @@ class App {
     this.currentLeftDay = currentLeftDay
     this.covidCurrent = this.covidCurrent.bind(this)
     this.covidHistory = this.covidHistory.bind(this)
-    //fix these event listeners to call correct methods from respective classes
     this.currentRightDay.addEventListener("click", () => {
       this.covidCurrent()
       this.verseDisplay.verseOfTheDay(this.verseArray[this.today], this.currentDate)

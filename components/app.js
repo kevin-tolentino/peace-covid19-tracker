@@ -95,7 +95,7 @@ class App {
   covidCurrent() {
     $.ajax({
       method: "GET",
-      url: "https://covid-193.p.rapidapi.com/statistics",
+      url: "https://covid-193.p.rapidapi.com/statistics?country=USA",
       headers: {
         "x-rapidapi-host": "covid-193.p.rapidapi.com",
         "x-rapidapi-key": "c857e751dfmsh459b4184fde79f2p1e3cbdjsn082cb4dee5cd"

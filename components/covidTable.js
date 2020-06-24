@@ -25,10 +25,10 @@ class CovidTable {
   }
 
   updateCurrentCovidStats(data) {
-    this.currentActive.textContent = this.formatNumber(data.response[3].cases.active)
-    this.currentCritical.textContent = this.formatNumber(data.response[3].cases.critical)
-    this.currentRecovered.textContent = this.formatNumber(data.response[3].cases.recovered)
-    this.currentDeaths.textContent = this.formatNumber(data.response[3].deaths.total)
+    this.currentActive.textContent = this.formatNumber(data.response[0].cases.active)
+    this.currentCritical.textContent = this.formatNumber(data.response[0].cases.critical)
+    this.currentRecovered.textContent = this.formatNumber(data.response[0].cases.recovered)
+    this.currentDeaths.textContent = this.formatNumber(data.response[0].deaths.total)
   }
 
   previewStatsPlaceholder() {

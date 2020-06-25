@@ -1,5 +1,5 @@
 class CovidTable {
-  constructor(currentActive, currentCritical, currentRecovered, currentDeaths) {
+  constructor(table, currentActive, currentCritical, currentRecovered, currentDeaths) {
     this.currentActive = currentActive
     this.currentCritical = currentCritical
     this.currentRecovered = currentRecovered

@@ -1,9 +1,16 @@
 class CovidTable {
-  constructor(table, currentActive, currentCritical, currentRecovered, currentDeaths) {
+  constructor(table, errorMessage, currentActive, currentCritical, currentRecovered, currentDeaths) {
+    this.table = table
+    this.errorMessage = errorMessage
     this.currentActive = currentActive
     this.currentCritical = currentCritical
     this.currentRecovered = currentRecovered
     this.currentDeaths = currentDeaths
+  }
+
+  hideTable(){
+    this.errorMessage.classList.remove('d-none')
+    this.table.classList.add('d-none')
   }
 
   formatNumber(num) {

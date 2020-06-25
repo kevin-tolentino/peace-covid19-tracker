@@ -36,6 +36,6 @@ var tomorrow = (today === 6) ? 0 : (today + 1)
 
 
 const verseDisplay = new VerseDisplay(verseText, verseRef, dateHeader, currentDate)
-const covidTable = new CovidTable(table, currentActive, currentCritical, currentRecovered, currentDeaths)
-var covidTracker = new App(verseDisplay, covidTable, formattedPreviousDate, timer, previousDayDate, currentDate, previewDayDate, yesterday, today, tomorrow, currentRightDay, leftButton, middleButton, rightButton, currentLeftDay, errorMessage)
+const covidTable = new CovidTable(table, errorMessage, currentActive, currentCritical, currentRecovered, currentDeaths)
+var covidTracker = new App(verseDisplay, covidTable, formattedPreviousDate, timer, previousDayDate, currentDate, previewDayDate, yesterday, today, tomorrow, currentRightDay, leftButton, middleButton, rightButton, currentLeftDay)
 covidTracker.start()

@@ -12,8 +12,7 @@ class App {
     leftButton,
     middleButton,
     rightButton,
-    currentLeftDay,
-    errorMessage) {
+    currentLeftDay) {
     this.handleGetCovidHistorySuccess = this.handleGetCovidHistorySuccess.bind(this)
     this.handleGetCovidHistoryError = this.handleGetCovidHistoryError.bind(this)
     this.handleGetCovidCurrentSuccess = this.handleGetCovidCurrentSuccess.bind(this)
@@ -42,7 +41,6 @@ class App {
     this.middleButton = middleButton
     this.rightButton = rightButton
     this.currentLeftDay = currentLeftDay
-    this.errorMessage = errorMessage
     this.covidCurrent = this.covidCurrent.bind(this)
     this.covidHistory = this.covidHistory.bind(this)
     this.currentRightDay.addEventListener("click", () => {
@@ -189,6 +187,7 @@ class App {
   }
 
   handleGetCovidHistoryError(error) {
+    this.covidTable.hideTable()
     console.error(error)
   }
 

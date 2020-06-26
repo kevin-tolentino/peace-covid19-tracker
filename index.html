@@ -27,7 +27,7 @@
           <h5 id="date" class="text-center"></h5>
           <p id="verse" class="text-center"><span id="verseText">In peace I will both lie down and sleep; for you alone, O LORD, make me dwell in safety.</span> <strong>(<span id="verseRef">Psalm 4:8</span>)</strong></p>
         </div>
-        <h3 class="text-center">United States COVID-19 Stats</h3>
+        <h4 class="text-center">United States National COVID-19 Stats <img src="assets/covid-19.png" alt="COVID-19 Icon"></h4>
         <div><h5 id="currrentErrorMessage" class="text-center text-danger d-none">Error retrieving Current COVID-19 API Data. Please check your internet connection and click <span id="retryCurrentGet"><em>here</em></span> to try again.</h5></div>
         <div><h5 id="historyErrorMessage" class="text-center text-danger d-none">Error retrieving Historic COVID-19 API Data. Please check your internet connection and click <span id="retryHistoryGet"><em>here</em></span> to try again.</h5></div>
         <div class="table-responsive">
@@ -35,22 +35,24 @@
           <table id="table" class="table table-bordered text-center w-100">
             <thead class="table-primary">
               <tr>
-                <th scope="col"><img src="assets/covid-19.png" alt="COVID-19 Icon"></th>
-                <th scope="col">Total Cases</th>
+                <th scope="col">Active Cases</th>
                 <th scope="col">Critical Condition</th>
                 <th scope="col">Recovered</th>
+                <th scope="col">Deaths</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th class="table-warning" scope="row">Cases</th>
                 <td class="table-info"><strong id="currentActive"></strong></td>
                 <td class="table-info"><strong id="currentCritical"></strong></td>
                 <td class="table-info"><strong id="currentRecovered"></strong></td>
+                <td class="table-dark" colspan="3"><strong id="currentDeaths"></strong></td>
               </tr>
               <tr>
-                <th class="table-danger" scope="row">Deaths</th>
-                <td class="table-dark" colspan="3"><strong id="currentDeaths"></strong></td>
+                <td class="table-dark" colspan="4"><em><span>Blank</span></em> percent of U.S. population has the COVID-19 Virus</td>
+              </tr>
+              <tr>
+                <td class="table-dark" colspan="4">Of the blank Active COVID-19 cases, 5% are in critical condition</td>
               </tr>
             </tbody>
           </table>

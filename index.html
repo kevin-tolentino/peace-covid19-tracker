@@ -30,28 +30,31 @@
         <h3 class="text-center">United States COVID-19 Stats</h3>
         <div><h5 id="currrentErrorMessage" class="text-center text-danger d-none">Error retrieving Current COVID-19 API Data. Please check your internet connection and click <span id="retryCurrentGet"><em>here</em></span> to try again.</h5></div>
         <div><h5 id="historyErrorMessage" class="text-center text-danger d-none">Error retrieving Historic COVID-19 API Data. Please check your internet connection and click <span id="retryHistoryGet"><em>here</em></span> to try again.</h5></div>
-        <table id="table" class="table table-bordered text-center">
-          <thead class="table-primary">
-            <tr>
-              <th scope="col"><img src="assets/covid-19.png" alt="COVID-19 Icon"></th>
-              <th scope="col">Active</th>
-              <th scope="col">Critical</th>
-              <th scope="col">Recovered</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th class="table-warning" scope="row">Cases</th>
-              <td class="table-info"><strong id="currentActive"></strong></td>
-              <td class="table-info"><strong id="currentCritical"></strong></td>
-              <td class="table-info"><strong id="currentRecovered"></strong></td>
-            </tr>
-            <tr>
-              <th class="table-danger" scope="row">Deaths</th>
-              <td class="table-dark" colspan="3"><strong id="currentDeaths"></strong></td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-responsive">
+
+          <table id="table" class="table table-bordered text-center w-100">
+            <thead class="table-primary">
+              <tr>
+                <th scope="col"><img src="assets/covid-19.png" alt="COVID-19 Icon"></th>
+                <th scope="col">Total Cases</th>
+                <th scope="col">Critical Condition</th>
+                <th scope="col">Recovered</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th class="table-warning" scope="row">Cases</th>
+                <td class="table-info"><strong id="currentActive"></strong></td>
+                <td class="table-info"><strong id="currentCritical"></strong></td>
+                <td class="table-info"><strong id="currentRecovered"></strong></td>
+              </tr>
+              <tr>
+                <th class="table-danger" scope="row">Deaths</th>
+                <td class="table-dark" colspan="3"><strong id="currentDeaths"></strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </main>
     </div>
     <div class="row ">

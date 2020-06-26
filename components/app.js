@@ -110,6 +110,18 @@ class App {
     })
   }
 
+  retryVerseGet(){
+
+  }
+
+  retryCurrentGet(){
+
+  }
+
+  retryHistoryGet(){
+
+  }
+
 
   getVerseOneSearch() {
     $.ajax({

@@ -47,5 +47,5 @@ var tomorrow = (today === 6) ? 0 : (today + 1)
 
 const verseDisplay = new VerseDisplay(verseDisplayDiv, verseErrorMessage, verseText, verseRef, dateHeader, currentDate)
 const covidTable = new CovidTable(table, currentErrorMessage, historyErrorMessage, currentActive, currentRecovered, currentDeaths, tested, confirmedCases, newCases, newDeaths, totalPopulation)
-var covidTracker = new App(retryCurrentGet, retryHistoryGet, footer, verseDisplay, retryVerseGet, covidTable, formattedPreviousDate, timer, previousDayDate, currentDate, previewDayDate, yesterday, today, tomorrow, currentRightDay, leftButton, middleButton, rightButton, currentLeftDay)
+var covidTracker = new App(retryCurrentGet, retryHistoryGet, retryVerseGet, footer, verseDisplay, covidTable, formattedPreviousDate, timer, previousDayDate, currentDate, previewDayDate, yesterday, today, tomorrow, currentRightDay, leftButton, middleButton, rightButton, currentLeftDay)
 covidTracker.start()

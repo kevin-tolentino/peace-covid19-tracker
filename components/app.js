@@ -1,9 +1,9 @@
 class App {
   constructor(retryCurrentGet,
     retryHistoryGet,
+    retryVerseGet,
     footer,
     verseDisplay,
-    retryVerseGet,
     covidTable,
     formattedPreviousDate,
     timer, previousDayDate,
@@ -27,9 +27,9 @@ class App {
     this.handleGetVerseThreeSuccess = this.handleGetVerseThreeSuccess.bind(this)
     this.handleGetVerseFourSuccess = this.handleGetVerseFourSuccess.bind(this)
     this.verseArray = []
-    this.retryVerseGet = retryVerseGet
     this.retryCurrentGet = retryCurrentGet
     this.retryHistoryGet = retryHistoryGet
+    this.retryVerseGet = retryVerseGet
     this.footer = footer
     this.formattedPreviousDate = formattedPreviousDate
     this.verseDisplay = verseDisplay
@@ -48,6 +48,10 @@ class App {
     this.currentLeftDay = currentLeftDay
     this.covidCurrent = this.covidCurrent.bind(this)
     this.covidHistory = this.covidHistory.bind(this)
+    this.retryVerseGet.addEventListener("click", () => {
+      this.verseDisplay.retryVerseHandle()
+      this.getVerses()
+    })
     this.retryCurrentGet.addEventListener("click", () => {
       this.covidTable.retryCurrentHandle()
       this.covidCurrent()

@@ -70,8 +70,8 @@ class CovidTable {
     this.currentRecovered.textContent = this.formatNumber(data.response[0].cases.recovered)
     this.currentDeaths.textContent = this.formatNumber(data.response[0].deaths.total)
     this.newDeaths.textContent = this.formatNumber(data.response[0].deaths.new)
-    this.totalPopulation.textContent = `${((confirmed / population) * 100).toFixed(2)}% of U.S. population had the COVID-19 Virus`
-    this.currentActive.textContent = `Of the ${this.formatNumber(active)} Active COVID-19 cases, ${((critical / active) * 100).toFixed(2)}% were in critical condition`
+    this.totalPopulation.textContent = `${((confirmed / population) * 100).toFixed(2)}% of U.S. population had the COVID-19 Virus.`
+    this.currentActive.textContent = `Of the ${this.formatNumber(active)} Active COVID-19 cases, ${((critical / active) * 100).toFixed(2)}% were in critical condition.`
   }
 
   updateCurrentCovidStats(data) {
@@ -85,8 +85,8 @@ class CovidTable {
     this.currentRecovered.textContent = this.formatNumber(data.response[0].cases.recovered)
     this.currentDeaths.textContent = this.formatNumber(data.response[0].deaths.total)
     this.newDeaths.textContent = this.formatNumber(data.response[0].deaths.new)
-    this.totalPopulation.textContent = `${((confirmed / population) * 100).toFixed(2)}% of U.S. population has the COVID-19 Virus`
-    this.currentActive.textContent = `Of the ${this.formatNumber(active)} Active COVID-19 cases, ${((critical / active) * 100).toFixed(2)}% are in critical condition`
+    this.totalPopulation.textContent = `${((confirmed / population) * 100).toFixed(2)}% of U.S. population has the COVID-19 Virus.`
+    this.currentActive.textContent = `Of the ${this.formatNumber(active)} Active COVID-19 cases, ${((critical / active) * 100).toFixed(2)}% are in critical condition.`
   }
 
   previewStatsPlaceholder() {

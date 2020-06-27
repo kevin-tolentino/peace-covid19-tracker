@@ -1,5 +1,6 @@
 class App {
-  constructor(verseDisplay,
+  constructor(footer,
+    verseDisplay,
     covidTable,
     formattedPreviousDate,
     timer, previousDayDate,
@@ -26,6 +27,7 @@ class App {
     this.handleGetVerseFourSuccess = this.handleGetVerseFourSuccess.bind(this)
     this.handleGetVerseFourError = this.handleGetVerseFourError.bind(this)
     this.verseArray = []
+    this.footer = footer
     this.formattedPreviousDate = formattedPreviousDate
     this.verseDisplay = verseDisplay
     this.covidTable = covidTable
@@ -190,6 +192,7 @@ class App {
   }
 
   handleGetCovidCurrentError(error) {
+    this.covidTable.currentErrorHandle()
     console.error(error)
   }
 
@@ -199,7 +202,7 @@ class App {
   }
 
   handleGetCovidHistoryError(error) {
-    this.covidTable.errorHandle()
+    this.covidTable.historyErrorHandle()
     console.error(error)
   }
 

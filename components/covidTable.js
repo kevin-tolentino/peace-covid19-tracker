@@ -24,13 +24,23 @@ class CovidTable {
   }
 
 
-  errorHandle(){
-    this.errorMessage.classList.remove('d-none')
+  currentErrorHandle(){
+    this.currentErrorMessage.classList.remove('d-none')
     this.table.classList.add('d-none')
   }
 
   retryCurrentHandle(){
-    this.errorMessage.classList.add('d-none')
+    this.currentErrorMessage.classList.add('d-none')
+    this.table.classList.remove('d-none')
+  }
+
+  historyErrorHandle() {
+    this.historyErrorMessage.classList.remove('d-none')
+    this.table.classList.add('d-none')
+  }
+
+  retryHistoryHandle() {
+    this.historyErrorMessage.classList.add('d-none')
     this.table.classList.remove('d-none')
   }
 

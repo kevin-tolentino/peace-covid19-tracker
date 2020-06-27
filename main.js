@@ -1,5 +1,4 @@
 var currentActive = document.getElementById("currentActive")
-var currentCritical = document.getElementById("currentCritical")
 var currentRecovered = document.getElementById("currentRecovered")
 var currentDeaths = document.getElementById("currentDeaths")
 var verseText = document.getElementById("verseText")
@@ -41,6 +40,6 @@ var tomorrow = (today === 6) ? 0 : (today + 1)
 
 
 const verseDisplay = new VerseDisplay(verseText, verseRef, dateHeader, currentDate)
-const covidTable = new CovidTable(table, errorMessage, currentActive, currentCritical, currentRecovered, currentDeaths, tested, confirmedCases, newCases, newDeaths, totalPopulation)
+const covidTable = new CovidTable(table, errorMessage, currentActive, currentRecovered, currentDeaths, tested, confirmedCases, newCases, newDeaths, totalPopulation)
 var covidTracker = new App(verseDisplay, covidTable, formattedPreviousDate, timer, previousDayDate, currentDate, previewDayDate, yesterday, today, tomorrow, currentRightDay, leftButton, middleButton, rightButton, currentLeftDay)
 covidTracker.start()

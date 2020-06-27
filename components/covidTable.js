@@ -2,7 +2,6 @@ class CovidTable {
   constructor(table,
     errorMessage,
     currentActive,
-    currentCritical,
     currentRecovered,
     currentDeaths,
     tested,
@@ -13,7 +12,6 @@ class CovidTable {
     this.table = table
     this.errorMessage = errorMessage
     this.currentActive = currentActive
-    this.currentCritical = currentCritical
     this.currentRecovered = currentRecovered
     this.currentDeaths = currentDeaths
     this.tested = tested
@@ -34,14 +32,14 @@ class CovidTable {
   }
 
   beforeSendCovid() {
-    this.currentActive.textContent = 'loading'
-    this.currentRecovered.textContent = 'loading'
-    this.currentDeaths.textContent = 'loading'
     this.tested.textContent = 'loading'
     this.confirmedCases.textContent = 'loading'
     this.newCases.textContent = 'loading'
+    this.currentRecovered.textContent = 'loading'
+    this.currentDeaths.textContent = 'loading'
     this.newDeaths.textContent = 'loading'
     this.totalPopulation.textContent = 'loading'
+    this.currentActive.textContent = 'loading'
   }
 
   previousDayCovidStats(data) {
@@ -51,15 +49,18 @@ class CovidTable {
   }
 
   updateCurrentCovidStats(data) {
-    this.currentActive.textContent = this.formatNumber(data.response[0].cases.active)
-    this.currentCritical.textContent = this.formatNumber(data.response[0].cases.critical)
+    this.tested.textContent = this.formatNumber(data.response[0].tests.total)
+    this.confirmedCases.textContent = this.formatNumber(data.response[0].cases.total)
+    this.newCases.textContent = this.formatNumber(data.response[0].cases.new)
     this.currentRecovered.textContent = this.formatNumber(data.response[0].cases.recovered)
     this.currentDeaths.textContent = this.formatNumber(data.response[0].deaths.total)
+    this.newDeaths.textContent = this.formatNumber(data.response[0].deaths.new)
+    this.totalPopulation.textContent = this.formatNumber(data.response[0].population)
+    this.currentActive.textContent = this.formatNumber(data.response[0].cases.active)
   }
 
   previewStatsPlaceholder() {
     this.currentActive.textContent = 'TBD'
-    this.currentCritical.textContent = 'TBD'
     this.currentRecovered.textContent = 'TBD'
     this.currentDeaths.textContent = 'TBD'
   }

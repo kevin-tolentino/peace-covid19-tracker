@@ -31,12 +31,11 @@
         <div><h5 id="currrentErrorMessage" class="text-center text-danger d-none">Error retrieving Current COVID-19 API Data. Please check your internet connection and click <span id="retryCurrentGet"><em>here</em></span> to try again.</h5></div>
         <div><h5 id="historyErrorMessage" class="text-center text-danger d-none">Error retrieving Historic COVID-19 API Data. Please check your internet connection and click <span id="retryHistoryGet"><em>here</em></span> to try again.</h5></div>
         <div class="table-responsive">
-
           <table id="table" class="table table-bordered text-center w-100">
             <thead class="table-primary">
               <tr>
                 <th scope="col">Active Cases</th>
-                <th scope="col">Critical Condition</th>
+                <th scope="col">Cases per 1M people</th>
                 <th scope="col">Recovered</th>
                 <th scope="col">Deaths</th>
               </tr>
@@ -46,14 +45,15 @@
                 <td class="table-info"><strong id="currentActive"></strong></td>
                 <td class="table-info"><strong id="currentCritical"></strong></td>
                 <td class="table-info"><strong id="currentRecovered"></strong></td>
-                <td class="table-dark" colspan="3"><strong id="currentDeaths"></strong></td>
+                <td class="table-dark"><strong id="currentDeaths"></strong></td>
               </tr>
               <tr>
-                <td class="table-dark" colspan="4"><em><span>Blank</span></em> percent of U.S. population has the COVID-19 Virus</td>
+                <td class="table-danger" colspan="2"><em><span>Blank</span></em> percent of U.S. population has the COVID-19 Virus</td>
+                <td class="table-warning" colspan="2">Of the blank Active COVID-19 cases, 5% are in critical condition</td>
               </tr>
-              <tr>
+              <!-- <tr>
                 <td class="table-dark" colspan="4">Of the blank Active COVID-19 cases, 5% are in critical condition</td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>

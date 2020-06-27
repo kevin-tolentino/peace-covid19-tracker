@@ -1,5 +1,7 @@
 class App {
-  constructor(footer,
+  constructor(retryCurrentGet,
+    retryHistoryGet,
+    footer,
     verseDisplay,
     covidTable,
     formattedPreviousDate,
@@ -27,6 +29,8 @@ class App {
     this.handleGetVerseFourSuccess = this.handleGetVerseFourSuccess.bind(this)
     this.handleGetVerseFourError = this.handleGetVerseFourError.bind(this)
     this.verseArray = []
+    this.retryCurrentGet = retryCurrentGet
+    this.retryHistoryGet = retryHistoryGet
     this.footer = footer
     this.formattedPreviousDate = formattedPreviousDate
     this.verseDisplay = verseDisplay
@@ -45,6 +49,16 @@ class App {
     this.currentLeftDay = currentLeftDay
     this.covidCurrent = this.covidCurrent.bind(this)
     this.covidHistory = this.covidHistory.bind(this)
+    this.retryCurrentGet.addEventListener("click", () => {
+      this.covidTable.retryCurrentHandle()
+      this.covidCurrent()
+      this.footer.className = 'w-100'
+    })
+    this.retryHistoryGet.addEventListener("click", () => {
+      this.covidTable.retryHistoryHandle()
+      this.covidHistory()
+      this.footer.className = 'w-100'
+    })
     this.currentRightDay.addEventListener("click", () => {
       this.covidCurrent()
       this.verseDisplay.verseOfTheDay(this.verseArray[this.today], this.currentDate)
@@ -193,6 +207,7 @@ class App {
 
   handleGetCovidCurrentError(error) {
     this.covidTable.currentErrorHandle()
+    this.footer.className = 'd-none'
     console.error(error)
   }
 

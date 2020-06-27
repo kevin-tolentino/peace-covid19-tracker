@@ -1,9 +1,21 @@
 class VerseDisplay {
-  constructor(verseText, verseRef, dateHeader) {
+  constructor(verseDisplayDiv, verseErrorMessage, verseText, verseRef, dateHeader) {
+    this.verseDisplayDiv = verseDisplayDiv
+    this.verseErrorMessage = verseErrorMessage
     this.verseText = verseText
     this.verseRef = verseRef
     this.dateHeader = dateHeader
     this.previousVerseOfTheDay = this.previewVerseOfTheDay.bind(this)
+  }
+
+  verseErrorHandle() {
+    this.verseErrorMessage.classList.remove('d-none')
+    this.verseDisplayDiv.classList.add('d-none')
+  }
+
+  retryVerseHandle() {
+    this.currentErrorMessage.classList.add('d-none')
+    this.table.classList.remove('d-none')
   }
 
   beforeSendVerse() {

@@ -43,14 +43,25 @@ class CovidTable {
   }
 
   previousDayCovidStats(data) {
-    this.currentActive.textContent = this.formatNumber(data.response[0].cases.active)
+    const population = data.response[0].population
+    const confirmed = data.response[0].cases.total
+    const active = data.response[0].cases.active
+    const critical = data.response[0].cases.critical
+    this.tested.textContent = this.formatNumber(data.response[0].tests.total)
+    this.confirmedCases.textContent = this.formatNumber(confirmed)
+    this.newCases.textContent = this.formatNumber(data.response[0].cases.new)
     this.currentRecovered.textContent = this.formatNumber(data.response[0].cases.recovered)
     this.currentDeaths.textContent = this.formatNumber(data.response[0].deaths.total)
+    this.newDeaths.textContent = this.formatNumber(data.response[0].deaths.new)
+    this.totalPopulation.textContent = `${((confirmed / population) * 100).toFixed(2)}% of U.S. population had the COVID-19 Virus`
+    this.currentActive.textContent = `Of the ${this.formatNumber(active)} Active COVID-19 cases, ${((critical / active) * 100).toFixed(2)}% were in critical condition`
   }
 
   updateCurrentCovidStats(data) {
     const population = data.response[0].population
     const confirmed = data.response[0].cases.total
+    const active = data.response[0].cases.active
+    const critical = data.response[0].cases.critical
     this.tested.textContent = this.formatNumber(data.response[0].tests.total)
     this.confirmedCases.textContent = this.formatNumber(confirmed)
     this.newCases.textContent = this.formatNumber(data.response[0].cases.new)
@@ -58,13 +69,18 @@ class CovidTable {
     this.currentDeaths.textContent = this.formatNumber(data.response[0].deaths.total)
     this.newDeaths.textContent = this.formatNumber(data.response[0].deaths.new)
     this.totalPopulation.textContent = `${((confirmed / population) * 100).toFixed(2)}% of U.S. population has the COVID-19 Virus`
-    this.currentActive.textContent = this.formatNumber(data.response[0].cases.active)
+    this.currentActive.textContent = `Of the ${this.formatNumber(active)} Active COVID-19 cases, ${((critical / active) * 100).toFixed(2)}% are in critical condition`
   }
 
   previewStatsPlaceholder() {
-    this.currentActive.textContent = 'TBD'
+    this.tested.textContent = 'TBD'
+    this.confirmedCases.textContent = 'TBD'
+    this.newCases.textContent = 'TBD'
     this.currentRecovered.textContent = 'TBD'
     this.currentDeaths.textContent = 'TBD'
+    this.newDeaths.textContent = 'TBD'
+    this.totalPopulation.textContent = 'TBD'
+    this.currentActive.textContent = 'TBD'
   }
 
 }

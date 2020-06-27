@@ -1,5 +1,9 @@
 class App {
-  constructor(verseDisplay,
+  constructor(retryCurrentGet,
+    retryHistoryGet,
+    retryVerseGet,
+    footer,
+    verseDisplay,
     covidTable,
     formattedPreviousDate,
     timer, previousDayDate,
@@ -17,15 +21,16 @@ class App {
     this.handleGetCovidHistoryError = this.handleGetCovidHistoryError.bind(this)
     this.handleGetCovidCurrentSuccess = this.handleGetCovidCurrentSuccess.bind(this)
     this.handleGetCovidCurrentError = this.handleGetCovidCurrentError.bind(this)
+    this.handleGetVerseError = this.handleGetVerseError.bind(this)
     this.handleGetVerseOneSuccess = this.handleGetVerseOneSuccess.bind(this)
-    this.handleGetVerseOneError = this.handleGetVerseOneSuccess.bind(this)
     this.handleGetVerseTwoSuccess = this.handleGetVerseTwoSuccess.bind(this)
-    this.handleGetVerseTwoError = this.handleGetVerseTwoError.bind(this)
     this.handleGetVerseThreeSuccess = this.handleGetVerseThreeSuccess.bind(this)
-    this.handleGetVerseThreeError = this.handleGetVerseThreeError.bind(this)
     this.handleGetVerseFourSuccess = this.handleGetVerseFourSuccess.bind(this)
-    this.handleGetVerseFourError = this.handleGetVerseFourError.bind(this)
     this.verseArray = []
+    this.retryCurrentGet = retryCurrentGet
+    this.retryHistoryGet = retryHistoryGet
+    this.retryVerseGet = retryVerseGet
+    this.footer = footer
     this.formattedPreviousDate = formattedPreviousDate
     this.verseDisplay = verseDisplay
     this.covidTable = covidTable
@@ -43,6 +48,20 @@ class App {
     this.currentLeftDay = currentLeftDay
     this.covidCurrent = this.covidCurrent.bind(this)
     this.covidHistory = this.covidHistory.bind(this)
+    this.retryVerseGet.addEventListener("click", () => {
+      this.verseDisplay.retryVerseHandle()
+      this.getVerses()
+    })
+    this.retryCurrentGet.addEventListener("click", () => {
+      this.covidTable.retryCurrentHandle()
+      this.covidCurrent()
+      this.footer.className = 'w-100'
+    })
+    this.retryHistoryGet.addEventListener("click", () => {
+      this.covidTable.retryHistoryHandle()
+      this.covidHistory()
+      this.footer.className = 'w-100'
+    })
     this.currentRightDay.addEventListener("click", () => {
       this.covidCurrent()
       this.verseDisplay.verseOfTheDay(this.verseArray[this.today], this.currentDate)
@@ -110,19 +129,6 @@ class App {
     })
   }
 
-  retryVerseGet(){
-
-  }
-
-  retryCurrentGet(){
-
-  }
-
-  retryHistoryGet(){
-
-  }
-
-
   getVerseOneSearch() {
     $.ajax({
       method: "GET",
@@ -131,7 +137,7 @@ class App {
       data: { "page-size": 100, "page": 1 },
       beforeSend: this.verseDisplay.beforeSendVerse(),
       success: this.handleGetVerseOneSuccess,
-      error: this.handleGetVerseOneError
+      error: this.handleGetVerseError
     })
   }
 
@@ -143,7 +149,7 @@ class App {
       data: { "page-size": 100, "page": 2 },
       beforeSend: this.verseDisplay.beforeSendVerse(),
       success: this.handleGetVerseTwoSuccess,
-      error: this.handleGetVerseTwoError
+      error: this.handleGetVerseError
     })
   }
 
@@ -155,7 +161,7 @@ class App {
       data: { "page-size": 100, "page": 3 },
       beforeSend: this.verseDisplay.beforeSendVerse(),
       success: this.handleGetVerseThreeSuccess,
-      error: this.handleGetVerseThreeError
+      error: this.handleGetVerseError
     })
   }
 
@@ -167,7 +173,7 @@ class App {
       data: { "page-size": 100, "page": 4 },
       beforeSend: this.verseDisplay.beforeSendVerse(),
       success: this.handleGetVerseFourSuccess,
-      error: this.handleGetVerseFourError
+      error: this.handleGetVerseError
     })
   }
 
@@ -186,10 +192,11 @@ class App {
     this.covidTable.updateCurrentCovidStats(data)
     this.leftButton.removeAttribute('disabled', '')
     this.rightButton.removeAttribute('disabled', '')
-
   }
 
   handleGetCovidCurrentError(error) {
+    this.covidTable.currentErrorHandle()
+    this.footer.className = 'd-none'
     console.error(error)
   }
 
@@ -199,7 +206,13 @@ class App {
   }
 
   handleGetCovidHistoryError(error) {
-    this.covidTable.hideTable()
+    this.covidTable.historyErrorHandle()
+    this.footer.className = 'd-none'
+    console.error(error)
+  }
+
+  handleGetVerseError(error) {
+    this.verseDisplay.verseErrorHandle()
     console.error(error)
   }
 
@@ -209,10 +222,6 @@ class App {
     var numbers626 = { content, reference }
     this.verseArray[0] = numbers626
     if (this.today === 0) { this.verseDisplay.verseOfTheDay(numbers626, this.currentDate) }
-  }
-
-  handleGetVerseOneError(error) {
-    console.error(error)
   }
 
   handleGetVerseTwoSuccess(data) {
@@ -229,10 +238,6 @@ class App {
 
   }
 
-  handleGetVerseTwoError(error) {
-    console.error(error)
-  }
-
   handleGetVerseThreeSuccess(data) {
     var content = data.results[76].content
     var reference = data.results[76].reference
@@ -244,10 +249,6 @@ class App {
     this.verseArray[4] = romans51
     if (this.today === 3) { this.verseDisplay.verseOfTheDay(john1427, this.currentDate) }
     if (this.today === 4) { this.verseDisplay.verseOfTheDay(romans51, this.currentDate) }
-  }
-
-  handleGetVerseThreeError(error) {
-    console.error(error)
   }
 
   handleGetVerseFourSuccess(data) {
@@ -263,11 +264,6 @@ class App {
     if (this.today === 6) { this.verseDisplay.verseOfTheDay(colossians315, this.currentDate) }
 
   }
-
-  handleGetVerseFourError(error) {
-    console.error(error)
-  }
-
 
   getPreviousDay() {
     var currentRightDay = document.getElementById('currentRightDay')

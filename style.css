@@ -15,6 +15,12 @@ img {
   font-size: 12px;
 }
 
+.retry:hover{
+  text-decoration: underline;
+  color: black;
+  cursor: pointer;
+}
+
 @media screen
   and (max-width: 768px)
  {

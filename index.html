@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="og:title" content="Peace COVID19 Tracker - A web application that displays recent COVID-19 case data and daily Bible Verses." />
+  <meta property="og:title"
+    content="Peace COVID19 Tracker - A web application that displays recent COVID-19 case data and daily Bible Verses." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="assets/covid-19.png" />
   <meta property="og:url" content="https://peace-covid19-tracker.kevintolentino.com/" />
@@ -13,6 +15,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/svg+xml" href="assets/virus-icon.svg">
 </head>
+
 <body>
   <div class="container">
     <div class="row mt-2 ">
@@ -25,11 +28,26 @@
         <div id="verseDisplay" class="col verse">
           <h4 class="text-center">Peace Verse of the Day</h4>
           <h5 id="date" class="text-center"></h5>
-          <p id="verse" class="text-center"><span id="verseText"></span> <strong><span id="verseRef"></span></strong></p>
+          <p id="verse" class="text-center"><span id="verseText"></span> <strong><span id="verseRef"></span></strong>
+          </p>
+        </div>
+        <div>
+          <h5 id="verseErrorMessage" class="text-center text-danger d-none">Error retrieving Bible verse Data. Please
+            check your internet connection and click <span id="retryVerseGet" class="retry">
+              <em>here</em></span> to try again.
+          </h5>
         </div>
         <h4 class="text-center">USA National COVID-19 Stats</h4>
-        <div><h5 id="currentErrorMessage" class="text-center text-danger d-none">Error retrieving Current COVID-19 API Data. Please check your internet connection and click <span id="retryCurrentGet" class="retry"><em>here</em></span> to try again.</h5></div>
-        <div><h5 id="historyErrorMessage" class="text-center text-danger d-none">Error retrieving Historic COVID-19 API Data. Please check your internet connection and click <span id="retryHistoryGet" class="retry"><em>here</em></span> to try again.</h5></div>
+        <div>
+          <h5 id="currentErrorMessage" class="text-center text-danger d-none">Error retrieving Current COVID-19 API
+            Data. Please check your internet connection and click <span id="retryCurrentGet"
+              class="retry"><em>here</em></span> to try again.</h5>
+        </div>
+        <div>
+          <h5 id="historyErrorMessage" class="text-center text-danger d-none">Error retrieving Historic COVID-19 API
+            Data. Please check your internet connection and click <span id="retryHistoryGet"
+              class="retry"><em>here</em></span> to try again.</h5>
+        </div>
         <div id="table" class="table-responsive">
           <table class="table table-bordered text-center">
             <thead class="table-primary">
@@ -43,17 +61,20 @@
             <tbody>
               <tr>
                 <td class="table-info"><strong id="tested"></strong></td>
-                <td class="table-info"><strong id="confirmedCases"></strong><br><em id="newCases" class="text-danger">+30,040</em></td>
+                <td class="table-info"><strong id="confirmedCases"></strong><br><em id="newCases"
+                    class="text-danger">+30,040</em></td>
                 <td class="table-info"><strong id="currentRecovered"></strong></td>
-                <td class="table-dark"><strong id="currentDeaths"></strong><br><em id="newDeaths" class="text-danger">+30,040</em></td>
+                <td class="table-dark"><strong id="currentDeaths"></strong><br><em id="newDeaths"
+                    class="text-danger">+30,040</em></td>
               </tr>
               <tr>
                 <td class="table-danger" colspan="2"><b><em id="totalPopulation"></em></b></td>
-                <td  class="table-warning" colspan="2"><b><em id="currentActive"></em></b></td>
+                <td class="table-warning" colspan="2"><b><em id="currentActive"></em></b></td>
               </tr>
             </tbody>
           </table>
-        <p class="reference text-right">(data serviced by <a href="https://api-sports.io/documentation/covid-19" target="_blank" rel="noopener noreferrer">API-SPORTS</a>)</p>
+          <p class="reference text-right">(data serviced by <a href="https://api-sports.io/documentation/covid-19"
+              target="_blank" rel="noopener noreferrer">API-SPORTS</a>)</p>
         </div>
       </main>
     </div>
@@ -62,7 +83,7 @@
         <div class="col d-flex justify-content-between">
           <button id="currentLeftDay" class="d-none col btn btn-outline-primary m-1">View Current Day</button>
           <button id="leftButton" class="col btn btn-outline-primary m-1">Previous Day</button>
-          <button id="middleButton" class="col btn btn-success m-1">Update Stats<br/>  <span id="timer"></span></button>
+          <button id="middleButton" class="col btn btn-success m-1">Update Stats<br /> <span id="timer"></span></button>
           <button id="rightButton" class="col btn btn-outline-primary m-1">Preview Tomorrow's Verse</button>
           <button id="currentRightDay" class="d-none col btn btn-outline-primary m-1">View Current Day</button>
         </div>
@@ -78,4 +99,5 @@
   <script src="components/app.js"></script>
   <script src="main.js"></script>
 </body>
+
 </html>

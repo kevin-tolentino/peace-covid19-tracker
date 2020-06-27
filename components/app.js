@@ -126,19 +126,6 @@ class App {
     })
   }
 
-  retryVerseGet(){
-
-  }
-
-  retryCurrentGet(){
-
-  }
-
-  retryHistoryGet(){
-
-  }
-
-
   getVerseOneSearch() {
     $.ajax({
       method: "GET",

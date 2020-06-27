@@ -49,13 +49,15 @@ class CovidTable {
   }
 
   updateCurrentCovidStats(data) {
+    const population = data.response[0].population
+    const confirmed = data.response[0].cases.total
     this.tested.textContent = this.formatNumber(data.response[0].tests.total)
-    this.confirmedCases.textContent = this.formatNumber(data.response[0].cases.total)
+    this.confirmedCases.textContent = this.formatNumber(confirmed)
     this.newCases.textContent = this.formatNumber(data.response[0].cases.new)
     this.currentRecovered.textContent = this.formatNumber(data.response[0].cases.recovered)
     this.currentDeaths.textContent = this.formatNumber(data.response[0].deaths.total)
     this.newDeaths.textContent = this.formatNumber(data.response[0].deaths.new)
-    this.totalPopulation.textContent = this.formatNumber(data.response[0].population)
+    this.totalPopulation.textContent = `${((confirmed / population) * 100).toFixed(2)}% of U.S. population has the COVID-19 Virus`
     this.currentActive.textContent = this.formatNumber(data.response[0].cases.active)
   }
 

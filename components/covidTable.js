@@ -1,6 +1,7 @@
 class CovidTable {
   constructor(table,
-    errorMessage,
+    currentErrorMessage,
+    historyErrorMessage,
     currentActive,
     currentRecovered,
     currentDeaths,
@@ -10,7 +11,8 @@ class CovidTable {
     newDeaths,
     totalPopulation) {
     this.table = table
-    this.errorMessage = errorMessage
+    this.currentErrorMessage = currentErrorMessage
+    this.historyErrorMessage = historyErrorMessage
     this.currentActive = currentActive
     this.currentRecovered = currentRecovered
     this.currentDeaths = currentDeaths
@@ -22,9 +24,14 @@ class CovidTable {
   }
 
 
-  hideTable(){
+  errorHandle(){
     this.errorMessage.classList.remove('d-none')
     this.table.classList.add('d-none')
+  }
+
+  retryCurrentHandle(){
+    this.errorMessage.classList.add('d-none')
+    this.table.classList.remove('d-none')
   }
 
   formatNumber(num) {

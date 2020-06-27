@@ -199,7 +199,7 @@ class App {
   }
 
   handleGetCovidHistoryError(error) {
-    this.covidTable.hideTable()
+    this.covidTable.errorHandle()
     console.error(error)
   }
 

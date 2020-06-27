@@ -14,8 +14,8 @@ class VerseDisplay {
   }
 
   retryVerseHandle() {
-    this.currentErrorMessage.classList.add('d-none')
-    this.table.classList.remove('d-none')
+    this.verseErrorMessage.classList.add('d-none')
+    this.verseDisplayDiv.classList.remove('d-none')
   }
 
   beforeSendVerse() {

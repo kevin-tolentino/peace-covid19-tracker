@@ -3,6 +3,7 @@ class App {
     retryHistoryGet,
     footer,
     verseDisplay,
+    retryVerseGet,
     covidTable,
     formattedPreviousDate,
     timer, previousDayDate,
@@ -26,6 +27,7 @@ class App {
     this.handleGetVerseThreeSuccess = this.handleGetVerseThreeSuccess.bind(this)
     this.handleGetVerseFourSuccess = this.handleGetVerseFourSuccess.bind(this)
     this.verseArray = []
+    this.retryVerseGet = retryVerseGet
     this.retryCurrentGet = retryCurrentGet
     this.retryHistoryGet = retryHistoryGet
     this.footer = footer
@@ -206,6 +208,7 @@ class App {
   }
 
   handleGetVerseError(error) {
+    this.verseDisplay.verseErrorHandle()
     console.error(error)
   }
 

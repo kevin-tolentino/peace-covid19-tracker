@@ -1,5 +1,5 @@
 class CovidTable {
-  constructor(table, errorMessage, currentActive, currentCritical, currentRecovered, currentDeaths) {
+  constructor(table, errorMessage, currentActive, currentCritical, currentRecovered, currentDeaths, tested, confirmedCases, newCases, newDeaths, totalPopulation) {
     this.table = table
     this.errorMessage = errorMessage
     this.currentActive = currentActive
@@ -7,6 +7,7 @@ class CovidTable {
     this.currentRecovered = currentRecovered
     this.currentDeaths = currentDeaths
   }
+
 
   hideTable(){
     this.errorMessage.classList.remove('d-none')
@@ -19,7 +20,7 @@ class CovidTable {
 
   beforeSendCovid() {
     this.currentActive.textContent = 'loading'
-    // this.currentCritical.textContent = 'loading'
+    this.currentCritical.textContent = 'loading'
     this.currentRecovered.textContent = 'loading'
     this.currentDeaths.textContent = 'loading'
   }
@@ -33,7 +34,7 @@ class CovidTable {
 
   updateCurrentCovidStats(data) {
     this.currentActive.textContent = this.formatNumber(data.response[0].cases.active)
-    // this.currentCritical.textContent = this.formatNumber(data.response[0].cases.critical)
+    this.currentCritical.textContent = this.formatNumber(data.response[0].cases.critical)
     this.currentRecovered.textContent = this.formatNumber(data.response[0].cases.recovered)
     this.currentDeaths.textContent = this.formatNumber(data.response[0].deaths.total)
   }

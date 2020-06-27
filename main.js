@@ -13,6 +13,11 @@ var rightButton = document.getElementById('rightButton')
 var currentLeftDay = document.getElementById('currentLeftDay')
 const errorMessage = document.getElementById('errorMessage')
 const table = document.getElementById('table')
+const tested = document.getElementById('tested')
+const confirmedCases = document.getElementById('confirmedCases')
+const newCases = document.getElementById('newCases')
+const newDeaths = document.getElementById('newDeaths')
+const totalPopulation = document.getElementById('totalPopulation')
 var currentDate = new Date();
 var previousDayDate = new Date();
 previousDayDate.setDate(previousDayDate.getDate() - 1);
@@ -36,6 +41,6 @@ var tomorrow = (today === 6) ? 0 : (today + 1)
 
 
 const verseDisplay = new VerseDisplay(verseText, verseRef, dateHeader, currentDate)
-const covidTable = new CovidTable(table, errorMessage, currentActive, currentCritical, currentRecovered, currentDeaths)
+const covidTable = new CovidTable(table, errorMessage, currentActive, currentCritical, currentRecovered, currentDeaths, tested, confirmedCases, newCases, newDeaths, totalPopulation)
 var covidTracker = new App(verseDisplay, covidTable, formattedPreviousDate, timer, previousDayDate, currentDate, previewDayDate, yesterday, today, tomorrow, currentRightDay, leftButton, middleButton, rightButton, currentLeftDay)
 covidTracker.start()

@@ -203,6 +203,7 @@ class App {
 
   handleGetCovidHistoryError(error) {
     this.covidTable.historyErrorHandle()
+    this.footer.className = 'd-none'
     console.error(error)
   }
 

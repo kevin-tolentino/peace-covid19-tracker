@@ -17,13 +17,13 @@
   <div class="container">
     <div class="row mt-2 ">
       <header class="col">
-        <h1 class="text-center">Peace COVID-19 Tracker</h1>
+        <h2 class="text-center">Peace COVID-19 Tracker</h2>
       </header>
     </div>
     <div class="row ">
       <main class="col">
         <div id="verseDisplay" class="col verse">
-          <h3 class="text-center">Peace Verse of the Day</h3>
+          <h4 class="text-center">Peace Verse of the Day</h4>
           <h5 id="date" class="text-center"></h5>
           <p id="verse" class="text-center"><span id="verseText">In peace I will both lie down and sleep; for you alone, O LORD, make me dwell in safety.</span> <strong>(<span id="verseRef">Psalm 4:8</span>)</strong></p>
         </div>
@@ -34,22 +34,22 @@
           <table id="table" class="table table-bordered text-center">
             <thead class="table-primary">
               <tr>
+                <th scope="col">Tested</th>
                 <th scope="col">Confirmed Cases</th>
-                <th scope="col">Cases per 1M people</th>
                 <th scope="col">Recovered</th>
                 <th scope="col">Deaths</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="table-info align-middle"><strong id="currentActive"></strong><br><em>+<span class="text-danger">30,000</span></em></td>
-                <td class="table-info align-middle"><strong id="currentCritical"></strong></td>
+                <td class="table-info align-middle"><strong id="tested">31,757,216</strong></td>
+                <td class="table-info align-middle"><strong id="confirmedCases">2,582,996</strong><br><span id="newCases" class="text-danger">+30,040</span></td>
                 <td class="table-info align-middle"><strong id="currentRecovered"></strong></td>
-                <td class="table-dark align-middle"><strong id="currentDeaths"></strong></td>
+                <td class="table-dark align-middle"><strong id="currentDeaths"></strong><br><span id="newDeaths" class="text-danger">+30,040</span></td>
               </tr>
               <tr>
                 <td class="table-danger" colspan="2"><em><span>Blank</span></em> percent of U.S. population has the COVID-19 Virus</td>
-                <td class="table-warning" colspan="2">Of the blank Active COVID-19 cases, 5% are in critical condition</td>
+                <td class="table-warning" colspan="2">Of the <strong id="currentActive"></strong> Active COVID-19 cases, 5% are in critical condition</td>
               </tr>
               <!-- <tr>
                 <td class="table-dark" colspan="4">Of the blank Active COVID-19 cases, 5% are in critical condition</td>

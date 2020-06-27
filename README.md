@@ -43,29 +43,3 @@ cd peace-covid19-tracker
 2. Register for your API Keys at the following links: [ESV API](https://api.esv.org/docs/) [COVID-19 by API-SPORTS](https://rapidapi.com/api-sports/api/covid-193/endpoints) (Note: You must sign up for a RapidAPI account to obtain key)
 
 3. Open index.html in the browser
-
-
-## 📱 Screenshots 
-
-### iPad Portrait
-<p align="center">
-  <img width=75% alt="app demo" src="https://github.com/kevin-tolentino/peace-covid19-tracker/blob/master/assets/iPad%20Portrait.png" >
-</p>
-
-### iPad Landscape
-<p align="center">
-  <img width=100% alt="app demo" src="https://github.com/kevin-tolentino/peace-covid19-tracker/blob/master/assets/iPad%20landscape.png" >
-</>
-
-### iPhone 6/7/8 Portrait
-<p align="center">
-  <img width=48% alt="app demo" src="https://github.com/kevin-tolentino/peace-covid19-tracker/blob/master/assets/iPhone%206%207%208%20Portrait.png" >
-</div>
-
-### iPhone 6/7/8 Landscape
-<p align="center">
-  <img width=100% alt="app demo" src="https://github.com/kevin-tolentino/peace-covid19-tracker/blob/master/assets/iPhone%206%207%208%20Landscape.gif" >
-</p>
-
-
-

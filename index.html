@@ -31,10 +31,10 @@
         <div><h5 id="currrentErrorMessage" class="text-center text-danger d-none">Error retrieving Current COVID-19 API Data. Please check your internet connection and click <span id="retryCurrentGet"><em>here</em></span> to try again.</h5></div>
         <div><h5 id="historyErrorMessage" class="text-center text-danger d-none">Error retrieving Historic COVID-19 API Data. Please check your internet connection and click <span id="retryHistoryGet"><em>here</em></span> to try again.</h5></div>
         <div class="table-responsive">
-          <table id="table" class="table table-bordered text-center w-100">
+          <table id="table" class="table table-bordered text-center">
             <thead class="table-primary">
               <tr>
-                <th scope="col">Active Cases</th>
+                <th scope="col">Confirmed Cases</th>
                 <th scope="col">Cases per 1M people</th>
                 <th scope="col">Recovered</th>
                 <th scope="col">Deaths</th>
@@ -42,9 +42,9 @@
             </thead>
             <tbody>
               <tr>
-                <td class="table-info"><strong id="currentActive"></strong></td>
-                <td class="table-info"><strong id="currentCritical"></strong></td>
-                <td class="table-info"><strong id="currentRecovered"></strong></td>
+                <td class="table-info align-middle"><strong id="currentActive"></strong><br><em>+<span class="text-danger">30,000</span></em></td>
+                <td class="table-info align-middle"><strong id="currentCritical"></strong></td>
+                <td class="table-info align-middle"><strong id="currentRecovered"></strong></td>
                 <td class="table-dark"><strong id="currentDeaths"></strong></td>
               </tr>
               <tr>

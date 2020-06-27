@@ -6,3 +6,23 @@
 img {
   width: 30px;
 }
+
+#table {
+  font-size: 14px;
+}
+
+.reference{
+  font-size: 12px;
+}
+
+@media screen
+  and (max-width: 768px)
+ {
+#table {
+  font-size: 12px;
+}
+
+.reference{
+  font-size: 10px;
+}
+ }

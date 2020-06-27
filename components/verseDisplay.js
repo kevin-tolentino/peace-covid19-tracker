@@ -17,7 +17,7 @@ class VerseDisplay {
     var formattedText = previousVerseInfo.content
     formattedText = formattedText[0].toUpperCase() + formattedText.slice(1)
     this.verseText.textContent = formattedText
-    this.verseRef.textContent = previousVerseInfo.reference
+    this.verseRef.textContent = `(${previousVerseInfo.reference})`
   }
 
   verseOfTheDay(verseObject, currentDate) {
@@ -25,7 +25,7 @@ class VerseDisplay {
     var formattedText = verseObject.content
     formattedText = formattedText[0].toUpperCase() + formattedText.slice(1)
     this.verseText.textContent = formattedText
-    this.verseRef.textContent = verseObject.reference
+    this.verseRef.textContent = `(${verseObject.reference})`
   }
 
   previewVerseOfTheDay(verseArray, previewDayDate, tomorrow) {
@@ -34,6 +34,6 @@ class VerseDisplay {
     var formattedText = previewVerseInfo.content
     formattedText = formattedText[0].toUpperCase() + formattedText.slice(1)
     this.verseText.textContent = formattedText
-    this.verseRef.textContent = previewVerseInfo.reference
+    this.verseRef.textContent = `(${previewVerseInfo.reference})`
   }
 }

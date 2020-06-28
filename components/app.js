@@ -104,7 +104,7 @@ class App {
       },
       beforeSend: () => {
         this.covidTable.beforeSendCovid()
-        this.rightButton.setAttribute('disabled', '')
+        this.currentRightDay.setAttribute('disabled', '')
       },
       success: this.handleGetCovidHistorySuccess,
       error: this.handleGetCovidHistoryError
@@ -202,7 +202,7 @@ class App {
 
   handleGetCovidHistorySuccess(data) {
     this.covidTable.previousDayCovidStats(data)
-    this.rightButton.removeAttribute('disabled', '')
+    this.currentRightDay.removeAttribute('disabled', '')
   }
 
   handleGetCovidHistoryError(error) {

@@ -217,21 +217,21 @@ class App {
   }
 
   handleGetVerseOneSuccess(data) {
-    var content = data.results[49].content
-    var reference = data.results[49].reference
-    var numbers626 = { content, reference }
+    const content = data.results[49].content
+    const reference = data.results[49].reference
+    const numbers626 = { content, reference }
     this.verseArray[0] = numbers626
     if (this.today === 0) { this.verseDisplay.verseOfTheDay(numbers626, this.currentDate) }
   }
 
   handleGetVerseTwoSuccess(data) {
-    var content = data.results[65].content
-    var reference = data.results[65].reference
-    var psalm48 = { content, reference }
+    let content = data.results[65].content
+    let reference = data.results[65].reference
+    const psalm48 = { content, reference }
     this.verseArray[1] = psalm48
     content = data.results[96].content
     reference = data.results[96].reference
-    var isaiah263 = { content, reference }
+    const isaiah263 = { content, reference }
     this.verseArray[2] = isaiah263
     if (this.today === 1) { this.verseDisplay.verseOfTheDay(psalm48, this.currentDate) }
     if (this.today === 2) { this.verseDisplay.verseOfTheDay(isaiah263, this.currentDate) }
@@ -239,26 +239,26 @@ class App {
   }
 
   handleGetVerseThreeSuccess(data) {
-    var content = data.results[76].content
-    var reference = data.results[76].reference
-    var john1427 = { content, reference }
+    let content = data.results[76].content
+    let reference = data.results[76].reference
+    const john1427 = { content, reference }
     this.verseArray[3] = john1427
     content = data.results[90].content
     reference = data.results[90].reference
-    var romans51 = { content, reference }
+    const romans51 = { content, reference }
     this.verseArray[4] = romans51
     if (this.today === 3) { this.verseDisplay.verseOfTheDay(john1427, this.currentDate) }
     if (this.today === 4) { this.verseDisplay.verseOfTheDay(romans51, this.currentDate) }
   }
 
   handleGetVerseFourSuccess(data) {
-    var content = data.results[13].content
-    var reference = data.results[13].reference
-    var philippians12 = { content, reference }
+    let content = data.results[13].content
+    let reference = data.results[13].reference
+    const philippians12 = { content, reference }
     this.verseArray[5] = philippians12
     content = data.results[18].content
     reference = data.results[18].reference
-    var colossians315 = { content, reference }
+    const colossians315 = { content, reference }
     this.verseArray[6] = colossians315
     if (this.today === 5) { this.verseDisplay.verseOfTheDay(philippians12, this.currentDate) }
     if (this.today === 6) { this.verseDisplay.verseOfTheDay(colossians315, this.currentDate) }
@@ -266,10 +266,10 @@ class App {
   }
 
   getPreviousDay() {
-    var currentRightDay = document.getElementById('currentRightDay')
-    var leftButton = document.getElementById('leftButton')
-    var middleButton = document.getElementById('middleButton')
-    var rightButton = document.getElementById('rightButton')
+    const currentRightDay = document.getElementById('currentRightDay')
+    const leftButton = document.getElementById('leftButton')
+    const middleButton = document.getElementById('middleButton')
+    const rightButton = document.getElementById('rightButton')
     leftButton.classList.add('invisible')
     middleButton.classList.add('invisible')
     rightButton.classList.add('d-none')
@@ -277,10 +277,10 @@ class App {
   }
 
   getPreviewDay() {
-    var currentLeftDay = document.getElementById('currentLeftDay')
-    var leftButton = document.getElementById('leftButton')
-    var middleButton = document.getElementById('middleButton')
-    var rightButton = document.getElementById('rightButton')
+    const currentLeftDay = document.getElementById('currentLeftDay')
+    const leftButton = document.getElementById('leftButton')
+    const middleButton = document.getElementById('middleButton')
+    const rightButton = document.getElementById('rightButton')
     leftButton.classList.add('invisible')
     middleButton.classList.add('invisible')
     rightButton.classList.add('d-none')
@@ -288,10 +288,10 @@ class App {
   }
 
   viewCurrentDayRight() {
-    var currentRightDay = document.getElementById('currentRightDay')
-    var leftButton = document.getElementById('leftButton')
-    var middleButton = document.getElementById('middleButton')
-    var rightButton = document.getElementById('rightButton')
+    const currentRightDay = document.getElementById('currentRightDay')
+    const leftButton = document.getElementById('leftButton')
+    const middleButton = document.getElementById('middleButton')
+    const rightButton = document.getElementById('rightButton')
     leftButton.classList.remove('invisible')
     middleButton.classList.remove('invisible')
     rightButton.classList.remove('d-none')
@@ -299,10 +299,10 @@ class App {
   }
 
   viewCurrentDayLeft() {
-    var currentLeftDay = document.getElementById('currentLeftDay')
-    var leftButton = document.getElementById('leftButton')
-    var middleButton = document.getElementById('middleButton')
-    var rightButton = document.getElementById('rightButton')
+    const currentLeftDay = document.getElementById('currentLeftDay')
+    const leftButton = document.getElementById('leftButton')
+    const middleButton = document.getElementById('middleButton')
+    const rightButton = document.getElementById('rightButton')
     leftButton.classList.remove('invisible')
     middleButton.classList.remove('invisible')
     rightButton.classList.remove('d-none')
@@ -311,8 +311,8 @@ class App {
 
   startTimer(duration, display) {
     this.middleButton.setAttribute('disabled', '')
-    var timer = duration, minutes, seconds;
-    var intervalId = setInterval(function () {
+    let timer = duration, minutes, seconds;
+    const intervalId = setInterval(function () {
       minutes = parseInt(timer / 60, 10);
       seconds = parseInt(timer % 60, 10);
 

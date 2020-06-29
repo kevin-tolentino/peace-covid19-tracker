@@ -21,6 +21,10 @@ img {
   cursor: pointer;
 }
 
+.fallback-em{
+  color: #087bff;
+}
+
 @media screen
   and (max-width: 768px)
  {

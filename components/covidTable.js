@@ -66,10 +66,20 @@ class CovidTable {
     const critical = data.response[0].cases.critical
     this.tested.textContent = this.formatNumber(data.response[0].tests.total)
     this.confirmedCases.textContent = this.formatNumber(confirmed)
-    this.newCases.textContent = this.formatNumber(data.response[0].cases.new)
+    if (data.response[0].cases.new) {
+      this.newCases.classList.remove('d-none')
+      this.newCases.textContent = this.formatNumber(data.response[0].cases.new)
+    } else {
+      this.newCases.classList.add('d-none')
+    }
     this.currentRecovered.textContent = this.formatNumber(data.response[0].cases.recovered)
     this.currentDeaths.textContent = this.formatNumber(data.response[0].deaths.total)
-    this.newDeaths.textContent = this.formatNumber(data.response[0].deaths.new)
+    if (data.response[0].deaths.new) {
+      this.newDeaths.classList.remove('d-none')
+      this.newDeaths.textContent = this.formatNumber(data.response[0].deaths.new)
+    } else {
+      this.newDeaths.classList.add('d-none')
+    }
     this.totalPopulation.textContent = `${((confirmed / population) * 100).toFixed(2)}% of U.S. population had the COVID-19 Virus.`
     this.currentActive.textContent = `Of the ${this.formatNumber(active)} Active COVID-19 cases, ${((critical / active) * 100).toFixed(2)}% were in critical condition.`
   }
@@ -81,10 +91,21 @@ class CovidTable {
     const critical = data.response[0].cases.critical
     this.tested.textContent = this.formatNumber(data.response[0].tests.total)
     this.confirmedCases.textContent = this.formatNumber(confirmed)
-    this.newCases.textContent = this.formatNumber(data.response[0].cases.new)
+    if (data.response[0].cases.new){
+      this.newCases.classList.remove('d-none')
+      this.newCases.textContent = this.formatNumber(data.response[0].cases.new)
+    } else {
+      this.newCases.classList.add('d-none')
+    }
     this.currentRecovered.textContent = this.formatNumber(data.response[0].cases.recovered)
     this.currentDeaths.textContent = this.formatNumber(data.response[0].deaths.total)
-    this.newDeaths.textContent = this.formatNumber(data.response[0].deaths.new)
+    if (data.response[0].deaths.new) {
+      this.newDeaths.classList.remove('d-none')
+      this.newDeaths.textContent = this.formatNumber(data.response[0].deaths.new)
+    } else {
+      this.newDeaths.classList.add('d-none')
+    }
+
     this.totalPopulation.textContent = `${((confirmed / population) * 100).toFixed(2)}% of U.S. population has the COVID-19 Virus.`
     this.currentActive.textContent = `Of the ${this.formatNumber(active)} Active COVID-19 cases, ${((critical / active) * 100).toFixed(2)}% are in critical condition.`
   }
